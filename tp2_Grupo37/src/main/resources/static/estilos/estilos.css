@@ -9,9 +9,11 @@
 body{
     font-family: 'Roboto', sans-serif;
     background-image: linear-gradient(to top, #0444ac 0%, #438cfc 100%);
-    height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
+/*header*/
 .header{
     display: flex;
     justify-content: center;
@@ -78,7 +80,7 @@ nav ul {
 }
 
 .main__section{
-    padding: 0 20px;
+    padding: 20px 20px;
     width: 80%;
 }
 
@@ -159,7 +161,6 @@ nav ul {
 
 /*footer*/
 .footer {
-    position: absolute;
     bottom: 0;
     width: 100%;
     text-align: center;
