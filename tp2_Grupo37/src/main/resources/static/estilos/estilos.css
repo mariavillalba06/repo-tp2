@@ -258,3 +258,30 @@ figcaption a{
     color: #f2f2f2;
     font-size: 2em;
 }
+
+/* Página de Consejos */
+.consejos__container{
+	/*display: flex;*/
+ 	width: 85%;
+  	margin: 30px auto;
+  	background-color: #f2f2f2;
+  	border-radius: 15px;
+  	text-align: center;
+}
+.consejos__section{
+	padding: 20px 40px;
+  	width: 100%;
+}
+.consejos__titulo {
+  font-size: 2.2em;
+  color: #004080;
+}
+.servicios__article {
+  margin: 20px 0;
+  text-align:left;
+}
+.clave{
+	font-size: 1.2em;
+  	color: #004080;
+  	font-weight: bold;
+}
