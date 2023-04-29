@@ -178,6 +178,7 @@ nav ul {
   color: #f2f2f2;
   margin-bottom: 5px;
 }
+
 /*Pagina Productos - Galeria de productos*/
 section.one-title{
   width: 100%;
@@ -185,6 +186,7 @@ section.one-title{
   padding: 10px;
   color: white;
 }
+
 .div-main {
   max-width: 800px;
   padding: 1rem;
@@ -192,11 +194,13 @@ section.one-title{
   display: grid;
   grid-template-columns: 300px 300px 300px;  
 }
+
 .div-main >div{
   display: block;
   width: 250px;
   text-align: center;
 }
+
 img.galery {
   object-fit: cover;
   border-radius: 10px;
@@ -207,11 +211,50 @@ figcaption a{
   color: white;
   font-weight: bold;
 }
+
 .container-div{
-margin-bottom: 20px;
+  margin-bottom: 20px;
 }
+
 .container-div:hover{
-width: 260px;
-background-color: rgba(91, 239, 255, 0.5);
-border-radius: 5px;
+  width: 260px;
+  background-color: rgba(91, 239, 255, 0.5);
+  border-radius: 5px;
+}
+
+/*página-servicios*/
+.servicios__container{
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabla__container{
+    box-shadow: 0 0 20px rgba(0,0,0,.3);
+    border-collapse: collapse;
+}
+
+.tabla__encabezado{
+    color: #f2f2f2;
+    padding: 15px;
+    margin: 0px;
+    background-color: #023482;
+}
+
+.tabla__body{
+    background-color: rgba(255,255,255,.5);
+}
+
+.tabla__dato{
+    padding: 20px 15px;
+    text-align: center;
+    color: #023482;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.servicios__titulo{
+    margin-bottom: 15px;
+    color: #f2f2f2;
+    font-size: 2em;
 }
