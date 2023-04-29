@@ -3,71 +3,75 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Servicios</title>
+        <link rel="stylesheet" href="../static/estilos/estilos.css">
 	</head>
 	<body>
-		<header>
-			<h1>Patas Arriba S.A</h1>
-			<img alt="logo-veterinaria" src="../static/images/logo.png" title="Veterinaria S.A">
+		<header class="header">
+			<img class="logo" alt="logo-veterinaria" src="../static/images/logo.png" title="Veterinaria S.A">
+			<h1 class="titulo">Patas Arriba S.A</h1>
 		</header>
 		
-		<nav>
+		<nav class="nav__container">
 			<ul>
-				<li><a href="index.html">Inicio</a></li>
-				<li><a href="productos.html">Productos</a></li>
-				<li><a href="consejos.html">Consejos de salud</a></li>
-				<li><a href="servicios.html">Servicios de paseo</a></li>
-				<li><a href="sucursales.html">Sucursales</a></li>
-				<li><a href="contacto.html">Contáctanos</a></li>
+				<li class="item"><a class="nav__enlace" href="index.html">Inicio</a></li>
+				<li class="item"><a class="nav__enlace" href="productos.html">Productos</a></li>
+				<li class="item"><a class="nav__enlace" href="consejos.html">Consejos de salud</a></li>
+				<li class="item"><a class="nav__enlace" href="servicios.html">Servicios de paseo</a></li>
+				<li class="item"><a class="nav__enlace" href="sucursales.html">Sucursales</a></li>
+				<li class="item"><a class="nav__enlace" href="contacto.html">Contáctanos</a></li>
 			</ul>
 		</nav>
 		
-		<section>
-            <h1>Servicios</h1>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th><strong>Día</strong></th>
-                        <th><strong>Lunes</strong></th>
-                        <th><strong>Martes</strong></th>
-                        <th><strong>Miércoles</strong></th>
-                        <th><strong>Jueves</strong></th>
-                        <th><strong>Viernes</strong></th>
-                        <th><strong>Sábado</strong></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Horario</strong></td>
-                        <td>9 a 12 - 16 a 18</td>
-                        <td>9 a 12 - 16 a 18</td>
-                        <td>9 a 12 - 16 a 18</td>
-                        <td>9 a 12 - 16 a 18</td>
-                        <td>9 a 12 - 16 a 18</td>
-                        <td>9 a 12 - 16 a 18</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Paseador</strong></td>
-                        <td>Juan Pérez</td>
-                        <td>Lucas Diaz</td>
-                        <td>Juan Pérez</td>
-                        <td>María Gomez</td>
-                        <td>Lucas Diaz</td>
-                        <td>Roberto Vázquez</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+        <div class="servicios__container">
+            <section>
+                <h1 class="servicios__titulo">Servicios</h1>
+                <table class="tabla__container">
+                    <thead class="tabla__head">
+                        <tr>
+                            <th class="tabla__encabezado"><strong>Día</strong></th>
+                            <th class="tabla__encabezado"><strong>Lunes</strong></th>
+                            <th class="tabla__encabezado"><strong>Martes</strong></th>
+                            <th class="tabla__encabezado"><strong>Miércoles</strong></th>
+                            <th class="tabla__encabezado"><strong>Jueves</strong></th>
+                            <th class="tabla__encabezado"><strong>Viernes</strong></th>
+                            <th class="tabla__encabezado"><strong>Sábado</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tabla__body">
+                        <tr>
+                            <td class="tabla__dato"><strong>Horario</strong></td>
+                            <td class="tabla__dato">9 a 12 - 16 a 18</td>
+                            <td class="tabla__dato">9 a 12 - 16 a 18</td>
+                            <td class="tabla__dato">9 a 12 - 16 a 18</td>
+                            <td class="tabla__dato">9 a 12 - 16 a 18</td>
+                            <td class="tabla__dato">9 a 12 - 16 a 18</td>
+                            <td class="tabla__dato">9 a 12 - 16 a 18</td>
+                        </tr>
+                        <tr>
+                            <td class="tabla__dato"><strong>Paseador</strong></td>
+                            <td class="tabla__dato">Juan Pérez</td>
+                            <td class="tabla__dato">Lucas Diaz</td>
+                            <td class="tabla__dato">Juan Pérez</td>
+                            <td class="tabla__dato">María Gomez</td>
+                            <td class="tabla__dato">Lucas Diaz</td>
+                            <td class="tabla__dato">Roberto Vázquez</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
         
-        <footer>
-			<div>
-				<p>Copyright &copy; 2023 - Patas Arriba S.A – Jujuy – República Argentina</p>
+        <footer class="footer">
+			<div class="footer__copyright">
+				<p class="copyright">Copyright &copy; 2023 - Patas Arriba S.A – Jujuy – República Argentina</p>
 			</div>
 			<hr>
-			<div>
-				<a href="#"><img alt="facebook" src="../static/images/facebook.png"></a>
-				<a href="#"><img alt="instagram" src="../static/images/instagram.png"></a>
-				<a href="#"><img alt="twitter" src="../static/images/twitter.png"></a>
-				<a href="#"><img alt="email" src="../static/images/correo-electronico.png"></a>
+			<div class="footer__icon__container">
+				<a href="#"><img class="footer__icon" alt="facebook" src="../static/images/facebook.png"></a>
+				<a href="#"><img class="footer__icon" alt="instagram" src="../static/images/instagram.png"></a>
+				<a href="#"><img class="footer__icon" alt="twitter" src="../static/images/twitter.png"></a>
+				<a href="#"><img class="footer__icon" alt="email" src="../static/images/correo-electronico.png"></a>
 			</div>
 		</footer>
 	</body>
