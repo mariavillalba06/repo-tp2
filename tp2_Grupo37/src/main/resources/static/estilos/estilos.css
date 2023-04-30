@@ -172,6 +172,7 @@ nav ul {
 .footer__icon {
   width: 30px;
   margin: 10px 5px 0 5px;
+  filter: invert(100%) sepia(14%) saturate(53%) hue-rotate(58deg) brightness(114%) contrast(90%);
 }
 
 .copyright {
