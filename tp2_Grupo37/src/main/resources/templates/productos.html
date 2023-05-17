@@ -1,70 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Productos</title>
-    <link rel="stylesheet" href="../static/estilos/estilos.css">
+    <link rel="stylesheet" th:href="@{estilos/estilos.css}">
   </head>
   <body>
-    <header class="header">
-			<img class="logo" alt="logo-veterinaria" src="../static/images/logo.png" title="Veterinaria S.A">
-			<h1 class="titulo">Patas Arriba S.A</h1>
-		</header>
+    <header th:replace="layouts/layouts :: header"></header>
 
-    <nav class="nav__container">
-			<ul>
-				<li class="item"><a class="nav__enlace" href="index.html">Inicio</a></li>
-				<li class="item"><a class="nav__enlace" href="#">Productos</a></li>
-				<li class="item"><a class="nav__enlace" href="consejos.html">Consejos de salud</a></li>
-				<li class="item"><a class="nav__enlace" href="servicios.html">Servicios de paseo</a></li>
-				<li class="item"><a class="nav__enlace" href="sucursales.html">Sucursales</a></li>
-				<li class="item"><a class="nav__enlace" href="contacto.html">Contáctanos</a></li>
-			</ul>
-		</nav>
+    <nav th:replace="layouts/layouts :: nav"></nav>
 
      <section class="one-title">
       <h2>Productos en promo!!</h2>
     </section>
       <div class="div-main">
-        <div class="container-div">
+        <figure class="container-div">
             <a href="#"><img class="item-a galery" src="../static/images/producto1.png" alt="Collar regulable para perros y gatos" title="Veterinaria S.A" width="250px"/> </a>
             <figcaption><a href="#">Collar Gato - Perros Ajustable</a> </figcaption>
-        </div>
-        <div class="container-div">
+        </figure>
+        
+        <figure class="container-div">
            <a href="#"> <img class="item-b galery" src="../static/images/producto2.png" alt="Colchon Perros de Lona Grande" title="Veterinaria S.A" width="250px"/> </a>
           <figcaption><a href="#">Colchon Perros de Lona Grande con Cierre 105cm x 65cm</a>  </figcaption>
-        </div>
-        <div class="container-div">
+        </figure>
+        
+        <figure class="container-div">
            <a href="#"> <img class="item-c galery" src="../static/images/producto3.png" alt="Hierba gatera en sobre" title="Veterinaria S.A" width="250px"/></a>
            <figcaption><a href="#">Hierba Gatera En Sobre</a> </figcaption>
-          </div>
-        <div class="container-div">
+        </figure>
+          
+        <figure class="container-div">
            <a href="#"> <img class="item-d galery" src="../static/images/producto4.png" alt="Alimento Royal Canin" title="Veterinaria S.A" width="250px"/></a>
           <figcaption><a href="#">Royal Canin Mini Perro Adulto 3kg</a> </figcaption>
-          </div>
-        <div class="container-div">
+        </figure>
+          
+        <figure class="container-div">
             <a href="#"><img class="item-e galery" src="../static/images/producto5.png" alt="Alimento para peces" title="Veterinaria S.A" width="250px"/> </a>
          <figcaption><a href="#">Shulet Tropical 20gr</a> </figcaption>
-        </div>
-        <div class="container-div">
+        </figure>
+        
+        <figure class="container-div">
             <a href="#"><img class="item-f galery" src="../static/images/producto6.png" alt="Alimento para conejos" title="Veterinaria S.A" width="250px"/></a>
            <figcaption><a href="#">Alimento para conejo 750gr</a> </figcaption>
-          </div>
+        </figure>
 
       </div>
-    <footer class="footer">
-			<div class="footer__copyright">
-				<p class="copyright">Copyright &copy; 2023 - Patas Arriba S.A – Jujuy – República Argentina</p>
-			</div>
-			<hr>
-			<div class="footer__icon__container">
-				<a href="#"><img class="footer__icon" alt="facebook" src="../static/images/facebook.png"></a>
-				<a href="#"><img class="footer__icon" alt="instagram" src="../static/images/instagram.png"></a>
-				<a href="#"><img class="footer__icon" alt="twitter" src="../static/images/twitter.png"></a>
-				<a href="#"><img class="footer__icon" alt="email" src="../static/images/correo-electronico.png"></a>
-			</div>
-		</footer>
+      
+    <footer th:replace="layouts/layouts :: footer"></footer>
   </body>
 </html>

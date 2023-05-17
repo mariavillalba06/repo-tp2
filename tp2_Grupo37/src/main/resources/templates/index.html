@@ -1,26 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 	<head>
 	    <meta charset="UTF-8">
 	    <title>Inicio</title>
-		<link rel="stylesheet" href="../static/estilos/estilos.css">
+		<link rel="stylesheet" th:href="@{estilos/estilos.css}">
 	</head>
 	<body>
-		<header class="header">
-			<img class="logo" alt="logo-veterinaria" src="../static/images/logo.png" title="Veterinaria S.A">
-			<h1 class="titulo">Patas Arriba S.A</h1>
-		</header>
+		<header th:replace="layouts/layouts :: header"></header>
 		
-		<nav class="nav__container">
-			<ul>
-				<li class="item"><a class="nav__enlace" href="index.html">Inicio</a></li>
-				<li class="item"><a class="nav__enlace" href="productos.html">Productos</a></li>
-				<li class="item"><a class="nav__enlace" href="consejos.html">Consejos de salud</a></li>
-				<li class="item"><a class="nav__enlace" href="servicios.html">Servicios de paseo</a></li>
-				<li class="item"><a class="nav__enlace" href="sucursales.html">Sucursales</a></li>
-				<li class="item"><a class="nav__enlace" href="contacto.html">Contáctanos</a></li>
-			</ul>
-		</nav>
+		<nav th:replace="layouts/layouts :: nav"></nav>
+		
 		<main class="main__container">
 			<section class="main__section">
 				<h2 class="main__titulo">Buscamos</h2>
@@ -60,17 +49,6 @@
 			</aside>
 		</main>
 		
-		<footer class="footer">
-			<div class="footer__copyright">
-				<p class="copyright">Copyright &copy; 2023 - Patas Arriba S.A – Jujuy – República Argentina</p>
-			</div>
-			<hr>
-			<div class="footer__icon__container">
-				<a href="#"><img class="footer__icon" alt="facebook" src="../static/images/facebook.png"></a>
-				<a href="#"><img class="footer__icon" alt="instagram" src="../static/images/instagram.png"></a>
-				<a href="#"><img class="footer__icon" alt="twitter" src="../static/images/twitter.png"></a>
-				<a href="#"><img class="footer__icon" alt="email" src="../static/images/correo-electronico.png"></a>
-			</div>
-		</footer>
+		<footer th:replace="layouts/layouts :: footer"></footer>
 	</body>
 </html>

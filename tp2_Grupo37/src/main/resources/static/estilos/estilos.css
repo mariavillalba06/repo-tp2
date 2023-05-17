@@ -196,7 +196,7 @@ section.one-title{
   grid-template-columns: 300px 300px 300px;  
 }
 
-.div-main >div{
+.div-main >figure{
   display: block;
   width: 250px;
   text-align: center;
