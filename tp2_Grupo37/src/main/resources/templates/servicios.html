@@ -6,9 +6,9 @@
 		<link rel="stylesheet" th:href="@{estilos/estilos.css}">
 	</head>
 	<body>
-		<header th:replace="layouts/layouts :: header"></header>
+		<header th:replace="~{layouts/layouts :: header}"></header>
 		
-		<nav th:replace="layouts/layouts :: nav"></nav>
+		<nav th:replace="~{layouts/layouts :: nav}"></nav>
 		
 		<section>
             <h2>Servicios</h2>
@@ -38,6 +38,6 @@
             </table>
         </section>
         
-        <footer th:replace="layouts/layouts :: footer"></footer>
+        <footer th:replace="~{layouts/layouts :: footer}"></footer>
 	</body>
 </html>

@@ -6,9 +6,9 @@
 		<link rel="stylesheet" href="../static/estilos/estilos.css">
 	</head>
 	<body>
-		<header th:replace="layouts/layouts :: header"></header>
+		<header th:replace="~{layouts/layouts :: header}"></header>
 		
-		<nav th:replace="layouts/layouts :: nav"></nav>
+		<nav th:replace="~{layouts/layouts :: nav}"></nav>
 		
 		<main class="consejos__container">
 			<section class="consejos__section">
@@ -41,6 +41,6 @@
 			</section>	
 		</main>
 		
-		<footer th:replace="layouts/layouts :: footer"></footer>
+		<footer th:replace="~{layouts/layouts :: footer}"></footer>
 	</body>
 </html>
