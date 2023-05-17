@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head lang="es">
+		<meta charset="UTF-8">
+		<title>Contacto</title>
+		<link rel="stylesheet" href="../static/estilos/estilos.css">
+	</head>
+	<body>
+		<header class="header">
+		<img class="logo" alt="logo-veterinaria" src="../static/images/logo.png" title="Veterinaria S.A">
+			<h1 class="titulo">Patas Arriba S.A</h1>
+		</header>
+		<nav class="nav__container">
+			<ul>
+				<li class="item"><a class="nav__enlace" href="index.html">Inicio</a></li>
+				<li class="item"><a class="nav__enlace" href="productos.html">Productos</a></li>
+				<li class="item"><a class="nav__enlace" href="consejos.html">Consejos de salud</a></li>
+				<li class="item"><a class="nav__enlace" href="servicios.html">Servicios de paseo</a></li>
+				<li class="item"><a class="nav__enlace" href="sucursales.html">Sucursales</a></li>
+				<li class="item"><a class="nav__enlace" href="contacto.html">Contáctanos</a></li>
+			</ul>
+		</nav>
+		<main class="form__container">
+			<div class="form__section">
+				<h2 class="form__titulo">Contáctenos</h2>
+				<div class="form__datos">
+					<p>Direccion: 3915 Av. General Belgrano</p>
+					<p>Telefono: 388-49999</p>
+					<p>Horario:</p>
+					<ul>
+						<li>Lunes a viernes: 9:00 am a 8:00pm</li>
+						<li>Sabado a domingo: 9:00 am a 12:30 pm</li>
+					</ul>
+					<p>Correo electrónico: <a href="mailto:contactos@mail.com.ar">contactos@mail.com.ar</a></p>
+				</div>
+				<form class="form__consulta">
+					<fieldset>
+						<legend>Consulta</legend>
+						<div>
+							<label>Nombre: </label>
+							<input type="text" name="nombre" placeholder="Ingrese su nombre" required>
+						</div>
+						<div>
+							<label>Email: </label>
+							<input type="email" name="email" placeholder="Ingrese un email válido" required>
+						</div>
+						<div>
+							<label>Ciudad: </label>
+							<input type="text" name="ciudad" placeholder="Ingrese su ciudad" required>
+						</div>
+						<div>
+							<label>Mensaje: </label>
+							<br>
+							<textarea rows="8"></textarea>
+						</div>
+						<button type="submit" id="button__submit">Enviar</button>
+					</fieldset>
+				</form>
+			</div>
+		</main>
+		<footer class="footer">
+			<div class="footer__copyright">
+				<p class="copyright">Copyright &copy; 2023 - Patas Arriba S.A – Jujuy – República Argentina</p>
+			</div>
+			<hr>
+			<div class="footer__icon__container">
+				<a href="#"><img class="footer__icon" alt="facebook" src="../static/images/facebook.png"></a>
+				<a href="#"><img class="footer__icon" alt="instagram" src="../static/images/instagram.png"></a>
+				<a href="#"><img class="footer__icon" alt="twitter" src="../static/images/twitter.png"></a>
+				<a href="#"><img class="footer__icon" alt="email" src="../static/images/correo-electronico.png"></a>
+			</div>
+		</footer>
+</html>
