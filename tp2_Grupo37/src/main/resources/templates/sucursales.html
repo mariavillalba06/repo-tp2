@@ -1,61 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sucursales</title>
-    <link rel="stylesheet" href="../static/estilos/estilos.css">
+    <link rel="stylesheet" th:href="@{estilos/estilos.css}">
 </head>
 <body>
-  <header class="header">
-    <img class="logo" alt="logo-veterinaria" src="../static/images/logo.png" title="Veterinaria S.A">
-    <h1 class="titulo">Patas Arriba S.A</h1>
-  </header>
+  		<header th:replace="~{layouts/layouts :: header}"></header>
+		
+		<nav th:replace="~{layouts/layouts :: nav}"></nav>
   
-  <nav class="nav__container">
-    <ul>
-      <li class="item"><a class="nav__enlace" href="index.html">Inicio</a></li>
-      <li class="item"><a class="nav__enlace" href="productos.html">Productos</a></li>
-      <li class="item"><a class="nav__enlace" href="consejos.html">Consejos de salud</a></li>
-      <li class="item"><a class="nav__enlace" href="servicios.html">Servicios de paseo</a></li>
-      <li class="item"><a class="nav__enlace" href="sucursales.html">Sucursales</a></li>
-      <li class="item"><a class="nav__enlace" href="contacto.html">Contáctanos</a></li>
-    </ul>
-  </nav>
       <section class="sucursales_other">
         <h2>Nuestras Sucursales</h2>
         <div class="map_sucursales">
         <ol>
-            <li class="li_map"><a href="#">Sucursal Animarket</a> </li>
-            <p>*Gdor. Tello 375, Y4600 San Salvador de Jujuy, Jujuy</p>
+            <li class="li_map">
+            	<a href="#">Sucursal Animarket</a> 
+            	<p>*Gdor. Tello 375, Y4600 San Salvador de Jujuy, Jujuy</p>
+            </li>
 
-            <li class="li_map"><a href="#">Sucursal Tonda</a></li>
-            <p>*Maimara 693 Abra Pampa, C. Maimara &, Y4612 Palpalá, Jujuy</p>
+            <li class="li_map">
+            	<a href="#">Sucursal Tonda</a>
+            	<p>*Maimara 693 Abra Pampa, C. Maimara, Y4612 Palpalá, Jujuy</p>
+            </li>
 
-            <li class="li_map"><a href="#">Sucursal Mascotti</a></li>
-            <p>*Av. Carlos Undiano, San Salvador de Jujuy, Jujuy</p>
+            <li class="li_map">
+            	<a href="#">Sucursal Mascotti</a>
+            	<p>*Av. Carlos Undiano, San Salvador de Jujuy, Jujuy</p>
+            </li>
 
-            <li class="li_map"><a href="#">Sucursal San Benito</a></li>
-            <p>*Av. Carlos Undiano, Y4600 San Salvador de Jujuy, Jujuy</p>
+            <li class="li_map">
+            	<a href="#">Sucursal San Benito</a>
+            	<p>*Av. Carlos Undiano, Y4600 San Salvador de Jujuy, Jujuy</p>
+            </li>
 
-            <li class="li_map"><a href="#">Sucursal Animalada</a></li>
-            <p>*Antenor Sajama 858, Y4600 San Salvador de Jujuy, Jujuy</p>
+            <li class="li_map">
+            	<a href="#">Sucursal Animalada</a>
+            	<p>*Antenor Sajama 858, Y4600 San Salvador de Jujuy, Jujuy</p>
+            </li>
         </ol>
       </div>
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3639.0323130826596!2d-65.27623298686359!3d-24.205647856684983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x941b0710f54d5577%3A0x3f815c36a3bb00e4!2sAnimarket!5e0!3m2!1ses!2sar!4v1682878131707!5m2!1ses!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </section>
-      <footer class="footer">
-        <div class="footer__copyright">
-          <p class="copyright">Copyright &copy; 2023 - Patas Arriba S.A – Jujuy – República Argentina</p>
-        </div>
-        <hr>
-        <div class="footer__icon__container">
-          <a href="#"><img class="footer__icon" alt="facebook" src="../static/images/facebook.png"></a>
-          <a href="#"><img class="footer__icon" alt="instagram" src="../static/images/instagram.png"></a>
-          <a href="#"><img class="footer__icon" alt="twitter" src="../static/images/twitter.png"></a>
-          <a href="#"><img class="footer__icon" alt="email" src="../static/images/correo-electronico.png"></a>
-        </div>
-      </footer>
+      
+      <footer th:replace="~{layouts/layouts :: footer}"></footer>
 </body>
 </html>
