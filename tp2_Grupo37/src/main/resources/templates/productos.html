@@ -8,9 +8,9 @@
     <link rel="stylesheet" th:href="@{estilos/estilos.css}">
   </head>
   <body>
-   	<header th:replace="~{layouts/layouts :: header}"></header>
+   	<header th:replace="~{layouts/header :: header}"></header>
 		
-	<nav th:replace="~{layouts/layouts :: nav}"></nav>
+	<nav th:replace="~{layouts/nav :: nav}"></nav>
 
      <section class="one-title">
       <h2>Productos en promo!!</h2>
@@ -47,6 +47,6 @@
         </figure>
 
       </div>
-    <footer th:replace="~{layouts/layouts :: footer}"></footer>
+    <footer th:replace="~{layouts/footer :: footer}"></footer>
   </body>
 </html>
