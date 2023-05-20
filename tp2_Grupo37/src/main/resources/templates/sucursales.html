@@ -8,9 +8,9 @@
     <link rel="stylesheet" th:href="@{estilos/estilos.css}">
 </head>
 <body>
-  		<header th:replace="~{layouts/layouts :: header}"></header>
+  		<header th:replace="~{layouts/header :: header}"></header>
 		
-		<nav th:replace="~{layouts/layouts :: nav}"></nav>
+		<nav th:replace="~{layouts/nav :: nav}"></nav>
   
       <section class="sucursales_other">
         <h2>Nuestras Sucursales</h2>
@@ -45,6 +45,6 @@
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3639.0323130826596!2d-65.27623298686359!3d-24.205647856684983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x941b0710f54d5577%3A0x3f815c36a3bb00e4!2sAnimarket!5e0!3m2!1ses!2sar!4v1682878131707!5m2!1ses!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </section>
       
-      <footer th:replace="~{layouts/layouts :: footer}"></footer>
+      <footer th:replace="~{layouts/footer :: footer}"></footer>
 </body>
 </html>
