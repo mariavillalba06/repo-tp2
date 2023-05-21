@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Nueva Sucursales</title>
+	<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
+</head>
+
+<body>
+	<header th:replace="~{/layouts/header :: header}"></header>
+
+	<nav th:replace="~{/layouts/nav :: nav}"></nav>
+
+	 <section class="newSucursal">
+      
+      <form class="form-container" th:action="${edicion}?@{/Producto/modificarse}:@{/Producto/guardarse}" th:object="${productos}" method="post">
+       
+        <h2 th:text="${edicion}?'Modificar producto':'Registro de nuevo producto'"></h2>
+        
+        <input type="text" placeholder="Nombre del Producto" id="nombrecod" name="producto_nombre" th:field="*{nombrecod}">
+        <input type="text" placeholder="Codigo Producto" id="codigo" name="producto_codigo" th:field="*{codigo}">
+        <input type="number" placeholder="Precio" id="precio" name="producto_precio" th:field="*{precio}">
+        <input type="text" placeholder="Categoria" id="categoria" name="producto_categoria" th:field="*{categoria}">
+        <input type="number" placeholder="Descuento" id="descuento" name="producto_descuento" th:field="*{descuento}">
+        <p><input  class="buttom" type="submit" th:value="${edicion}?'Modificar':'Guardar'"></p>
+       
+        
+      </form>
+    </section>
+
+	<footer th:replace="~{/layouts/footer :: footer}"></footer>
+</body>
+
+</html>
