@@ -5,45 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sucursales</title>
-    <link rel="stylesheet" th:href="@{estilos/estilos.css}">
+    <link rel="stylesheet" th:href="@{/estilos/estilos.css}">
 </head>
 <body>
   		<header th:replace="~{layouts/header :: header}"></header>
 		
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
   
-      <section class="sucursales_other">
-        <h2>Nuestras Sucursales</h2>
-        <div class="map_sucursales">
-        <ol>
-            <li class="li_map">
-            	<a href="#">Sucursal Animarket</a> 
-            	<p>*Gdor. Tello 375, Y4600 San Salvador de Jujuy, Jujuy</p>
-            </li>
-
-            <li class="li_map">
-            	<a href="#">Sucursal Tonda</a>
-            	<p>*Maimara 693 Abra Pampa, C. Maimara, Y4612 Palpalá, Jujuy</p>
-            </li>
-
-            <li class="li_map">
-            	<a href="#">Sucursal Mascotti</a>
-            	<p>*Av. Carlos Undiano, San Salvador de Jujuy, Jujuy</p>
-            </li>
-
-            <li class="li_map">
-            	<a href="#">Sucursal San Benito</a>
-            	<p>*Av. Carlos Undiano, Y4600 San Salvador de Jujuy, Jujuy</p>
-            </li>
-
-            <li class="li_map">
-            	<a href="#">Sucursal Animalada</a>
-            	<p>*Antenor Sajama 858, Y4600 San Salvador de Jujuy, Jujuy</p>
-            </li>
-        </ol>
-      </div>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3639.0323130826596!2d-65.27623298686359!3d-24.205647856684983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x941b0710f54d5577%3A0x3f815c36a3bb00e4!2sAnimarket!5e0!3m2!1ses!2sar!4v1682878131707!5m2!1ses!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </section>
+     <section class="sucursales_other">
+		 <a th:href="@{/sucursal/nuevo}">Nueva sucursal</a>
+        <table>
+          <tr>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Provincia</th>
+            <th>Fecha Inicio</th>
+            <th>Email</th>
+            <th>Teléfono</th>    
+            <th>Ediciones</th>      
+          </tr>
+          
+          <tr th:each="sucu: ${sucursales}">
+			<td th:text="${sucu.nombre}"></td>
+			<td th:text="${sucu.direccion}"></td>
+			<td th:text="${sucu.provincia}"></td>
+			<td th:text="${#temporals.format(sucu.fechaInicio,'dd/MM/yyyy')}"></td>
+			<td th:text="${sucu.email}"></td>
+			<td th:text="${sucu.telefono}"></td>
+			<td>
+				<a class="newlink" th:href="@{/sucursal/modificar/}+${sucu.nombre}">Editar</a><br>
+				<a class="newlink" th:href="@{/sucursal/eliminar/}+${sucu.nombre}">Eliminar</a>
+			</td>
+		  </tr>
+        </table>
+     </section>
       
       <footer th:replace="~{layouts/footer :: footer}"></footer>
 </body>
