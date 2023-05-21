@@ -7,12 +7,14 @@
 			
 		<nav class="nav__container" th:fragment="nav">
 			<ul>
+
 				<li class="item"><a class="nav__enlace" th:href="@{/index}">Inicio</a></li>
-				<li class="item"><a class="nav__enlace" href="productos.html">Productos</a></li>
+				<li class="item"><a class="nav__enlace" th:href="@{/productos}">Productos</a></li>
 				<li class="item"><a class="nav__enlace" th:href="@{/consejos}">Consejos de salud</a></li>
 				<li class="item"><a class="nav__enlace" th:href="@{/servicios/listado}">Servicios de paseo</a></li>
-				<li class="item"><a class="nav__enlace" href="sucursales.html">Sucursales</a></li>
+				<li class="item"><a class="nav__enlace" th:href="@{/sucursal/listado}">Sucursales</a></li>
 				<li class="item"><a class="nav__enlace" th:href="@{/contacto}">Contáctanos</a></li>
+
 			</ul>
 		</nav>
 		
