@@ -23,7 +23,7 @@
 					</ul>
 					<p>Correo electrónico: <a href="mailto:contactos@mail.com.ar">contactos@mail.com.ar</a></p>
 				</div>
-				<form class="form__consulta" th:action="@/contacto/nuevo" th:object="${contacto}" method="post">
+				<form class="form__consulta" th:action="@{/contacto}" th:object="${contacto}" method="post">
 					<fieldset>
 						<legend>Consulta</legend>
 						<div>
@@ -41,13 +41,12 @@
 						<div>
 							<label>Mensaje: </label>
 							<br>
-							<textarea rows="8" th:field="*{mensaje}"></textarea>
+							<textarea rows="8" required th:field="*{mensaje}"></textarea>
 						</div>
 						<button type="submit" id="button__submit">Enviar</button>
 					</fieldset>
 				</form>
 			</div>
 		</main>
-		
 		<footer th:replace="~{layouts/footer :: footer}"></footer>
 </html>

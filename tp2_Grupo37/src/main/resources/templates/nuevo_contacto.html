@@ -14,13 +14,12 @@
 			<div class="form__section">
 				<h2 class="form__titulo">CONSULTA ENVIADA</h2>
 				<div class="form__datos">
-					<p>Nombre: <span th:field="${nombre}"></span></p>
-					<p>Email: <span th:field="${email}"></span></p>
-					<p>Ciudad: <span th:field="{ciudad}"></span></p>
-					<p>Consulta: <span th:field="${mensaje}"></span></p>
+					<p>Nombre: <span th:text="${nombre}"></span></p>
+					<p>Email: <span th:text="${email}"></span></p>
+					<p>Ciudad: <span th:text="${ciudad}"></span></p>
+					<p>Consulta: <span th:text="${mensaje}"></span></p>
 				</div>
 			</div>
 		</main>
-		
 		<footer th:replace="~{layouts/footer :: footer}"></footer>
 </html>
