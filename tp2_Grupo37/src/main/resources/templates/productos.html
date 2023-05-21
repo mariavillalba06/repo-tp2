@@ -5,48 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Productos</title>
-    <link rel="stylesheet" th:href="@{estilos/estilos.css}">
+    <link rel="stylesheet" th:href="@{/estilos/estilos.css}">
   </head>
   <body>
-   	<header th:replace="~{layouts/header :: header}"></header>
+   	<header th:replace="~{/layouts/header :: header}"></header>
 		
-	<nav th:replace="~{layouts/nav :: nav}"></nav>
+	<nav th:replace="~{/layouts/nav :: nav}"></nav>
+	
+	
+    <div class="newProducto">
+		<a class="linkprod" th:href="@{/Producto/nuevo}">Nuevo Producto</a>
+      <table class="table-product">
 
-     <section class="one-title">
-      <h2>Productos en promo!!</h2>
-    </section>
-      <div class="div-main">
-        <figure class="container-div">
-            <a href="#"><img class="item-a galery" th:src="@{/images/producto1.png}" alt="Collar regulable para perros y gatos" title="Veterinaria S.A" width="250px"/> </a>
-            <figcaption><a href="#">Collar Gato - Perros Ajustable</a> </figcaption>
-        </figure>
-        
-        <figure class="container-div">
-           <a href="#"> <img class="item-b galery" th:src="@{/images/producto2.png}" alt="Colchon Perros de Lona Grande" title="Veterinaria S.A" width="250px"/> </a>
-          <figcaption><a href="#">Colchon Perros de Lona Grande con Cierre 105cm x 65cm</a>  </figcaption>
-        </figure>
-        
-        <figure class="container-div">
-           <a href="#"> <img class="item-c galery" th:src="@{/images/producto3.png}" alt="Hierba gatera en sobre" title="Veterinaria S.A" width="250px"/></a>
-           <figcaption><a href="#">Hierba Gatera En Sobre</a> </figcaption>
-        </figure>
-          
-        <figure class="container-div">
-           <a href="#"> <img class="item-d galery" th:src="@{/images/producto4.png}" alt="Alimento Royal Canin" title="Veterinaria S.A" width="250px"/></a>
-          <figcaption><a href="#">Royal Canin Mini Perro Adulto 3kg</a> </figcaption>
-        </figure>
-          
-        <figure class="container-div">
-            <a href="#"><img class="item-e galery" th:src="@{/images/producto5.png}" alt="Alimento para peces" title="Veterinaria S.A" width="250px"/> </a>
-         <figcaption><a href="#">Shulet Tropical 20gr</a> </figcaption>
-        </figure>
-        
-        <figure class="container-div">
-            <a href="#"><img class="item-f galery" th:src="@{/images/producto6.png}" alt="Alimento para conejos" title="Veterinaria S.A" width="250px"/></a>
-           <figcaption><a href="#">Alimento para conejo 750gr</a> </figcaption>
-        </figure>
-
-      </div>
-    <footer th:replace="~{layouts/footer :: footer}"></footer>
+        <tr>
+          <th>Descripcion</th>
+          <th>Codigo</th>
+          <th>Precio</th>
+          <th>Categoria</th>
+          <th>Descuento</th>
+          <th>Acciones</th>
+        </tr>
+  		<tr th:each="produ:${productos}">
+			<td th:text="${produ.nombrecod}"></td>
+			<td th:text="${produ.codigo}"></td>
+			<td th:text="${produ.precio}"></td>
+			<td th:text="${produ.categoria}"></td>
+			<td th:text="${produ.descuento}"></td>
+			<td>
+				<a class="newlink" th:href="@{/Producto/modificarse/}+${produ.nombrecod}">Editar</a><br>
+				<a class="newlink" th:href="@{/Producto/eliminarse/}+${produ.nombrecod}">Eliminar</a>
+			</td>
+		</tr>
+           
+      </table>
+    </div>
+      
+    <footer th:replace="~{/layouts/footer :: footer}"></footer>
   </body>
 </html>
