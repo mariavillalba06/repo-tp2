@@ -3,40 +3,68 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Servicios</title>
-		<link rel="stylesheet" th:href="@{estilos/estilos.css}">
+		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
 	</head>
 	<body>
 		<header th:replace="~{layouts/layouts :: header}"></header>
 		
 		<nav th:replace="~{layouts/layouts :: nav}"></nav>
 		
-		<section>
-            <h2>Servicios</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th><strong>Día</strong></th>
-                        <th><strong>Lunes</strong></th>
-                        <th><strong>Martes</strong></th>
-                        <th><strong>Miércoles</strong></th>
-                        <th><strong>Jueves</strong></th>
-                        <th><strong>Viernes</strong></th>
-                        <th><strong>Sábado</strong></th>
-                    </tr>
-                </thead>
-                <tbody>
-          
-                    <tr th:each="servicio : ${servicios}">
-                        <td><strong>Horario</strong></td>
-                        <td th:text="${servicio.hora}"></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Paseador</strong></td>
-                        <td th:text="${servicio.nombrePaseador}"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+		<div class="servicios__container">
+            <section>
+                <h1 class="servicios__titulo">Servicios de paseos</h1>
+                <table class="tabla__container">
+                    <thead class="tabla__head">
+                        <tr>
+                            <th class="tabla__encabezado"><strong>Día</strong></th>
+                            <th class="tabla__encabezado"><strong>Horario</strong></th>
+                            <th class="tabla__encabezado"><strong>Paseador</strong></th>
+                            <th class="tabla__encabezado"><strong>Acciones</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tabla__body">
+                        <tr th:each="paseo: ${paseos}">
+                            <td class="tabla__dato" th:text="${paseo.dia}"></td>
+                            <td class="tabla__dato" th:text="${paseo.horarioInicio + ' - ' + paseo.horarioFinal + ' hs'}"></td>
+                            <td class="tabla__dato" th:text="${paseo.nombre}"></td>
+                            <td>
+                            	<a id="tabla__enlace" class="tabla__dato" th:href="@{/servicios/modificar-paseo/} + ${paseo.id}">Editar</a>
+                            	<a id="tabla__enlace" class="tabla__dato" th:href="@{/servicios/eliminar-paseo/} + ${paseo.id}">Borrar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+           		<a class="servicio__enlace" th:href="@{/servicios/nuevo-paseo}">Nuevo servicio de paseo</a>
+            </section>
+        </div>
+        
+        <div class="servicios__container">
+            <section>
+                <h1 class="servicios__titulo">Servicios de cortes</h1>
+                <table class="tabla__container">
+                    <thead class="tabla__head">
+                        <tr>
+                            <th class="tabla__encabezado"><strong>Peso</strong></th>
+                            <th class="tabla__encabezado"><strong>Instrumento</strong></th>
+                            <th class="tabla__encabezado"><strong>Precio</strong></th>
+                            <th class="tabla__encabezado"><strong>Acciones</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tabla__body">
+                        <tr th:each="corte: ${cortes}">
+                            <td class="tabla__dato" th:text="${corte.pesoMinimo + ' - ' + corte.pesoMaximo + ' Kg'}"></td>
+                            <td class="tabla__dato" th:text="${corte.instrumento}"></td>
+                            <td class="tabla__dato" th:text="${corte.precio + ' $'}"></td>
+                            <td>
+                            	<a id="tabla__enlace" class="tabla__dato" th:href="@{/servicios/modificar-corte/} + ${corte.id}">Editar</a>
+                            	<a id="tabla__enlace" class="tabla__dato" th:href="@{/servicios/eliminar-corte/} + ${corte.id}">Borrar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a class="servicio__enlace" th:href="@{/servicios/nuevo-corte}">Nuevo servicio de corte</a>
+            </section>
+        </div>
         
         <footer th:replace="~{layouts/layouts :: footer}"></footer>
 	</body>

@@ -5,16 +5,16 @@
 	</head>
 	<body>
 		<header class="header" th:fragment="header">
-			<img class="logo" alt="logo-veterinaria" th:src="@{images/logo.png}" title="Veterinaria S.A">
+			<img class="logo" alt="logo-veterinaria" th:src="@{/images/logo.png}" title="Veterinaria S.A">
 			<h1 class="titulo">Patas Arriba S.A</h1>
 		</header>
 		
 		<nav class="nav__container" th:fragment="nav">
 			<ul>
-				<li class="item"><a class="nav__enlace" href="index">Inicio</a></li>
+				<li class="item"><a class="nav__enlace" th:href="@{/index}">Inicio</a></li>
 				<li class="item"><a class="nav__enlace" href="productos.html">Productos</a></li>
 				<li class="item"><a class="nav__enlace" href="consejos.html">Consejos de salud</a></li>
-				<li class="item"><a class="nav__enlace" href="servicios">Servicios de paseo</a></li>
+				<li class="item"><a class="nav__enlace" th:href="@{/servicios/listado}">Servicios de paseo</a></li>
 				<li class="item"><a class="nav__enlace" href="sucursales.html">Sucursales</a></li>
 				<li class="item"><a class="nav__enlace" href="contacto.html">Contáctanos</a></li>
 			</ul>
@@ -26,10 +26,10 @@
 			</div>
 			<hr>
 			<div class="footer__icon__container">
-				<a href="#"><img class="footer__icon" alt="facebook" th:src="@{images/facebook.png}"></a>
-				<a href="#"><img class="footer__icon" alt="instagram" th:src="@{images/instagram.png}"></a>
-				<a href="#"><img class="footer__icon" alt="twitter" th:src="@{images/twitter.png}"></a>
-				<a href="#"><img class="footer__icon" alt="email" th:src="@{images/correo-electronico.png}"></a>
+				<a href="#"><img class="footer__icon" alt="facebook" th:src="@{/images/facebook.png}"></a>
+				<a href="#"><img class="footer__icon" alt="instagram" th:src="@{/images/instagram.png}"></a>
+				<a href="#"><img class="footer__icon" alt="twitter" th:src="@{/images/twitter.png}"></a>
+				<a href="#"><img class="footer__icon" alt="email" th:src="@{/images/correo-electronico.png}"></a>
 			</div>
 		</footer>
 	</body>
