@@ -9,23 +9,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ar.edu.unju.fi.model.Contacto;
 
 @Controller
-@RequestMapping("/contacto")
+@RequestMapping("/")
 public class ContactoController {
-	@GetMapping("/nuevo")
-	public String nuevoContacto(Model model) {
+	
+	@GetMapping("/contacto")
+	public String mostrarContacto(Model model) {
 		Contacto contacto = new Contacto();
 		model.addAttribute("contacto",  contacto);
-		return "nuevo_contacto";
+	    return "contacto";
 	}
-	
-	@PostMapping("/nuevo")
+    @PostMapping("/contacto")
 	public String mostrarContacto(Model model, Contacto contacto) {
-		if (!contacto.getNombre().isEmpty() && !contacto.getEmail().isEmpty() && !contacto.getCiudad().isEmpty() && !contacto.getMensaje().isEmpty()) {
-			model.addAttribute("nombre", contacto.getNombre());
-			model.addAttribute("email", contacto.getEmail());
-			model.addAttribute("ciudad", contacto.getCiudad());
-			model.addAttribute("mensaje", contacto.getMensaje());
-		}
+		model.addAttribute("nombre", contacto.getNombre());
+		model.addAttribute("email", contacto.getEmail());
+		model.addAttribute("ciudad", contacto.getCiudad());
+		model.addAttribute("mensaje", contacto.getMensaje());
 		return "nuevo_contacto";
 	}
 }
