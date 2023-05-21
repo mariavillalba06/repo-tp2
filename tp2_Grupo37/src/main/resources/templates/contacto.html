@@ -3,7 +3,7 @@
 	<head lang="es">
 		<meta charset="UTF-8">
 		<title>Contacto</title>
-		<link rel="stylesheet" href="../static/estilos/estilos.css">
+		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
 	</head>
 	<body>
 		<header th:replace="~{layouts/header :: header}"></header>
@@ -23,31 +23,30 @@
 					</ul>
 					<p>Correo electrónico: <a href="mailto:contactos@mail.com.ar">contactos@mail.com.ar</a></p>
 				</div>
-				<form class="form__consulta">
+				<form class="form__consulta" th:action="@{/contacto}" th:object="${contacto}" method="post">
 					<fieldset>
 						<legend>Consulta</legend>
 						<div>
 							<label>Nombre: </label>
-							<input type="text" name="nombre" placeholder="Ingrese su nombre" required>
+							<input type="text" name="nombre" placeholder="Ingrese su nombre" required th:field="*{nombre}">
 						</div>
 						<div>
 							<label>Email: </label>
-							<input type="email" name="email" placeholder="Ingrese un email válido" required>
+							<input type="email" name="email" placeholder="Ingrese un email válido" required th:field="*{email}">
 						</div>
 						<div>
 							<label>Ciudad: </label>
-							<input type="text" name="ciudad" placeholder="Ingrese su ciudad" required>
+							<input type="text" name="ciudad" placeholder="Ingrese su ciudad" required th:field="*{ciudad}">
 						</div>
 						<div>
 							<label>Mensaje: </label>
 							<br>
-							<textarea rows="8"></textarea>
+							<textarea rows="8" required th:field="*{mensaje}"></textarea>
 						</div>
 						<button type="submit" id="button__submit">Enviar</button>
 					</fieldset>
 				</form>
 			</div>
 		</main>
-		
 		<footer th:replace="~{layouts/footer :: footer}"></footer>
 </html>

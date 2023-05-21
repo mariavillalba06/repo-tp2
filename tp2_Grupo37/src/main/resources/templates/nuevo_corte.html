@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<title>Servicio</title>
+		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
+	</head>
+	<body>
+		<header th:replace="~{layouts/header :: header}"></header>
+		
+		<nav th:replace="~{layouts/nav :: nav}"></nav>
+		
+		<section class="formulario__container">
+			<h3 class="formulario__subtitulo" th:text="${edicion}? 'Modificar corte' : 'Nuevo corte'"></h3>
+			
+			<form class="formulario__servicio" th:action="${edicion}? @{/servicios/modificar-corte} : @{/servicios/guardar-corte}" th:object="${servicioCorte}" method="post">
+				<label class="servicio__label" for="peso_minimo">Peso mínimo</label>
+				<input class="servicio__input" type="number" id="peso_minimo" name="peso_minimo" th:field="*{pesoMinimo}">
+				
+				<label class="servicio__label" for="peso_maximo">Peso máximo</label>
+				<input class="servicio__input" type="number" id="peso_maximo" name="peso_maximo" th:field="*{pesoMaximo}">
+				
+				<label class="servicio__label" for="instrumento">Instrumento</label>
+				<select class="servicio__input" id="instrumento" name="instrumento" th:field="*{instrumento}">
+					<option value="Máquina">Máquina</option>
+					<option value="Tijera">Tijera</option>
+				</select>
+				
+				
+				<label class="servicio__label" for="precio">Precio</label>
+				<input class="servicio__input" type="number" id="precio" name="precio" th:field="*{precio}">
+				
+				<input type="hidden" name="id" th:value="*{id}">
+				
+				<p><input type="submit" th:value="${edicion}? 'Modificar' : 'Guardar'">
+			</form>
+		</section>
+		
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+	</body>
+</html>
