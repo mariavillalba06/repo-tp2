@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head lang="es">
+		<meta charset="UTF-8">
+		<title>Contacto</title>
+		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
+	</head>
+	<body>
+		<header th:replace="~{layouts/header :: header}"></header>
+		
+		<nav th:replace="~{layouts/nav :: nav}"></nav>
+		
+		<main class="form__container">
+			<div class="form__section">
+				<h2 class="form__titulo">CONSULTA ENVIADA</h2>
+				<div class="form__datos">
+					<p>Nombre: <span th:field="${nombre}"></span></p>
+					<p>Email: <span th:field="${email}"></span></p>
+					<p>Ciudad: <span th:field="{ciudad}"></span></p>
+					<p>Consulta: <span th:field="${mensaje}"></span></p>
+				</div>
+			</div>
+		</main>
+		
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+</html>
