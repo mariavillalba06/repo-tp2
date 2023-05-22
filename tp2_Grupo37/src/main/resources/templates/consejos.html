@@ -13,32 +13,15 @@
 		<main class="consejos__container">
 			<section class="consejos__section">
 				<h2 class="consejos__titulo">Consejos de salud</h2>
-				<article class="servicios__article">
-					<h3 class="article__subtitulo">Antes que nada, visita al veterinario</h3>
-					<p class="article__texto">Tener una mascota de manera responsable comienza con visitas regulares al veterinario. Dada su esperanza de vida, tu perrito o mínimo deberían hacerse un chequeo una o dos veces al año. Pero el establecer y mantener la buena salud de tu mascota significa mantenerse al día con las visitas al veterinario a medida que envejecen.</p>
-					<p class="article__texto clave"><b>Consejo clave:</b> antes de salir camino hacia el veterinario, sácalos de paseo. Esto se hace para que no asocien entrar al carro con ir al veterinario.</p>
-				</article>
-				<article class="servicios__article">
-					<h3 class="article__subtitulo">Proporciona un entorno de vida seguro, cómodo y enriquecedor</h3>
-					<p class="article__texto">Así como los seres humanos necesitamos un hogar en el que podamos sentirnos cómodos y seguros, también lo necesitan nuestras mascotas.</p>
-					<p class="article__texto clave"><b>Consejo clave:</b> las mascotas que son demasiado jóvenes o ya tienen varios años encima pierden su capacidad para regular la temperatura corporal eficientemente. Es importante ofrecerles una manta y una cama que les proporcione confort y calor. Sobre todo en las horas de la noche.</p>
-				</article>
-				<article class="servicios__article">
-					<h3 class="article__subtitulo">Atiende sus necesidades nutricionales</h3>
-					<p class="article__texto">Todos los organismos vivos necesitan alimento para sobrevivir. Lamentablemente, muchas mascotas sufren de obesidad y otros problemas metabólicos por mala alimentación. Lo que más adelante se puede derivar en otros problemas de salud.</p>
-					<p class="article__texto clave"><b>Consejo clave:</b> selecciona una fórmula de alimento para mascotas que sea apropiada para su edad, sus condiciones de salud y el nivel de actividad de tu mascota.</p>
-				</article>
-				<article class="servicios__article">
-					<h3 class="article__subtitulo">Esteriliza a tu mascota</h3>
-					<p class="article__texto">Esterilizar a tu mascota evita una serie de problemas de salud (ASPCA, s.f.), incluídos embarazos complicados y ayuda a la reducción de animales sin hogar. Debido a que la esterilización o castración es una cirugía que requiere anestesia general, es probable que tu mascota pase la noche en el consultorio del veterinario. Esto, durante al menos una noche para observación y recuperación.</p>
-					<p class="article__texto clave"><b>Consejo clave:</b> trata de practicar este procedimiento en una edad temprana para tu peludito. De esta manera su recuperación y su proceso de cicatrización será rápida.</p>
-				</article>
-				<article class="servicios__article">
-					<h3 class="article__subtitulo">Aplica las vacunas a tiempo</h3>
-					<p class="article__texto">Poco después de llegar a tu hogar, la primera salida debe ser al veterinario. Acto seguido se establecerá un calendario de vacunación para tu pequeño cachorro o gatito. Esto, con el objetivo de protegerlos de enfermedades como la rabia o el moquillo en el caso de los perros. Los gatos también se benefician de las vacunas que previenen el virus del herpes felino, la leucemia felina y la rabia.</p>
-					<p class="article__texto clave"><b>Consejo clave:</b> si adoptaste una mascota en edad avanzada, asegúrate de que también esté protegido. Las vacunas necesitan renovación y no son solo para mascotas jóvenes.</p>
+				<article class="servicios__article" th:each="consejo: ${consejos}">
+					<h3 class="article__subtitulo" th:text="${consejo.titulo}"></h3>
+					<p class="article__texto" th:text="${consejo.texto}"></p>
+					<p class="article__texto clave" th:text="${'Consejo clave: ' + consejo.clave}"></p>
+					<a id="tabla__enlace" class="tabla__dato" th:href="@{/consejos/modificar_consejo/} + ${consejo.id}">Editar</a>
+                    <a id="tabla__enlace" class="tabla__dato" th:href="@{/consejos/eliminar_consejo/} + ${consejo.id}">Borrar</a>
 				</article>
 			</section>	
+			<a class="servicio__enlace" th:href="@{/consejos/nuevo_consejo}">Nuevo consejo</a>
 		</main>
 		
 		<footer th:replace="~{layouts/footer :: footer}"></footer>
