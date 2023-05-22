@@ -55,7 +55,7 @@ public class ProductoController {
 				break;
 			}
 		}
-		model.addAttribute("producto", productoEncontrado);
+		model.addAttribute("productos", productoEncontrado);
 		model.addAttribute("edicion", edicion);
 		return "nuevo_producto";
 	}
