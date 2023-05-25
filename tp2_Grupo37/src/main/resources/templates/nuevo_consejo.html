@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Nuevo Consejo</title>
+		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
+	</head>
+	<body>
+		<header th:replace="~{layouts/header :: header}"></header>
+		
+		<nav th:replace="~{layouts/nav :: nav}"></nav>
+		
+		<section class="formulario__container">
+			<h3 class="formulario__subtitulo" th:text="${edicion}? 'Modificar consejo' : 'Nuevo consejo'"></h3>
+			
+			<form class="formulario__servicio" th:action="${edicion}? @{/consejos/modificar_consejo} : @{/consejos/guardar_consejo}" th:object="${consejo}" method="post">
+				<label class="servicio__label" for="titulo">Titulo</label>
+				<textarea class="servicio__input" id="titulo" rows="1" cols="60" name="titulo" required th:field="*{titulo}"></textarea>
+				
+				<label class="servicio__label" for="texto">Texto</label>
+				<textarea class="servicio__input" id="texto" rows="5" cols="80" name="texto" required th:field="*{texto}"></textarea>
+				
+				<label class="servicio__label" for="clave">Consejo clave</label>
+				<textarea class="servicio__input" id="clave" rows="5" cols="80" name="clave" required th:field="*{clave}"></textarea>
+				
+				<input type="hidden" name="id" th:value="*{id}">
+				
+				<p><input type="submit" th:value="${edicion}? 'Modificar' : 'Guardar'">
+			</form>
+		</section>
+		
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+	</body>
+</html>
