@@ -6,36 +6,45 @@
 		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
 	</head>
 	<body>
+		<!-- Encabezado -->
 		<header th:replace="~{layouts/header :: header}"></header>
 		
+		<!-- Navegación -->
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
 		
 		<section class="formulario__container">
+			<!-- Título dinámico según el valor de la variable "edicion"--> 
 			<h3 class="formulario__subtitulo" th:text="${edicion}? 'Modificar corte' : 'Nuevo corte'"></h3>
 			
+			<!-- Formulario para crear o modificar un corte -->
 			<form class="formulario__servicio" th:action="${edicion}? @{/servicios/modificar-corte} : @{/servicios/guardar-corte}" th:object="${servicioCorte}" method="post">
+				<!-- Selección del peso minimo -->
 				<label class="servicio__label" for="peso_minimo">Peso mínimo</label>
-				<input class="servicio__input" type="number" id="peso_minimo" name="peso_minimo" th:field="*{pesoMinimo}">
+				<input class="servicio__input" type="number" id="peso_minimo" name="peso_minimo" min="1" max="34" required th:field="*{pesoMinimo}">
 				
+				<!-- Selección del peso máximo -->
 				<label class="servicio__label" for="peso_maximo">Peso máximo</label>
-				<input class="servicio__input" type="number" id="peso_maximo" name="peso_maximo" th:field="*{pesoMaximo}">
+				<input class="servicio__input" type="number" id="peso_maximo" name="peso_maximo" min="1" max="34" required th:field="*{pesoMaximo}">
 				
+				<!-- Selección del instrumento a utilizar -->
 				<label class="servicio__label" for="instrumento">Instrumento</label>
 				<select class="servicio__input" id="instrumento" name="instrumento" th:field="*{instrumento}">
 					<option value="Máquina">Máquina</option>
 					<option value="Tijera">Tijera</option>
 				</select>
 				
-				
+				<!-- Carga de precio del corte -->
 				<label class="servicio__label" for="precio">Precio</label>
-				<input class="servicio__input" type="number" id="precio" name="precio" th:field="*{precio}">
+				<input class="servicio__input" type="number" id="precio" name="precio" required th:field="*{precio}">
 				
+				<!-- Campo oculto para almacenar el ID del corte -->
 				<input type="hidden" name="id" th:value="*{id}">
 				
-				<p><input type="submit" th:value="${edicion}? 'Modificar' : 'Guardar'">
+				<!-- Envío del formulario, muestrará de manera dinamica el título según la variable "edición"  -->
+				<input type="submit" th:value="${edicion}? 'Modificar' : 'Guardar'">
 			</form>
 		</section>
-		
+		<!-- footer -->
 		<footer th:replace="~{layouts/footer :: footer}"></footer>
 	</body>
 </html>
