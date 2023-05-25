@@ -6,10 +6,13 @@
 		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
 	</head>
 	<body>
+		<!-- Encabezado -->
 		<header th:replace="~{layouts/header :: header}"></header>
 		
+		<!-- Navegación -->
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
 		
+		<!-- Contenedor de servicios de paseos -->
 		<div class="servicios__container">
             <section>
                 <h1 class="servicios__titulo">Servicios de paseos</h1>
@@ -23,21 +26,25 @@
                         </tr>
                     </thead>
                     <tbody class="tabla__body">
+                    	<!-- Iteración sobre la lista de paseos -->
                         <tr th:each="paseo: ${paseos}">
                             <td class="tabla__dato" th:text="${paseo.dia}"></td>
                             <td class="tabla__dato" th:text="${paseo.horarioInicio + ' - ' + paseo.horarioFinal + ' hs'}"></td>
                             <td class="tabla__dato" th:text="${paseo.nombre}"></td>
                             <td>
+                            	<!-- Enlaces para editar y eliminar un paseo -->
                             	<a id="tabla__enlace" class="tabla__dato" th:href="@{/servicios/modificar-paseo/} + ${paseo.id}">Editar</a>
                             	<a id="tabla__enlace" class="tabla__dato" th:href="@{/servicios/eliminar-paseo/} + ${paseo.id}">Borrar</a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <!-- Enlace para crear un nuevo servicio de paseo -->
            		<a class="servicio__enlace" th:href="@{/servicios/nuevo-paseo}">Nuevo servicio de paseo</a>
             </section>
         </div>
         
+        <!-- Contenedor de servicios de cortes -->
         <div class="servicios__container">
             <section>
                 <h1 class="servicios__titulo">Servicios de cortes</h1>
@@ -52,20 +59,24 @@
                     </thead>
                     <tbody class="tabla__body">
                         <tr th:each="corte: ${cortes}">
+                        	<!-- Iteración sobre la lista de cortes -->
                             <td class="tabla__dato" th:text="${corte.pesoMinimo + ' - ' + corte.pesoMaximo + ' Kg'}"></td>
                             <td class="tabla__dato" th:text="${corte.instrumento}"></td>
                             <td class="tabla__dato" th:text="${corte.precio + ' $'}"></td>
                             <td>
+                            	<!-- Enlaces para editar y eliminar un corte -->
                             	<a id="tabla__enlace" class="tabla__dato" th:href="@{/servicios/modificar-corte/} + ${corte.id}">Editar</a>
                             	<a id="tabla__enlace" class="tabla__dato" th:href="@{/servicios/eliminar-corte/} + ${corte.id}">Borrar</a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <!-- Enlace para crear un nuevo servicio de corte -->
                 <a class="servicio__enlace" th:href="@{/servicios/nuevo-corte}">Nuevo servicio de corte</a>
             </section>
         </div>
         
+        <!-- footer -->
         <footer th:replace="~{layouts/footer :: footer}"></footer>
 	</body>
 </html>

@@ -8,6 +8,10 @@ import ar.edu.unju.fi.model.ServicioPaseo;
 public class ListaServicioPaseo {
 	private List<ServicioPaseo> servicioPaseos;
 	
+	/**
+     * Constructor de la clase ListaServicioPaseo
+     * Permite inicializar la lista de servicioPaseos con algunos bojetos percargados
+     */
 	public ListaServicioPaseo() {
 		servicioPaseos = new ArrayList<ServicioPaseo>();
 		
@@ -19,6 +23,9 @@ public class ListaServicioPaseo {
 		servicioPaseos.add(new ServicioPaseo(6, "Roberto Vazquez", "Sábado", (byte)16, (byte)18));
 	}
 	
+	/**
+     * Retorna la lista de servicioPaseos
+     */
 	public List<ServicioPaseo> getServicioPaseos() {
 		return servicioPaseos;
 	}
