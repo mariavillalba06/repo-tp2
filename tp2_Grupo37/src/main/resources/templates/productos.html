@@ -19,21 +19,21 @@
 
         <tr>
           <th>Descripcion</th>
-          <th>Codigo</th>
           <th>Precio</th>
           <th>Categoria</th>
           <th>Descuento</th>
+          <th>Precio total</th>
           <th>Acciones</th>
         </tr>
   		<tr th:each="produ:${productos}">
-			<td th:text="${produ.nombrecod}"></td>
-			<td th:text="${produ.codigo}"></td>
-			<td th:text="${produ.precio}"></td>
+			<td th:text="${produ.nombre}"></td>
+			<td th:text="${produ.precio} + ' $'"></td>
 			<td th:text="${produ.categoria}"></td>
-			<td th:text="${produ.descuento}"></td>
+			<td th:text="${produ.descuento + '%'}"></td>
+			<td th:text="${produ.precioTotal + ' $'}"></td>
 			<td>
-				<a class="newlink" th:href="@{/Producto/modificarse/}+${produ.nombrecod}">Editar</a><br>
-				<a class="newlink" th:href="@{/Producto/eliminarse/}+${produ.nombrecod}">Eliminar</a>
+				<a class="newlink" th:href="@{/Producto/modificarse/}+${produ.codigo}">Editar</a><br>
+				<a class="newlink" th:href="@{/Producto/eliminarse/}+${produ.codigo}">Eliminar</a>
 			</td>
 		</tr>
            

@@ -1,45 +1,45 @@
 package ar.edu.unju.fi.model;
 
 public class Producto {
-	 private String nombrecod;
-	 private String codigo;
-	 private int precio;
+	 private String nombre;
+	 private int codigo;
+	 private float precio;
 	 private String categoria;
 	 private int descuento;
+	 private float precioTotal;
 	 	 
 	public Producto() {
 	}	
-	public Producto(String nombrecod, String codigo, int precio, String categoria, int descuento) {
+	public Producto(String nombre, int codigo, float precio, String categoria, int descuento) {
 		super();
-		this.nombrecod = nombrecod;
+		this.nombre = nombre;
 		this.codigo = codigo;
 		this.precio = precio;
 		this.categoria = categoria;
 		this.descuento = descuento;
 	}
 
-
-
-	
-	public String getNombrecod() {
-		return nombrecod;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setNombrecod(String nombrecod) {
-		this.nombrecod = nombrecod;
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-	public String getCodigo() {
+
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 
-	public int getPrecio() {
+	public float getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(int precio) {
+	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
 
@@ -59,6 +59,21 @@ public class Producto {
 		this.descuento = descuento;
 	}
 	
-	 
+	public float calcularDescuento() {
+ 		float precioFinal;
+ 		precioFinal=this.precio-(this.precio*this.descuento)/100;
+ 		
+ 		return precioFinal;
+ 	}
+
+	public float getPrecioTotal() {
+		return precioTotal;
+	}
+
+	public void setPrecioTotal(float precioTotal) {
+		this.precioTotal = precioTotal;
+	}
+	
+	
  
 }

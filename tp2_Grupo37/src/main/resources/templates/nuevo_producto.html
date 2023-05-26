@@ -20,11 +20,26 @@
        
         <h2 th:text="${edicion}?'Modificar producto':'Registro de nuevo producto'"></h2>
         
-        <input type="text" placeholder="Nombre del Producto" id="nombrecod" name="producto_nombre" th:field="*{nombrecod}">
-        <input type="text" placeholder="Codigo Producto" id="codigo" name="producto_codigo" th:field="*{codigo}">
-        <input type="number" placeholder="Precio" id="precio" name="producto_precio" th:field="*{precio}">
-        <input type="text" placeholder="Categoria" id="categoria" name="producto_categoria" th:field="*{categoria}">
-        <input type="number" placeholder="Descuento" id="descuento" name="producto_descuento" th:field="*{descuento}">
+        <label for="nombre">Nombre</label>
+        <input type="text" placeholder="Nombre del Producto" id="nombre" name="producto_nombre" th:field="*{nombre}">
+        
+        <label for="precio">Precio</label>
+        <input type="number" min="1" placeholder="Precio" id="precio" name="producto_precio" th:field="*{precio}">
+        
+        <label for="categoria">Categoria</label>
+        <select id="categoria" name="producto_categoria" th:field="*{categoria}">
+			<option value="Alimentos">Alimentos</option>
+			<option value="Juguetes">Juguetes</option>
+			<option value="Accesorios">Accesorios</option>
+			<option value="Productos">Productos</option>
+			<option value="Camas">Cama</option>
+			<option value="Vestimenta">Vestimenta</option>
+		</select>
+        
+        <label for="descuento">Descuento</label>
+        <input type="number" min="0" max="50" id="descuento" name="producto_descuento" th:field="*{descuento}">
+        <input type="hidden" name="precio_total" th:value="*{precioTotal}">
+        <input type="hidden" name="producto_codigo" th:field="*{codigo}">
         <p><input  class="buttom" type="submit" th:value="${edicion}?'Modificar':'Guardar'"></p>
        
         
