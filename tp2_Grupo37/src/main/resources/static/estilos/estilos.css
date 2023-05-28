@@ -28,7 +28,7 @@ body {
 .titulo {
   font-size: 5em; /* Tamaño de fuente del titulo */
   color: #f2f2f2; /* Color del titulo */
-  *margin: 0 15px; /* Establece un margen de 0 píxeles en la parte superior e inferior y 15 píxeles en los lados izquierdo y derecho del titulo */
+  margin: 0 15px; /* Establece un margen de 0 píxeles en la parte superior e inferior y 15 píxeles en los lados izquierdo y derecho del titulo */
   font-weight: bold; /* Establece la negrita (fuente en negrita) para el elemento con la clase "titulo" */
 }
 
@@ -81,93 +81,57 @@ body {
   color: #fff; /* Color del texto al pasar el cursor sobre los enlaces de la barra de navegación */
 }
 
-/*main*/
+/*Index*/
 .main__container {
-  display: flex;
-  width: 85%;
-  margin: 30px auto;
-  background-color: #f2f2f2;
-  border-radius: 15px;
+  margin: 30px auto; /* Margen de 30px arriba y abajo, y automático en los laterales */
+  background-color: #f2f2f2; /* Color de fondo */
 }
 
 .main__section {
-  padding: 20px 20px;
-  width: 80%;
+  padding: 20px; /* Relleno interno de 20px */
 }
 
 .main__titulo {
-  font-size: 2.5em;
-  color: #438cfc;
-  margin-bottom: 20px;
-}
-
-.main__article {
-  margin: 15px 0;
+  font-size: 2.5em; /* Tamaño de fuente */
+  color: #438cfc; /* Color del titulo */
+  margin-bottom: 20px; /* Margen inferior */
 }
 
 .article__subtitulo {
-  color: #438cfc;
-  font-size: 1.7em;
-  font-weight: 300;
-  border-bottom: 1px solid #438cfc;
+  color: #438cfc; /* Color del subtitulo */
+  font-size: 1.7em; /* Tamaño de fuente */
+  font-weight: 300; /* Grosor de fuente */
+  border-bottom: 1px solid #438cfc; /* Borde inferior sólido */
 }
 
 .article__texto {
-  font-size: 1em;
-  color: #0444ac;
-  font-weight: 100;
-  line-height: 1.8;
-}
-
-/*aside*/
-.main__aside {
-  padding: 0 20px;
-  width: 20%;
-  text-align: center;
-}
-
-.aside__container {
-  display: inline-block;
-  padding: 20px 0px;
-  border-radius: 10px;
-  height: 100%;
+  font-size: 1em; /* Tamaño de fuente del texto */
+  color: #0444ac; /* Color de texto */
+  font-weight: 100; /* Grosor de fuente */
+  line-height: 1.8; /* Espaciado entre líneas */
 }
 
 .aside__titulo {
-  color: #f2f2f2;
-  background-color: #438cfc;
-  padding: 5px;
-  width: 150px;
-  text-align: center;
-  border-radius: 10px 10px 0 0;
-  font-weight: 700;
-  margin-top: 5px;
-}
-
-.aside__lista {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 80%;
-}
-
-.lista__item {
-  margin: 15px 0;
-  list-style: none;
+  color: #f2f2f2; /* Color del titulo */
+  background-color: #438cfc; /* Color de fondo*/
+  padding: 5px; /* Relleno interno */
+  border-radius: 10px 10px 0 0; /* Bordes redondeados en la parte superior */
+  font-weight: 700; /* Grosor de fuente */
+  margin-top: 5px; /* Margen superior */
 }
 
 .lista__enlace {
-  display: block;
-  color: #438cfc;
-  text-decoration: none;
-  transition: all 0.3s ease;
+  display: block; /* Mostrar como bloque para ocupar el ancho disponible */
+  color: #438cfc; /* Color de texto */
+  text-decoration: none; /* Sin decoracion de subrayado */
+  transition: all 0.3s ease; /* Transición de durante 0.3s */
 }
 
 .lista__enlace:hover {
-  color: #023482;
-  background-color: #f2f2f2;
-  border-radius: 5px;
-  box-shadow: 0px 5px 5px 0px #0444ac6e;
+  color: #023482; /* Cambio de color de texto al pasar el cursor por encima */
+  background-color: #f2f2f2; /* Cambio de color de fondo al pasar el cursor por encima */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0px 5px 5px 0px #0444ac6e; /* Sombra alrededor del elemento */
 }
 
 /*footer*/
@@ -510,3 +474,5 @@ input{
 .buttom:hover{
   background-color: rgb(4, 134, 116);
 }
+
+
