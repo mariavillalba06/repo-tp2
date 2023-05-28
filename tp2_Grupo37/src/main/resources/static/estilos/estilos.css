@@ -7,67 +7,78 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  /*font-family: "Roboto", sans-serif;*/
   background-image: linear-gradient(to top, #0444ac 0%, #438cfc 100%);
   background-size: cover;
   background-attachment: fixed;
 }
 
 /*header*/
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  width: 90%;
-  max-width: 1200px;
-  padding: 80px 0;
-  height: 180px;
+
+@media (max-width: 768px) {
+	.header {
+		display: none; /* Oculta el elemento con la clase "header" en pantallas con un ancho máximo de 768 píxeles */
+	}
 }
 
 .logo {
-  width: 150px;
-  text-align: center;
-  margin: 0 15px;
+  width: 150px; /* Establece el ancho del logo a 150 píxeles */
 }
 
 .titulo {
-  font-size: 4em;
-  color: #f2f2f2;
-  margin: 0 15px;
+  font-size: 5em; /* Tamaño de fuente del titulo */
+  color: #f2f2f2; /* Color del titulo */
+  *margin: 0 15px; /* Establece un margen de 0 píxeles en la parte superior e inferior y 15 píxeles en los lados izquierdo y derecho del titulo */
+  font-weight: bold; /* Establece la negrita (fuente en negrita) para el elemento con la clase "titulo" */
 }
+
+@media (max-width: 991px) {
+      .titulo {
+      	font-size: 4em; /* Modifica el tamaño de fuente del titulo en pantallas con un ancho máximo de 991 píxeles */
+      }
+}
+
+@media (max-width: 768px) {
+      .titulo {
+      	font-size: 1.5em; /* Modifica el tamaño de fuente del titulo en pantallas con un ancho máximo de 768 píxeles */
+        color: #438cfc; /* Cambia el color del titulo */
+      }
+}
+
+@media (max-width: 375px) {
+      .titulo {
+        font-size: 1.2em; /* Modifica el tamaño de fuente del titulo en pantallas con un ancho máximo de 375 píxeles */
+        color: #438cfc; /* Cambia el color del titulo */
+      }
+}
+
 
 /*barra de navegación*/
 .nav__container {
-  background-color: #f2f2f2;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  background-color: #f2f2f2; /* Color de fondo del contenedor de la barra de navegación */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Sombra alrededor del contenedor de la barra de navegación */
 }
 
-nav ul {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.item {
-  margin: 0 10px;
+@media (min-width: 769px) {
+	.nav__img {
+		display: none; /* Oculta la imagen de la barra de navegación en pantallas anchas (mayores o iguales a 769 píxeles) */
+	}
+	
+	.nav__titulo{
+		display: none; /* Oculta el título de la barra de navegación en pantallas anchas (mayores o iguales a 769 píxeles) */
+	}
 }
 
 .nav__enlace {
-  display: block;
-  padding: 10px;
-  color: #023482;
-  text-decoration: none;
-  transition: all 0.3s ease;
+  color: #023482; /* Color del texto de los enlaces de la barra de navegación */
+  text-decoration: none; /* Sin el subrayado en los enlaces de la barra de navegación */
+  transition: all 0.3s ease; /* Transición de 0.3 segundos en todos los cambios de estilo de los enlaces */
 }
 
 .nav__enlace:hover {
-  background-color: #7aacfc;
-  border-radius: 0 0 25px 25px;
-  color: #fff;
+  background-color: #7aacfc; /* Color de fondo al pasar el cursor sobre los enlaces de la barra de navegación */
+  border-radius: 0 0 25px 25px; /* Borde redondeado en la parte inferior de los enlaces al pasar el cursor */
+  color: #fff; /* Color del texto al pasar el cursor sobre los enlaces de la barra de navegación */
 }
 
 /*main*/
@@ -161,23 +172,13 @@ nav ul {
 
 /*footer*/
 .footer {
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 10px 0;
+  font-size: 12px; /* Tamaño de fuente texto a 12 píxeles */
 }
 
 .footer__icon {
-  width: 30px;
-  margin: 10px 5px 0 5px;
-  filter: invert(100%) sepia(14%) saturate(53%) hue-rotate(58deg) brightness(114%) contrast(90%);
-}
-
-.copyright {
-  color: #f2f2f2;
-  margin-bottom: 5px;
+  width: 30px; /* Establece el ancho de los iconos a 30 píxeles */
+  margin: 10px 0; /* Establece un margen de 10 píxeles en la parte superior e inferior y 0 píxeles en los lados izquierdo y derecho del elemento de los iconos" */
+  filter: invert(100%) sepia(14%) saturate(53%) hue-rotate(58deg) brightness(114%) contrast(90%); /* Aplica un filtro a los iconos */
 }
 
 /*Pagina Productos - Galeria de productos*/
