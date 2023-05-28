@@ -2,23 +2,39 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Inclusión del archivo CSS de Bootstrap -->
 		<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 	</head>
 	<body>
+		<!-- Barra de navegación -->
+		<nav class="nav__container navbar navbar-expand-lg">
+		  <div class="container">
+		  
+			<!-- Imagen del logo que se muestra en pantallas pequeñas y medianas (oculta en pantallas grandes) -->
+			<img class="nav__img"  th:src="@{/images/logo.png}" alt="Logo tienda" width="50">
+			<!-- Titulo que se muestra en pantallas pequeñas y medianas (oculta en pantallas grandes) -->
+			<h2 class="nav__titulo titulo">Patas Arriba S.A</h2>
 			
-		<nav class="nav__container" th:fragment="nav">
-			<ul>
-
-				<li class="item"><a class="nav__enlace" th:href="@{/index}">Inicio</a></li>
-				<li class="item"><a class="nav__enlace" th:href="@{/Producto/listas}">Productos</a></li>
-				<li class="item"><a class="nav__enlace" th:href="@{/consejos/listado}">Consejos de salud</a></li>
-				<li class="item"><a class="nav__enlace" th:href="@{/servicios/listado}">Servicios de paseo</a></li>
-				<li class="item"><a class="nav__enlace" th:href="@{/sucursal/listado}">Sucursales</a></li>
-				<li class="item"><a class="nav__enlace" th:href="@{/contacto}">Contáctanos</a></li>
-
-			</ul>
+			<!-- Botón para el menú de navegación en pantallas pequeñas -->
+		    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		      <span class="navbar-toggler-icon"></span>
+		    </button>
+		    <!-- Contenedor para los enlaces de navegación -->
+		    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		      <div class="navbar-nav mx-auto text-center">
+		      	<!-- Enlaces de navegación -->
+		        <a class="nav-link nav__enlace" th:href="@{/index}">Inicio</a>
+		        <a class="nav-link nav__enlace" th:href="@{/Producto/listas}">Productos</a>
+		        <a class="nav-link nav__enlace" th:href="@{/consejos/listado}">Consejos de salud</a>
+		        <a class="nav-link nav__enlace" th:href="@{/servicios/listado}">Servicios de paseo</a>
+		        <a class="nav-link nav__enlace" th:href="@{/sucursal/listado}">Sucursales</a>
+		        <a class="nav-link nav__enlace" th:href="@{/contacto}">Contáctanos</a>
+		      </div>
+		    </div>
+		  </div>
 		</nav>
-		
+		<!-- Inclusión del archivo JavaScript de Bootstrap -->
 		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 	</body>
 </html>
