@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Servicios</title>
 		<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
@@ -12,12 +13,25 @@
 		
 		<!-- Navegación -->
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
-		
-		<!-- Contenedor de servicios de paseos -->
-		<div class="servicios__container">
-            <section>
-                <h1 class="servicios__titulo">Servicios de paseos</h1>
-                <table class="tabla__container">
+        
+        
+        <div class="nav justify-content-center mt-5">
+		  <a href="#" class="btn btn-primary active" aria-current="page">Servicios</a>
+		  
+		  <!-- Botón de enlace "Paseo" -->
+		  <a th:href="@{/servicios/servicios-paseo}" class="btn btn-primary">Paseo</a>
+		  
+		  <!-- Botón de enlace "Corte" -->
+		  <a th:href="@{/servicios/servicios-corte}" class="btn btn-primary">Corte</a>
+		</div>
+
+        
+        <!-- Contenedor de servicios de paseos -->
+        <!-- Se mostrar la lista de acuerdo al valor de la variable paseo (true para mostrar) -->
+		<div th:if="${paseo}" class="servicios__container">
+            <section class="table-responsive">
+                <h1 class="servicios__titulo">Paseos</h1>
+                <table class="table table-striped text-center tabla__container">
                     <thead class="tabla__head">
                         <tr>
                             <th class="tabla__encabezado"><strong>Día</strong></th>
@@ -32,10 +46,10 @@
                             <td class="tabla__dato" th:text="${paseo.dia}"></td>
                             <td class="tabla__dato" th:text="${paseo.horarioInicio + ' - ' + paseo.horarioFinal + ' hs'}"></td>
                             <td class="tabla__dato" th:text="${paseo.nombre}"></td>
-                            <td>
+                            <td class="tabla__dato">
                             	<!-- Enlaces para editar y eliminar un paseo -->
-                            	<a id="tabla__enlace" class="tabla__dato" th:href="@{/servicios/modificar-paseo/} + ${paseo.id}">Editar</a>
-                            	<a id="tabla__enlace" class="tabla__dato" th:href="@{/servicios/eliminar-paseo/} + ${paseo.id}">Borrar</a>
+                            	<a id="tabla__enlace" th:href="@{/servicios/modificar-paseo/} + ${paseo.id}">Editar</a>
+                            	<a id="tabla__enlace" th:href="@{/servicios/eliminar-paseo/} + ${paseo.id}">Borrar</a>
                             </td>
                         </tr>
                     </tbody>
@@ -46,10 +60,11 @@
         </div>
         
         <!-- Contenedor de servicios de cortes -->
-        <div class="servicios__container">
+        <!-- Se mostrar la lista de acuerdo al valor de la variable corte (true para mostrar) -->
+        <div th:if="${corte}" class="servicios__container">
             <section>
-                <h1 class="servicios__titulo">Servicios de cortes</h1>
-                <table class="tabla__container">
+                <h1 class="servicios__titulo">Cortes</h1>
+                <table class="table table-striped text-center tabla__container">
                     <thead class="tabla__head">
                         <tr>
                             <th class="tabla__encabezado"><strong>Peso</strong></th>
@@ -64,10 +79,10 @@
                             <td class="tabla__dato" th:text="${corte.pesoMinimo + ' - ' + corte.pesoMaximo + ' Kg'}"></td>
                             <td class="tabla__dato" th:text="${corte.instrumento}"></td>
                             <td class="tabla__dato" th:text="${corte.precio + ' $'}"></td>
-                            <td>
+                            <td class="tabla__dato">
                             	<!-- Enlaces para editar y eliminar un corte -->
-                            	<a id="tabla__enlace" class="tabla__dato" th:href="@{/servicios/modificar-corte/} + ${corte.id}">Editar</a>
-                            	<a id="tabla__enlace" class="tabla__dato" th:href="@{/servicios/eliminar-corte/} + ${corte.id}">Borrar</a>
+                            	<a id="tabla__enlace" th:href="@{/servicios/modificar-corte/} + ${corte.id}">Editar</a>
+                            	<a id="tabla__enlace" th:href="@{/servicios/eliminar-corte/} + ${corte.id}">Borrar</a>
                             </td>
                         </tr>
                     </tbody>
@@ -76,6 +91,8 @@
                 <a class="servicio__enlace" th:href="@{/servicios/nuevo-corte}">Nuevo servicio de corte</a>
             </section>
         </div>
+        
+        
         
         <!-- footer -->
         <footer th:replace="~{layouts/footer :: footer}"></footer>

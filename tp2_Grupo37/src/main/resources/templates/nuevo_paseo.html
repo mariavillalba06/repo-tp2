@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Servicio</title>
 		<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
@@ -18,36 +19,46 @@
 			<h3 class="formulario__subtitulo" th:text="${edicion}? 'Modificar paseo' : 'Nuevo paseo'"></h3>
 			
 			<!-- Formulario para crear o modificar un paseo -->
-			<form class="formulario__servicio" th:action="${edicion}? @{/servicios/modificar-paseo} : @{/servicios/guardar-paseo}" th:object="${servicioPaseo}" method="post">
+			<form th:action="${edicion}? @{/servicios/modificar-paseo} : @{/servicios/guardar-paseo}" th:object="${servicioPaseo}" method="post">
+				
 				<!-- Selección del día del paseo -->
-				<label class="servicio__label" for="dia">Día</label>
-				<select class="servicio__input" id="dia" name="dia" th:field="*{dia}">
-					<option value="Lunes">Lunes</option>
-					<option value="Martes">Martes</option>
-					<option value="Miércoles">Miércoles</option>
-					<option value="Jueves">Jueves</option>
-					<option value="Viernes">Viernes</option>
-					<option value="Sábado">Sábado</option>
-				</select>
-				
-				<!-- Ingreso para el horario de inicio del paseo -->
-				<label class="servicio__label" for="inicio">Horario de inicio</label>
-				<input class="servicio__input" type="number" id="inicio" name="horario_inicio" required min="9" max="20" th:field="*{horarioInicio}">
-				
-				<!-- Ingreso para el horario de finalización del paseo -->
-				<label class="servicio__label" for="final">Horario de final</label>
-				<input class="servicio__input" type="number" id="final" name="horario_final"  required min="9" max="20" th:field="*{horarioFinal}">
-				
-				<!-- Ingreso para el nombre del paseador -->
-				<label class="servicio__label" for="paseador">Paseador</label>
-				<input class="servicio__input" type="text" id="paseador" name="nombre_paseador"  required th:field="*{nombre}">
-				
-				<!-- Campo oculto para almacenar el ID del paseo -->
+				<div class="mb-3">
+					<label for="dia" class="form-label servicio__label">Día</label>
+		      		<select class="form-select" aria-label="Default select example" id="dia" name="dia" th:field="*{dia}">
+				  		<option value="selected" selected>Selección</option>
+				  		<option value="Lunes">Lunes</option>
+						<option value="Martes">Martes</option>
+						<option value="Miércoles">Miércoles</option>
+						<option value="Jueves">Jueves</option>
+						<option value="Viernes">Viernes</option>
+						<option value="Sábado">Sábado</option>
+					</select>
+		      	</div>
+		      	
+		      	<!-- Ingreso para el horario de inicio del paseo -->
+		     	<div class="mb-3">
+		        	<label for="inicio" class="form-label servicio__label">Horario de inicio</label>
+		        	<input type="number" class="form-control" aria-describedby="emailHelp" id="inicio" name="horario_inicio" required min="9" max="20" th:field="*{horarioInicio}">
+		      	</div>
+		      	
+		      	<!-- Ingreso para el horario de finalización del paseo -->
+		      	<div class="mb-3">
+		        	<label for="final" class="form-label servicio__label">Horario de final</label>
+		        	<input type="number" class="form-control" aria-describedby="emailHelp" id="final" name="horario_final"  required min="9" max="20" th:field="*{horarioFinal}">
+		      	</div>
+		      	
+		      	<!-- Ingreso para el nombre del paseador -->
+		      	<div class="mb-3">
+		        	<label for="paseador" class="form-label servicio__label">Paseador</label>
+		        	<input type="text" class="form-control" id="exampleInputPassword1" name="nombre_paseador"  required th:field="*{nombre}">
+		      	</div>
+		      	
+		      	<!-- Campo oculto para almacenar el ID del paseo -->
 				<input type="hidden" name="id" th:value="*{id}">
-				
-				<!-- Envío del formulario, muestrará de manera dinamica el título según la variable "edición"  -->
-				<input type="submit" th:value="${edicion}? 'Modificar' : 'Guardar'">
-			</form>
+		      	
+		      	<!-- Envío del formulario, muestrará de manera dinamica el título según la variable "edición"  -->
+		      	<input type="submit" class="btn btn-primary"  th:value="${edicion}? 'Modificar' : 'Guardar'">
+		    </form>
 		</section>
 		
 		<!-- Footer -->
