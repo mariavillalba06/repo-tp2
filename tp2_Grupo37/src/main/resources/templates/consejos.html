@@ -10,22 +10,30 @@
 		<header th:replace="~{layouts/header :: header}"></header>
 		
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
-		
-		<main class="consejos__container">
-			<section class="consejos__section">
-				<h2 class="consejos__titulo">Consejos de salud</h2>
-				<article class="servicios__article" th:each="consejo: ${consejos}">
-					<h3 class="article__subtitulo" th:text="${consejo.titulo}"></h3>
-					<p class="article__texto" th:text="${consejo.texto}"></p>
-					<p class="article__texto clave" th:text="${'Consejo clave: ' + consejo.clave}"></p>
-					<a id="tabla__enlace" class="tabla__dato" th:href="@{/consejos/modificar_consejo/} + ${consejo.id}">Editar</a>
-                    <a id="tabla__enlace" class="tabla__dato" th:href="@{/consejos/eliminar_consejo/} + ${consejo.id}">Borrar</a>
-				</article>
-			</section>	
-			<a class="servicio__enlace" th:href="@{/consejos/nuevo_consejo}">Nuevo consejo</a>
-		</main>
+		<div class="container-lg consejos__container">
+			<h2 class="consejos__titulo ">Consejos de salud</h2>
+			<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+			  <div class="col" th:each="consejo: ${consejos}">
+			    <div class="card">
+			      <div class="card-body servicios__article">
+			        <h5 class="card-title article__subtitulo" th:text="${consejo.titulo}"></h5>
+			        <p class="card-text article__texto" th:text="${consejo.texto}"></p>
+			        <p class="card-text article__texto clave" th:text="${'Consejo clave: ' + consejo.clave}"></p>
+			      
+					<div class="card-footer md-flex justify-content-md-center pt-3">
+			        <a class="btn btn-outline-primary" th:href="@{/consejos/modificar_consejo/} + ${consejo.id}">Editar</a>
+                    <a class="btn btn-outline-danger" th:href="@{/consejos/eliminar_consejo/} + ${consejo.id}">Borrar</a>
+			      </div>			      
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<div class="d-grid gap-2">
+				<a class="btn btn-success btn-lg" th:href="@{/consejos/nuevo_consejo}">Nuevo consejo</a>
+			</div>
+		</div>
 		
 		<footer th:replace="~{layouts/footer :: footer}"></footer>
-		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 	</body>
 </html>
