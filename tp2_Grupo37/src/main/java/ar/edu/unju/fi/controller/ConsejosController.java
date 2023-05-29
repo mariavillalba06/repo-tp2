@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,12 @@ import ar.edu.unju.fi.model.Consejo;
 @Controller
 @RequestMapping("/consejos")
 public class ConsejosController {
-	ListaConsejo listaConsejo = new ListaConsejo();
+	
+	@Autowired
+	ListaConsejo listaConsejo;
+	
+	@Autowired
+	private Consejo consejo;
 	
 	@GetMapping("/listado")
 	public String mostrarConsejos(Model model) {
@@ -27,7 +33,7 @@ public class ConsejosController {
 	public String getNuevoConsejo(Model model) {
 		boolean edicion=false;
 		
-		model.addAttribute("consejo", new Consejo());
+		model.addAttribute("consejo", consejo);
 		model.addAttribute("edicion", edicion);
 		
 		return "nuevo_consejo";
