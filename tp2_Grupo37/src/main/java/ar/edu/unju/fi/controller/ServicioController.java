@@ -21,12 +21,54 @@ public class ServicioController {
 	ListaServicioPaseo listaPaseo = new ListaServicioPaseo();
 	ListaServicioCorte listaCorte = new ListaServicioCorte();
 	
-	@GetMapping("/listado")
-	public String getListaServicioPaseos(Model model) {
-		model.addAttribute("paseos", listaPaseo.getServicioPaseos());
-		model.addAttribute("cortes", listaCorte.getServicioCortes());
+	/**
+	 * Método que obtiene una lista de servicios según el tipo de servicio especificado.
+	 *
+	 * @param model    Objeto Model para pasar datos a la vista (lista de paseos o cortes)
+	 * @param servicio Tipo de servicio especificado en la URL
+	 * @return Regresa la vista "servicios"
+	 */
+	@GetMapping("/listado/{servicio}")
+	public String getListaServicio(Model model, @PathVariable(value="servicio")String servicio) {
+		boolean paseo, corte;
+		
+		// Comprobación del tipo de servicio
+		if(servicio.equals("paseo")) {
+			paseo=true;
+			corte=false;
+			model.addAttribute("paseos", listaPaseo.getServicioPaseos());
+		} else {
+			paseo=false;
+			corte=true;
+			model.addAttribute("cortes", listaCorte.getServicioCortes());
+		}
+		
+		model.addAttribute("paseo", paseo);
+		model.addAttribute("corte", corte);
+
 		return "servicios";
 	}
+	
+	/**
+	 * Redirige a la página de listado de servicios de paseos
+	 *
+	 */
+	@GetMapping("/servicios-paseo")
+	public String getServicioPaseos() {
+
+		return "redirect:/servicios/listado/paseo";
+	}
+	
+	/**
+	 * Redirige a la página de listado de servicios de cortes
+	 *
+	 */
+	@GetMapping("/servicios-corte")
+	public String getServicioCortes() {
+		
+		return "redirect:/servicios/listado/corte";
+	}
+	
 	
 	//Servicio de paseos
 	/**
@@ -60,6 +102,8 @@ public class ServicioController {
 		//valor utilizado para controlar el valor del ultima ID, se inicializa en 0 en caso de estar vacia
 		int ultimaId=0;
 		
+		boolean paseo=true, corte=false;
+		
 		// Se crea un objeto ModelAndView con la vista "servicios"
 		ModelAndView modelView = new ModelAndView("servicios");
 		
@@ -75,7 +119,9 @@ public class ServicioController {
 		
 		// Agrega el listado de paseos y cortes al modelo del ModelAndView
 		modelView.addObject("paseos", listaPaseo.getServicioPaseos());
-		modelView.addObject("cortes", listaCorte.getServicioCortes());
+		//modelView.addObject("cortes", listaCorte.getServicioCortes());
+		modelView.addObject("paseo", paseo);
+		modelView.addObject("corte", corte);
 		return modelView;
 	}
 	
@@ -127,7 +173,7 @@ public class ServicioController {
 				break;
 			}
 		}
-		return "redirect:/servicios/listado";
+		return "redirect:/servicios/listado/paseo";
 	}
 	
 	
@@ -147,7 +193,7 @@ public class ServicioController {
 				break;
 			}
 		}
-		return "redirect:/servicios/listado";
+		return "redirect:/servicios/listado/paseo";
 	}
 	
 	
@@ -184,6 +230,8 @@ public class ServicioController {
 		//valor utilizado para controlar el valor del ultima ID, se inicializa en 0 en caso de estar vacia
 		int ultimaId=0;
 		
+		boolean paseo=false, corte=true;
+		
 		// Creación de un objeto ModelAndView para la vista "servicios"
 		ModelAndView modelView = new ModelAndView("servicios");
 		
@@ -200,8 +248,10 @@ public class ServicioController {
 		listaCorte.getServicioCortes().add(servicioCorte);
 		
 		// Agrega el listado de paseos y cortes al modelo del ModelAndView
-		modelView.addObject("paseos", listaPaseo.getServicioPaseos());
+		//modelView.addObject("paseos", listaPaseo.getServicioPaseos());
 		modelView.addObject("cortes", listaCorte.getServicioCortes());
+		modelView.addObject("paseo", paseo);
+		modelView.addObject("corte", corte);
 		return modelView;
 	}
 	
@@ -249,7 +299,7 @@ public class ServicioController {
 				break;
 			}
 		}
-		return "redirect:/servicios/listado";
+		return "redirect:/servicios/listado/corte";
 	}
 	
 	
@@ -269,6 +319,6 @@ public class ServicioController {
 	        }
 	    }
 	    
-	    return "redirect:/servicios/listado";
+	    return "redirect:/servicios/listado/corte";
 	}
 }
