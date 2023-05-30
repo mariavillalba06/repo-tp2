@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +19,17 @@ import ar.edu.unju.fi.model.ServicioPaseo;
 @RequestMapping("/servicios")
 public class ServicioController {
 	
-	ListaServicioPaseo listaPaseo = new ListaServicioPaseo();
-	ListaServicioCorte listaCorte = new ListaServicioCorte();
+	@Autowired
+	ListaServicioPaseo listaPaseo;
+	
+	@Autowired
+	ListaServicioCorte listaCorte;
+	
+	@Autowired
+	ServicioPaseo nuevoPaseo;
+	
+	@Autowired
+	ServicioCorte nuevoCorte;
 	
 	/**
 	 * Método que obtiene una lista de servicios según el tipo de servicio especificado.
@@ -83,7 +93,7 @@ public class ServicioController {
 		boolean edicion=false;
 		
 		// Agrega un objeto ServicioPaseo vacío al modelo
-		model.addAttribute("servicioPaseo", new ServicioPaseo());
+		model.addAttribute("servicioPaseo", nuevoPaseo);
 		
 		// Agrega la variable "edicion" al modelo
 		model.addAttribute("edicion", edicion);
@@ -211,7 +221,7 @@ public class ServicioController {
 		boolean edicion=false;
 		
 		// Agrega un nuevo objeto "ServicioCorte" al modelo
-		model.addAttribute("servicioCorte", new ServicioCorte());
+		model.addAttribute("servicioCorte", nuevoCorte);
 		
 		// Agregar la variable "edicion" al modelo
 		model.addAttribute("edicion", edicion);
