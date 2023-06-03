@@ -2,11 +2,20 @@ package ar.edu.unju.fi.model;
 
 import org.springframework.stereotype.Component;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
 @Component
 public class Contacto {
+	@NotEmpty(message="El nombre no puede estar vacío")
 	private String nombre;
+	@NotEmpty(message="El email no puede estar vacío")
+	@Email(message="Debe ingresar un correo electronico válido")
 	private String email;
+	@Size(min=10,max=50,message="La direccion debe ser entre 10 y 50 caracteres")
 	private String ciudad;
+	@NotEmpty(message="El mensaje no puede estar vacío")
 	private String mensaje;
 	
 	public Contacto() {
