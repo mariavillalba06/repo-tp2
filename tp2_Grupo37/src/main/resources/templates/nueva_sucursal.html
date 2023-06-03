@@ -7,35 +7,49 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Nueva Sucursales</title>
 	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-	<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
+	<link th:rel="stylesheet" th:href="@{/estilos/estilos.css}">
 </head>
 
 <body>
 	<header th:replace="~{/layouts/header :: header}"></header>
 
 	<nav th:replace="~{/layouts/nav :: nav}"></nav>
-
-	 <section class="newSucursal">
+	<div class="d-flex justify-content-center align-items-center">
+	 <!--<section class="newSucursal">-->
       
       <form class="form-container" th:action="${edicion}?@{/sucursal/modificar}:@{/sucursal/guardar}" th:object="${sucursal}" method="post">
        
         <h2 th:text="${edicion}?'Modificar Registro':'Registro de nueva sucursal'"></h2>
         
         <input type="text" placeholder="Nombre del Local" id="nombre" name="sucursal_nombre" th:field="*{nombre}">
+        <div class=" text-white" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+        
         <input type="text" placeholder="Direccion" id="direccion" name="sucursal_direccion" th:field="*{direccion}">
+        <div class=" text-white" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></div>
+        
         <select id="provincia" name="sucursal_provincia" th:field="*{provincia}">
+          <option value="" slected>Seleccione una opcion..</option>
           <option value="SALTA">Salta</option>
           <option value="JUJUY">Jujuy</option>
           <option value="BSAS">Buenos Aires</option>
         </select>
+        <div class=" text-white" th:if="${#fields.hasErrors('provincia')}" th:errors="*{provincia}"></div>
+        
         <input type="date" placeholder="Fecha Inicio" id="fecha" name="sucursal_fecha" th:field="*{fechaInicio}">
+        <div class=" text-white" th:if="${#fields.hasErrors('fechaInicio')}" th:errors="*{fechaInicio}"></div>
+        
         <input type="email" placeholder="E-mail" id="email" name="sucursal_email" th:field="*{email}">
+        <div class=" text-white" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        
         <input type="text" placeholder="Telefono" id="telefono" name="sucursal_telefono" th:field="*{telefono}">
+        <div class=" text-white" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
+        
         <p><input  class="buttom" type="submit" th:value="${edicion}?'Modificar':'Guardar'"></p>
        
         
       </form>
-    </section>
+      </div>
+    <!--</section>-->
 
 	<footer th:replace="~{/layouts/footer :: footer}"></footer>
 	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>

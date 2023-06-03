@@ -6,28 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sucursales</title>
     <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/estilos/estilos.css}">
+    <link th:rel="stylesheet" th:href="@{/estilos/estilos.css}">
 </head>
 <body>
   		<header th:replace="~{layouts/header :: header}"></header>
 		
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
   
-     <section class="sucursales_other">
-		 <a th:href="@{/sucursal/nuevo}">Nueva sucursal</a>
-        <table>
+     
+		 <div class="container-sm">
+		<div class="row ">
+		 <a class="newlink" th:href="@{/sucursal/nuevo}">Nueva sucursal</a>
+		 </div>
+		 <div class="d-flex justify-content-center align-items-center">
+        <table class="table table-bordered table-hover newtable ">
+			<thead class="table-dark">
           <tr>
-            <th>Nombre</th>
-            <th>Dirección</th>
-            <th>Provincia</th>
-            <th>Fecha Inicio</th>
-            <th>Email</th>
-            <th>Teléfono</th>    
-            <th>Ediciones</th>      
+            <th scope="col">Nombre</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Provincia</th>
+            <th scope="col">Fecha Inicio</th>
+            <th scope="col">Email</th>
+            <th scope="col">Teléfono</th>    
+            <th scope="col">Ediciones</th>      
           </tr>
-          
+          </thead>
           <tr th:each="sucu: ${sucursales}">
-			<td th:text="${sucu.nombre}"></td>
+			<td   th:text="${sucu.nombre}"></td>
 			<td th:text="${sucu.direccion}"></td>
 			<td th:text="${sucu.provincia}"></td>
 			<td th:text="${#temporals.format(sucu.fechaInicio,'dd/MM/yyyy')}"></td>
@@ -39,7 +44,8 @@
 			</td>
 		  </tr>
         </table>
-     </section>
+        </div>
+     </div>
       
       <footer th:replace="~{layouts/footer :: footer}"></footer>
       <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>

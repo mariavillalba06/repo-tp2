@@ -3,14 +3,35 @@ package ar.edu.unju.fi.model;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+
+
+@Component
 public class Sucursal {
+	@NotEmpty(message="¡Este campo no puede quedar vacio!")
 	private String nombre;
+	@NotEmpty(message="¡Este campo no puede quedar vacio!")
+	@Size(min=5, max=100,message="¡La direccion debe contener entre 5 y 100 caracteres!")
 	private String direccion;
+	@NotEmpty(message="¡Debe seleccionar una provincia!")
 	private String provincia;
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@NotNull(message="¡La fecha no puede ser null!")
+	@Past(message="¡La fecha debe ser menor que la fecha actual!")
 	private LocalDate fechaInicio;
+	
+	@NotEmpty(message="¡Este campo no puede quedar vacio!")
+	@Email(message="¡Debe ingresar un email con formato valido!")
 	private String email;
+	
+	@NotEmpty(message="¡El campo telefono no puede ser vacio!")
 	private String telefono;
 	
 	public Sucursal() {

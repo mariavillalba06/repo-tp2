@@ -2,9 +2,12 @@ package ar.edu.unju.fi.controller;
 
 import ar.edu.unju.fi.listas.ListaSucursal;
 import ar.edu.unju.fi.model.Sucursal;
+import jakarta.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/sucursal")
 public class SucursalesController {
-	ListaSucursal listasucursal= new ListaSucursal();
+	@Autowired
+	private ListaSucursal listasucursal;
+	
+	@Autowired
+	private Sucursal sucursal;
 	
 	@GetMapping("/listado")
 	public 	String getSucursalesPage(Model model) {
@@ -26,14 +33,19 @@ public class SucursalesController {
 	@GetMapping("/nuevo")
 	public String getNuevaSucursalesPage(Model model) {
 		boolean edicion=false;
-		model.addAttribute("sucursal", new Sucursal());
+		model.addAttribute("sucursal", sucursal);
 		model.addAttribute("edicion", edicion);
 		return "nueva_sucursal";
 	}
 	
 	@PostMapping("/guardar")
-	public ModelAndView getGuardarNuevaPage(@ModelAttribute("sucursal")Sucursal sucursal) {
+	public ModelAndView getGuardarNuevaPage(@Valid @ModelAttribute("sucursal")Sucursal sucursal, BindingResult result) {
 		ModelAndView modelandview = new ModelAndView("sucursales");
+		if(result.hasErrors()) {
+			modelandview.setViewName("nueva_sucursal");
+			modelandview.addObject("sucursal", sucursal);
+			return modelandview;
+		}
 		listasucursal.getSucursales().add(sucursal);
 		modelandview.addObject("sucursales", listasucursal.getSucursales());
 		return modelandview;
@@ -61,7 +73,8 @@ public class SucursalesController {
 				sucu.setFechaInicio(sucursal.getFechaInicio());
 				sucu.setProvincia(sucursal.getProvincia());
 				sucu.setTelefono(sucursal.getTelefono());
-	}
+				}
+			
 		}
 		return "redirect:/sucursal/listado";
 	}
