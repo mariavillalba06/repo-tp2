@@ -3,6 +3,7 @@
 	<head lang="es">
 		<meta charset="UTF-8">
 		<title>Contacto</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
 	</head>
@@ -11,33 +12,39 @@
 		
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
 		
-		<main class="form__container">
-			<div class="form__section">
+		<main class="form__container container">
+			<div class="form__section mx-auto text-center">
 				<h2 class="form__titulo">Contáctenos</h2>
 				<div class="form__datos">
 					<p>Direccion: 3915 Av. General Belgrano</p>
 					<p>Telefono: 388-49999</p>
 					<p>Horario:</p>
-					<ul>
-						<li>Lunes a viernes: 9:00 am a 8:00pm</li>
-						<li>Sabado a domingo: 9:00 am a 12:30 pm</li>
-					</ul>
+					<div class="row">
+						<section class="col-md-6">
+							<p>Lunes a viernes: 9:00 am a 8:00pm</p>
+						</section>
+						
+						<section class="col-md-6">
+							<p>Sábados y domingos: 9:00 am a 12:30 pm</p>
+						</section>
+					</div>
+					
 					<p>Correo electrónico: <a href="mailto:contactos@mail.com.ar">contactos@mail.com.ar</a></p>
 				</div>
-				<form class="form__consulta" th:action="@{/contacto}" th:object="${contacto}" method="post">
-					<fieldset>
+				<form class="form__consulta " th:action="@{/contacto}" th:object="${contacto}" method="post">
+					<fieldset class="mx-auto text-center">
 						<legend>Consulta</legend>
 						<div>
-							<label>Nombre: </label>
-							<input type="text" name="nombre" placeholder="Ingrese su nombre" required th:field="*{nombre}">
+							<label for="nombre">Nombre: </label>
+							<input type="text" id="nombre"name="nombre" placeholder="Ingrese su nombre" required th:field="*{nombre}">
 						</div>
 						<div>
-							<label>Email: </label>
-							<input type="email" name="email" placeholder="Ingrese un email válido" required th:field="*{email}">
+							<label for="email">Email: </label>
+							<input type="email" id="email" name="email" placeholder="Ingrese un email válido" required th:field="*{email}">
 						</div>
 						<div>
-							<label>Ciudad: </label>
-							<input type="text" name="ciudad" placeholder="Ingrese su ciudad" required th:field="*{ciudad}">
+							<label for="ciudad">Ciudad: </label>
+							<input type="text" id="ciudad" name="ciudad" placeholder="Ingrese su ciudad" required th:field="*{ciudad}">
 						</div>
 						<div>
 							<label>Mensaje: </label>
