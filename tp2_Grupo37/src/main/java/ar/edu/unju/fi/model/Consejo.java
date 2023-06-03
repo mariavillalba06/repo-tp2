@@ -2,11 +2,18 @@ package ar.edu.unju.fi.model;
 
 import org.springframework.stereotype.Component;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
 @Component
 public class Consejo {
 	private int id;
+	@NotEmpty(message="No puede estar vacío")
 	private String titulo;
+	@Size(min=10,message="El texto debe ser de 10 caracteres minimos")
 	private String texto;
+	@NotEmpty(message="La clave no puede estar vacía")
+	@Size(max=30, message="La clave no puede tener mas de 30 caracteres")
 	private String clave;
 	
 	public Consejo() {

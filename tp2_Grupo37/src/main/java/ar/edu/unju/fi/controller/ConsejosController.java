@@ -3,6 +3,7 @@ package ar.edu.unju.fi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.listas.ListaConsejo;
 import ar.edu.unju.fi.model.Consejo;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/consejos")
@@ -40,10 +42,15 @@ public class ConsejosController {
 	}
 	
 	@PostMapping("/guardar_consejo")
-	public ModelAndView getGuardarConsejo(@ModelAttribute("consejo") Consejo consejo) {
+	public ModelAndView getGuardarConsejo(@Valid @ModelAttribute("consejo") Consejo consejo, BindingResult result) {
 		int ultimaId=0;
 		
 		ModelAndView modelView = new ModelAndView("consejos");
+		if(result.hasErrors()) {
+			modelView.setViewName("nuevo_consejo");
+			modelView.addObject("consejo", consejo);
+			return modelView;
+		}
 		
 		for(Consejo ultimoElemento : listaConsejo.getConsejos()) {
 			ultimaId = ultimoElemento.getId();
@@ -77,6 +84,7 @@ public class ConsejosController {
 
 	@PostMapping("/modificar_consejo")
 	public String modificarConsejo(@ModelAttribute("consejo") Consejo consejoModificado) {
+		
 		for(Consejo consejo : listaConsejo.getConsejos()) {
 			if(consejo.getId() == consejoModificado.getId()) {
 				consejo.setTitulo(consejoModificado.getTitulo());
