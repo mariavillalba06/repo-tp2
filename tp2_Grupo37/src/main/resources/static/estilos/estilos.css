@@ -290,7 +290,6 @@ body {
 
 /* Página de Contacto */
 .form__container{
- 	width: 60%;
   	margin: 30px auto;
   	padding: 20px;
   	background-image: url("../images/wallpaper-vet.jpg");
@@ -332,27 +331,6 @@ body {
 .form__datos p > a:active{
 	color: purple;
 	text-decoration:underline;
-}
-/* Formulario de consulta */
-.form__consulta fieldset{
-	background-color: #eeeeee;
-	margin: 30px;
-	width:80%;
-	text-align:center;
-	border-radius:15px;
-}
-.form__consulta label{
-	padding-left: 15px;
-	color: #004080;
-}
-.form__consulta legend{
-	font-size: 1.1em;
-	font-weight:bold;
-	color: #004080;
-}
-.form__consulta input, .form__consulta textarea{
-	width: 80%;
-	margin:10px;
 }
 /* Boton de enviar */
 #button__submit{
