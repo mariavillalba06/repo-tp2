@@ -149,43 +149,8 @@ body {
 .newProducto{
   background-color: #ffffff7d;
   border-radius: 10px;
- 
-  width: 800px;
-  display: grid;
-  place-items: center;
-  margin: auto;
+  
 }
-.newProducto .linkprod{
-	font-size: 20px;
-}
-.table-product{
-
-  border-collapse: collapse;
-  border: inherit;
-}
-.table-product tr th{
- color: rgb(128, 0, 0);
-  border: inherit;
-}
-.table-product tr td{
-  border: inherit;
-}
-.table-product tr td{
-	color: rgba(0, 0, 0,0.8);
-	font-weight: bold;
-}
-.table-product tr td.nametd{
-	
-  width: 350px;
-}
-.table-product tr td a{
-  text-decoration: none;
-color: rgba(0, 0, 0,0.8);
-  font-size: 16px;
-}
-
-
-
 /*página-servicios*/
 .servicios__container{
 	min-height: 500px;
@@ -408,44 +373,25 @@ color: rgba(0, 0, 0,0.8);
 	color: #004080;	
 }
 /* Pagina sucursales */
-.sucursales_other a{
+.newtable{
+	color: white;
+}
+.newlink{
 	display: inherit;
 	text-decoration: none;
 	font-size: 1.2rem;
-	margin-left: 100px;
     margin-top: 50px;
     margin-bottom: 15px;
     color: white;
-    width: 150px;
 }
-.sucursales_other a:hover{
-	color: black;
-	font-weight: bold;
-}
-.sucursales_other table{
-
-  border-collapse: collapse;
-  width: 80%;
-  text-align: center;
-  margin: auto;
-  margin-bottom: 100px;
-}
-th,td{
-	color: white;
-  padding: 10px;
-   border: 1px solid black;
+.newlink:hover{
+	color:black;
 }
 /*Pagina Nueva Sucursal*/
-.newSucursal{
-  width: 100vw;
-  height: 75vh;
-  display: grid;
-  place-items: center;
-}
 .form-container{
   display: inherit;
   color: white;
-  width: 380px;
+  width: 500px;
   background-color: rgba(255,255,255,0.137);
   display: flex;
   margin: 5px;

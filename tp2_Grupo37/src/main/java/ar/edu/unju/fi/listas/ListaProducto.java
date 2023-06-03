@@ -2,10 +2,19 @@ package ar.edu.unju.fi.listas;
 
 import ar.edu.unju.fi.model.Producto;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 
+@Component
 public class ListaProducto {
 	private List<Producto> productos;
+	
+	/**
+     * Constructor de la clase ListaProducto
+     * Permite inicializar la lista de productos con algunos bojetos percargados
+     */ 
 	
 	public ListaProducto() {
 		Producto producto1 = new Producto("arena para gatos",1,189,"Productos",0);
@@ -21,6 +30,9 @@ public class ListaProducto {
 		productos.add(producto3);
 	}
 
+	/**
+     * Retorna la lista de Productos
+     */
 	public List<Producto> getProductos() {
 		return productos;
 	}

@@ -1,7 +1,9 @@
 package ar.edu.unju.fi.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,14 +13,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.listas.ListaProducto;
 import ar.edu.unju.fi.model.Producto;
-
-
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/Producto")
 public class ProductoController {
-
-	ListaProducto listaProducto= new ListaProducto();
+	@Autowired
+	private ListaProducto listaProducto;
+	
+	@Autowired
+	private Producto producto;
 	
 	@GetMapping("/listas")
 	public String getProductoPage(Model model) {
@@ -29,7 +33,7 @@ public class ProductoController {
 	@GetMapping("/nuevo")
 	public String getNuevoProductoPage(Model model) {
 		boolean edicion=false;
-		model.addAttribute("productos", new Producto());
+		model.addAttribute("productos", producto);
 		model.addAttribute("edicion", edicion);
 		return "nuevo_producto";
 	}
@@ -37,10 +41,14 @@ public class ProductoController {
 	
 	
 	@PostMapping("/guardarse")
-	public ModelAndView getGuardarNuevaPage(@ModelAttribute("productos")Producto producto) {
+	public ModelAndView getGuardarNuevaPage(@Valid @ModelAttribute("productos")Producto producto, BindingResult result) {
 		int ultimaId=0;
 		ModelAndView modelandview = new ModelAndView("productos");
-		
+		if(result.hasErrors()) {
+			modelandview.setViewName("nuevo_producto");
+			modelandview.addObject("productos", producto);
+			return modelandview;
+		}
 		for(Producto ultimoElemento : listaProducto.getProductos()) {
 			ultimaId = ultimoElemento.getCodigo();
 		}
