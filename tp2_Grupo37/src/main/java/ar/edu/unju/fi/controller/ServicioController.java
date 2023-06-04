@@ -3,6 +3,7 @@ package ar.edu.unju.fi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import ar.edu.unju.fi.listas.ListaServicioCorte;
 import ar.edu.unju.fi.listas.ListaServicioPaseo;
 import ar.edu.unju.fi.model.ServicioCorte;
 import ar.edu.unju.fi.model.ServicioPaseo;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/servicios")
@@ -108,7 +110,7 @@ public class ServicioController {
 	 * @return regresa un objeto ModelAndView que representa la vista "servicios"
 	 */
 	@PostMapping("/guardar-paseo")
-	public ModelAndView getGuardarPaseoPage(@ModelAttribute("servicioPaseo") ServicioPaseo servicioPaseo) {
+	public ModelAndView getGuardarPaseoPage(@Valid @ModelAttribute("servicioPaseo") ServicioPaseo servicioPaseo, BindingResult result) {
 		//valor utilizado para controlar el valor del ultima ID, se inicializa en 0 en caso de estar vacia
 		int ultimaId=0;
 		
@@ -116,6 +118,12 @@ public class ServicioController {
 		
 		// Se crea un objeto ModelAndView con la vista "servicios"
 		ModelAndView modelView = new ModelAndView("servicios");
+		
+		if(result.hasErrors()) {
+			modelView.setViewName("nuevo_paseo");
+			modelView.addObject("servicioPaseo", servicioPaseo);
+			return modelView;
+		}
 		
 		//Se posiciona en el ultimo elemento y obtine su ID e incrementarlo una unidad
 		for(ServicioPaseo ultimoElemento : listaPaseo.getServicioPaseos()) {
@@ -171,7 +179,15 @@ public class ServicioController {
 	 * @return redirige a la página de listado de servicios
 	 */
 	@PostMapping("/modificar-paseo")
-	public String modicarPaseo(@ModelAttribute("servicioPaseo")ServicioPaseo servicioPaseo) {
+	public ModelAndView modicarPaseo(@Valid @ModelAttribute("servicioPaseo")ServicioPaseo servicioPaseo, BindingResult result ) {
+		ModelAndView modelView = new ModelAndView();
+		
+		if(result.hasErrors()) {
+			modelView.setViewName("nuevo_paseo");
+			modelView.addObject("servicioPaseo", servicioPaseo);
+			modelView.addObject("edicion", true);
+			return modelView;
+		}
 		// Recorre la lista de paseos de servicio para encontrar el objeto correspondiente al ID
 		for(ServicioPaseo paseo : listaPaseo.getServicioPaseos()) {
 			if(paseo.getId() == servicioPaseo.getId()) {
@@ -183,7 +199,8 @@ public class ServicioController {
 				break;
 			}
 		}
-		return "redirect:/servicios/listado/paseo";
+		modelView.setViewName("redirect:/servicios/listado/paseo");
+		return modelView;
 	}
 	
 	
@@ -236,7 +253,7 @@ public class ServicioController {
 	 * @return objeto ModelAndView que representa la vista "servicios" con los datos almacenados
 	 */
 	@PostMapping("/guardar-corte")
-	public ModelAndView getGuardarCortePage(@ModelAttribute("servicioCorte") ServicioCorte servicioCorte) {
+	public ModelAndView getGuardarCortePage(@Valid @ModelAttribute("servicioCorte") ServicioCorte servicioCorte, BindingResult result) {
 		//valor utilizado para controlar el valor del ultima ID, se inicializa en 0 en caso de estar vacia
 		int ultimaId=0;
 		
@@ -244,6 +261,12 @@ public class ServicioController {
 		
 		// Creación de un objeto ModelAndView para la vista "servicios"
 		ModelAndView modelView = new ModelAndView("servicios");
+		
+		if(result.hasErrors()) {
+			modelView.setViewName("nuevo_corte");
+			modelView.addObject("servicioCorte", servicioCorte);
+			return modelView;
+		}
 		
 		//Se posiciona en el ultimo elemento y obtine su ID e incrementarlo una unidad
 		for(ServicioCorte ultimoElemento : listaCorte.getServicioCortes()) {
@@ -298,7 +321,15 @@ public class ServicioController {
 	 * @return Redirige a la página de listado de servicios
 	 */
 	@PostMapping("/modificar-corte")
-	public String modicarCorte(@ModelAttribute("servicioCorte")ServicioCorte servicioCorte) {
+	public String modicarCorte(@Valid @ModelAttribute("servicioCorte")ServicioCorte servicioCorte, BindingResult result, Model model) {
+		
+		if(result.hasErrors()) {
+			model.addAttribute("servicioCorte", servicioCorte);
+			model.addAttribute("edicion", true);
+			return "nuevo_corte";
+		}
+	
+		
 		// Actualiza los datos del corte de servicio en la lista de cortes existentes
 		for(ServicioCorte corte : listaCorte.getServicioCortes()) {
 			if(corte.getId() == servicioCorte.getId()) {

@@ -25,7 +25,7 @@
 				<div class="mb-3">
 					<label for="dia" class="form-label servicio__label">Día</label>
 		      		<select class="form-select" aria-label="Default select example" id="dia" name="dia" th:field="*{dia}">
-				  		<option value="selected" selected>Selección</option>
+				  		<option value="" selected>Selección</option>
 				  		<option value="Lunes">Lunes</option>
 						<option value="Martes">Martes</option>
 						<option value="Miércoles">Miércoles</option>
@@ -33,24 +33,28 @@
 						<option value="Viernes">Viernes</option>
 						<option value="Sábado">Sábado</option>
 					</select>
+					<div class="p-1 mt-1 mb-2 bg-danger text-white rounded-1" th:if="${#fields.hasErrors('dia')}" th:errors="*{dia}"></div>
 		      	</div>
 		      	
 		      	<!-- Ingreso para el horario de inicio del paseo -->
 		     	<div class="mb-3">
 		        	<label for="inicio" class="form-label servicio__label">Horario de inicio</label>
-		        	<input type="number" class="form-control" aria-describedby="emailHelp" id="inicio" name="horario_inicio" required min="9" max="20" th:field="*{horarioInicio}">
+		        	<input type="number" class="form-control" aria-describedby="emailHelp" id="inicio" name="horario_inicio" th:field="*{horarioInicio}">
+		      		<div class="p-1 mt-1 mb-2 bg-danger text-white rounded-1" th:if="${#fields.hasErrors('horarioInicio')}" th:errors="*{horarioInicio}"></div>
 		      	</div>
 		      	
 		      	<!-- Ingreso para el horario de finalización del paseo -->
 		      	<div class="mb-3">
 		        	<label for="final" class="form-label servicio__label">Horario de final</label>
-		        	<input type="number" class="form-control" aria-describedby="emailHelp" id="final" name="horario_final"  required min="9" max="20" th:field="*{horarioFinal}">
+		        	<input type="number" class="form-control" aria-describedby="emailHelp" id="final" name="horario_final" th:field="*{horarioFinal}">
+		      		<div class="p-1 mt-1 mb-2 bg-danger text-white rounded-1" th:if="${#fields.hasErrors('horarioFinal')}" th:errors="*{horarioFinal}"></div>
 		      	</div>
 		      	
 		      	<!-- Ingreso para el nombre del paseador -->
 		      	<div class="mb-3">
 		        	<label for="paseador" class="form-label servicio__label">Paseador</label>
-		        	<input type="text" class="form-control" id="exampleInputPassword1" name="nombre_paseador"  required th:field="*{nombre}">
+		        	<input type="text" class="form-control" id="exampleInputPassword1" name="nombre_paseador" th:field="*{nombre}">
+					<div class="p-1 mt-1 mb-2 bg-danger text-white rounded-1" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>	      	
 		      	</div>
 		      	
 		      	<!-- Campo oculto para almacenar el ID del paseo -->
