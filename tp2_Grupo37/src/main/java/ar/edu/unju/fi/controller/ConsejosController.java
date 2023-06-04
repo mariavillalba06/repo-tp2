@@ -83,7 +83,13 @@ public class ConsejosController {
 	}
 
 	@PostMapping("/modificar_consejo")
-	public String modificarConsejo(@ModelAttribute("consejo") Consejo consejoModificado) {
+	public String modificarConsejo(@Valid @ModelAttribute("consejo") Consejo consejoModificado, BindingResult result, Model model ) {
+		
+		if(result.hasErrors()) {
+			model.addAttribute("consejo", consejoModificado);
+			model.addAttribute("edicion", true);
+			return "nuevo_consejo";
+		}
 		
 		for(Consejo consejo : listaConsejo.getConsejos()) {
 			if(consejo.getId() == consejoModificado.getId()) {
@@ -95,6 +101,7 @@ public class ConsejosController {
 		}
 		return "redirect:/consejos/listado";
 	}
+		
 	
 	@GetMapping("/eliminar_consejo/{id}")
 	public String eliminarConsejo(@PathVariable(value="id") int id) {

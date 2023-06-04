@@ -20,20 +20,20 @@
 					<div class="input-group input-group-lg">
 				  <label for="titulo" class="input-group-text" id="inputGroup-sizing-lg">Titulo</label>
 				  <input type="text" id="titulo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" th:field="*{titulo}">
-				  <div class="text-danger" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></div>
 				</div>
+				<div class="p-1 mb-2 bg-danger text-white rounded-1" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></div>
 				
 				<div class="input-group input-group-sm">
 				  <label for="texto" class="input-group-text" id="inputGroup-sizing-lg">Texto</label>
 				  <textarea id="texto" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" rows="5" cols="80" name="texto" th:field="*{texto}"></textarea>
-					<div class="text-danger" th:if="${#fields.hasErrors('texto')}" th:errors="*{texto}"></div>
 				</div>
+				<div class="p-1 mb-2 bg-danger text-white rounded-1" th:if="${#fields.hasErrors('texto')}" th:errors="*{texto}"></div>
 				
 				<div class="input-group input-group-default">
 				  <label for="clave" class="input-group-text" id="inputGroup-sizing-lg">Consejo Clave</label>
 				  <textarea id="clave" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" rows="3" cols="80" name="texto" th:field="*{clave}"></textarea>
-					<div class="text-danger" th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></div>
 				</div>
+				<div class="p-1 mb-2 bg-danger text-white rounded-1" th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></div>
 				
 				<input type="hidden" name="id" th:value="*{id}">
 				

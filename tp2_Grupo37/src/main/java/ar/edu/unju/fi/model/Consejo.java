@@ -13,7 +13,7 @@ public class Consejo {
 	@Size(min=10,message="El texto debe ser de 10 caracteres minimos")
 	private String texto;
 	@NotEmpty(message="La clave no puede estar vacía")
-	@Size(max=30, message="La clave no puede tener mas de 30 caracteres")
+	@Size(max=200, message="La clave no puede tener mas de 200 caracteres")
 	private String clave;
 	
 	public Consejo() {

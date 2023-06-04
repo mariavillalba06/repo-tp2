@@ -21,7 +21,7 @@ public class ListaConsejo {
 		consejos.add(new Consejo(2,
 				"Proporciona un entorno de vida seguro, cómodo y enriquecedor",
 				"Así como los seres humanos necesitamos un hogar en el que podamos sentirnos cómodos y seguros, también lo necesitan nuestras mascotas.",
-				"las mascotas que son demasiado jóvenes o ya tienen varios años encima pierden su capacidad para regular la temperatura corporal eficientemente. Es importante ofrecerles una manta y una cama que les proporcione confort y calor. Sobre todo en las horas de la noche."));
+				"Es importante ofrecerles una manta y una cama que les proporcione confort y calor. Sobre todo en las horas de la noche."));
 		
 		consejos.add(new Consejo(3,
 				"Atiende sus necesidades nutricionales",
