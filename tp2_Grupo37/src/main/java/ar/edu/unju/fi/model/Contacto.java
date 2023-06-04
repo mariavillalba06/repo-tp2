@@ -1,17 +1,18 @@
 package ar.edu.unju.fi.model;
 
 import org.springframework.stereotype.Component;
-
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Component
 public class Contacto {
 	@NotEmpty(message="El nombre no puede estar vacío")
+	@Pattern(regexp = "[a-zA-Z\\s]+", message = "Solo se permiten caracteres")
+	@Pattern(regexp = "^[A-Z].*", message = "El nombre debe comenzar con una letra mayúscula")
 	private String nombre;
 	@NotEmpty(message="El email no puede estar vacío")
-	@Email(message="Debe ingresar un correo electronico válido")
+	@Pattern(regexp="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}", message="Ingrese un correo electrónico válido. Ej:ejemplo123@gmail.com")
 	private String email;
 	@Size(min=10,max=50,message="La direccion debe ser entre 10 y 50 caracteres")
 	private String ciudad;
