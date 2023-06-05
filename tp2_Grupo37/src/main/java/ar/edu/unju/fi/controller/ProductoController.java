@@ -77,8 +77,16 @@ public class ProductoController {
 		return "nuevo_producto";
 	}
 	
+	
 	@PostMapping("/modificarse")
-	public String modificarProducto(@ModelAttribute("producto")Producto producto) {
+	public String modificarProducto(@Valid @ModelAttribute("productos")Producto producto, BindingResult result, Model model) {
+		
+		if(result.hasErrors()) {
+			model.addAttribute("productos", producto);
+			model.addAttribute("edicion", true);
+			return "nuevo_producto";
+		}
+		
 		for(Producto produ: listaProducto.getProductos()) {
 			if(produ.getCodigo() == producto.getCodigo()) {
 				produ.setNombre(producto.getNombre());
@@ -91,6 +99,7 @@ public class ProductoController {
 		}	
 		return "redirect:/Producto/listas";
 	}
+	
 	
 	@GetMapping("/eliminarse/{codigo}")
 	public String eliminarProducto(@PathVariable(value="codigo")int codigo) {

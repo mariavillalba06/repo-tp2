@@ -65,7 +65,14 @@ public class SucursalesController {
 		return "nueva_sucursal";
 	}
 	@PostMapping("/modificar")
-	public String modificarSucursal(@ModelAttribute("sucursal") Sucursal sucursal) {
+	public String modificarSucursal(@Valid @ModelAttribute("sucursal") Sucursal sucursal,BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			model.addAttribute("sucursal", sucursal);
+			model.addAttribute("edicion", true);
+			return "nueva_sucursal";
+		}
+		
+		
 		for(Sucursal sucu : listasucursal.getSucursales()) {
 			if(sucu.getNombre().equals(sucursal.getNombre())) {
 				sucu.setDireccion(sucursal.getDireccion());

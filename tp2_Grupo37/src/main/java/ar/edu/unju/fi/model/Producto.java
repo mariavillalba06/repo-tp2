@@ -3,23 +3,23 @@ package ar.edu.unju.fi.model;
 import org.springframework.stereotype.Component;
 
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 @Component
 public class Producto {
-	@NotEmpty(message="¡Este campo no puede quedar vacio!")
+	@NotNull(message="¡Este campo no puede quedar vacio!")
 	 private String nombre;
 	
 	
 	 private int codigo;
 	
-	@NotEmpty(message="¡Este campo no puede quedar vacio!")
+	@NotNull(message="¡Este campo no puede quedar vacio!")
 	@Positive(message="El precio debe tener valor un valor positivo")
 	@Min(value=100,message="El precio no puede ser menor que 100")
 	 private float precio;
 	
-	@NotEmpty(message="¡Debe seleccionar una categoria!")
+	@NotNull(message="¡Debe seleccionar una categoria!")
 	 private String categoria;
 	
 	 private int descuento;
