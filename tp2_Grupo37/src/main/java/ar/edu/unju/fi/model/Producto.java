@@ -3,12 +3,14 @@ package ar.edu.unju.fi.model;
 import org.springframework.stereotype.Component;
 
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 @Component
 public class Producto {
-	@NotNull(message="¡Este campo no puede quedar vacio!")
+	private int numeroImg;
+	@NotEmpty(message="¡Este campo no puede quedar vacio!")
 	 private String nombre;
 	
 	
@@ -19,7 +21,7 @@ public class Producto {
 	@Min(value=100,message="El precio no puede ser menor que 100")
 	 private float precio;
 	
-	@NotNull(message="¡Debe seleccionar una categoria!")
+	@NotEmpty(message="¡Debe seleccionar una categoria!")
 	 private String categoria;
 	
 	 private int descuento;
@@ -27,8 +29,9 @@ public class Producto {
 	 	 
 	public Producto() {
 	}	
-	public Producto(String nombre, int codigo, float precio, String categoria, int descuento) {
+	public Producto(int numeroImg, String nombre, int codigo, float precio, String categoria, int descuento) {
 		super();
+		this.numeroImg = numeroImg;
 		this.nombre = nombre;
 		this.codigo = codigo;
 		this.precio = precio;
@@ -36,6 +39,12 @@ public class Producto {
 		this.descuento = descuento;
 	}
 
+	public int getNumeroImg() {
+		return numeroImg;
+	}
+	public void setNumeroImg(int numeroImg) {
+		this.numeroImg = numeroImg;
+	}
 	public String getNombre() {
 		return nombre;
 	}

@@ -12,38 +12,26 @@
    	<header th:replace="~{/layouts/header :: header}"></header>
 		
 	<nav th:replace="~{/layouts/nav :: nav}"></nav>
-	
-	<div class="container-sm text-center ">
-		<a  class="newlink" th:href="@{/Producto/nuevo}">Nuevo Producto</a>
-		</div>
-    <div class="d-flex justify-content-center align-items-center">
-		
-		<div >
-      <table class="table table-hover newProducto ">
-
-        <tr>
-          <th>Descripcion</th>
-          <th>Precio</th>
-          <th>Categoria</th>
-          <th>Descuento</th>
-          <th>Precio total</th>
-          <th>Acciones</th>
-        </tr>
-  		<tr th:each="produ:${productos}">
-			<td th:text="${produ.nombre}"></td>
-			<td th:text="${produ.precio} + ' $'"></td>
-			<td th:text="${produ.categoria}"></td>
-			<td th:text="${produ.descuento + '%'}"></td>
-			<td th:text="${produ.precioTotal + ' $'}"></td>
-			<td>
-				<a class="newlink" th:href="@{/Producto/modificarse/}+${produ.codigo}">Editar</a><br>
-				<a class="newlink" th:href="@{/Producto/eliminarse/}+${produ.codigo}">Eliminar</a>
-			</td>
-		</tr>
-           
-      </table>
-      </div>
-    </div>
+    
+    <section class="container mt-5">
+	  <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+	    <div th:each="produ:${productos}" class="col-10">
+	      <div class="card h-100">
+	        <img th:src="@{'/images/producto'+ ${produ.numeroImg} +'.png'}" class="card-img-top mt-3 w-75 mx-auto d-block" alt="...">
+	        <div class="card-body text-center">
+	          <h5 class="fw-bold card-title" th:text="${produ.nombre}"></h5>
+	          <p class="fw-bold text-primary" th:text="${'Precio: ' + produ.precio + ' $'}"></p>
+	          <p class="fw-bold text-primary" th:text="${'Categoria: ' + produ.categoria}"></p>
+	          <p class="fw-bold text-primary" th:text="${'Descuento: ' + produ.descuento + '%'}"></p>
+	          <p class="fw-bold text-primary" th:text="${'Precio total: ' + produ.precioTotal + ' $'}"></p>
+	          <a class="btn btn-outline-primary mt-2" th:href="@{/Producto/modificarse/}+${produ.codigo}">Editar</a><br>
+	          <a class="btn btn-outline-primary mt-2" th:href="@{/Producto/eliminarse/}+${produ.codigo}">Eliminar</a>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	  <a class="btn btn-primary mt-3" th:href="@{/Producto/nuevo}">Nuevo Producto</a>
+	</section>
       
     <footer th:replace="~{/layouts/footer :: footer}"></footer>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
