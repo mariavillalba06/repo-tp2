@@ -14,38 +14,38 @@
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
   
      
-		 <div class="container-sm">
-		<div class="row ">
-		 <a class="newlink" th:href="@{/sucursal/nuevo}">Nueva sucursal</a>
-		 </div>
-		 <div class="d-flex justify-content-center align-items-center">
-        <table class="table table-bordered table-hover newtable ">
-			<thead class="table-dark">
-          <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Dirección</th>
-            <th scope="col">Provincia</th>
-            <th scope="col">Fecha Inicio</th>
-            <th scope="col">Email</th>
-            <th scope="col">Teléfono</th>    
-            <th scope="col">Ediciones</th>      
-          </tr>
-          </thead>
-          <tr th:each="sucu: ${sucursales}">
-			<td   th:text="${sucu.nombre}"></td>
-			<td th:text="${sucu.direccion}"></td>
-			<td th:text="${sucu.provincia}"></td>
-			<td th:text="${#temporals.format(sucu.fechaInicio,'dd/MM/yyyy')}"></td>
-			<td th:text="${sucu.email}"></td>
-			<td th:text="${sucu.telefono}"></td>
-			<td>
-				<a class="newlink" th:href="@{/sucursal/modificar/}+${sucu.nombre}">Editar</a><br>
-				<a class="newlink" th:href="@{/sucursal/eliminar/}+${sucu.nombre}">Eliminar</a>
-			</td>
-		  </tr>
-        </table>
-        </div>
-     </div>
+		 <div class="container-sm table-responsive">
+			<div class="row ">
+				<a class="newlink" th:href="@{/sucursal/nuevo}">Nueva sucursal</a>
+			</div>
+			<div class="d-flex justify-content-center align-items-center">
+	        <table class="table table-bordered table-hover newtable ">
+				<thead class="table-dark">
+		          <tr>
+		            <th scope="col">Nombre</th>
+		            <th scope="col">Dirección</th>
+		            <th scope="col">Provincia</th>
+		            <th scope="col">Fecha Inicio</th>
+		            <th scope="col">Email</th>
+		            <th scope="col">Teléfono</th>    
+		            <th scope="col">Ediciones</th>      
+		          </tr>
+	         	</thead>
+	          <tr th:each="sucu: ${sucursales}">
+				<td   th:text="${sucu.nombre}"></td>
+				<td th:text="${sucu.direccion}"></td>
+				<td th:text="${sucu.provincia}"></td>
+				<td th:text="${#temporals.format(sucu.fechaInicio,'dd/MM/yyyy')}"></td>
+				<td th:text="${sucu.email}"></td>
+				<td th:text="${sucu.telefono}"></td>
+				<td>
+					<a class="newlink" th:href="@{/sucursal/modificar/}+${sucu.nombre}">Editar</a><br>
+					<a class="newlink" th:href="@{/sucursal/eliminar/}+${sucu.nombre}">Eliminar</a>
+				</td>
+			  </tr>
+	        </table>
+	        </div>
+	     </div>
       
       <footer th:replace="~{layouts/footer :: footer}"></footer>
       <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>

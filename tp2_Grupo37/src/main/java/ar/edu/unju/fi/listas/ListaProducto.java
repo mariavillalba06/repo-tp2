@@ -17,11 +17,11 @@ public class ListaProducto {
      */ 
 	
 	public ListaProducto() {
-		Producto producto1 = new Producto("arena para gatos",1,189,"Productos",0);
+		Producto producto1 = new Producto(1,"arena para gatos",1,189,"Productos",0);
 		producto1.setPrecioTotal(producto1.calcularDescuento());
-		Producto producto2 = new Producto("alimento para perro",2,200,"Alimentos",20);
+		Producto producto2 = new Producto(2,"alimento para perro",2,200,"Alimentos",20);
 		producto2.setPrecioTotal(producto2.calcularDescuento());
-		Producto producto3 = new Producto("collar",3,300,"Accesorios",40);
+		Producto producto3 = new Producto(3,"collar",3,300,"Accesorios",40);
 		producto3.setPrecioTotal(producto3.calcularDescuento());
 		
 		productos=new ArrayList<Producto>();

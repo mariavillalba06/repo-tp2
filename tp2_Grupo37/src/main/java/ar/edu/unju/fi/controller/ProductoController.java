@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.controller;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +44,7 @@ public class ProductoController {
 	
 	@PostMapping("/guardarse")
 	public ModelAndView getGuardarNuevaPage(@Valid @ModelAttribute("productos")Producto producto, BindingResult result) {
-		int ultimaId=0;
+		int ultimaId=0, numeroImagen;
 		ModelAndView modelandview = new ModelAndView("productos");
 		if(result.hasErrors()) {
 			modelandview.setViewName("nuevo_producto");
@@ -55,6 +57,9 @@ public class ProductoController {
 		ultimaId++;
 		producto.setPrecioTotal(producto.calcularDescuento());
 		producto.setCodigo(ultimaId);
+		Random random = new Random();
+		numeroImagen = random.nextInt(3) + 1;
+		producto.setNumeroImg(numeroImagen);
 		listaProducto.getProductos().add(producto);
 		modelandview.addObject("productos", listaProducto.getProductos());
 		return modelandview;

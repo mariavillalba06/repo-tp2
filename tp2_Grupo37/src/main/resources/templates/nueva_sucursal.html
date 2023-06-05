@@ -28,10 +28,10 @@
         <div class=" text-white" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></div>
         
         <select id="provincia" name="sucursal_provincia" th:field="*{provincia}">
-          <option value="" slected>Seleccione una opcion..</option>
-          <option value="SALTA">Salta</option>
-          <option value="JUJUY">Jujuy</option>
-          <option value="BSAS">Buenos Aires</option>
+          <option value="" selected>Seleccione una opcion..</option>
+          <option value="Salta">Salta</option>
+          <option value="Jujuy">Jujuy</option>
+          <option value="Bsas">Buenos aires</option>
         </select>
         <div class=" text-white" th:if="${#fields.hasErrors('provincia')}" th:errors="*{provincia}"></div>
         

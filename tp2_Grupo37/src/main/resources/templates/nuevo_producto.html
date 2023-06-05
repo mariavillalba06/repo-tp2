@@ -26,12 +26,12 @@
          <div class=" text-white" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
          
         <label for="precio">Precio</label>
-        <input type="number" min="1" placeholder="Precio" id="precio" name="producto_precio" th:field="*{precio}">
+        <input type="number" placeholder="Precio" id="precio" name="producto_precio" th:field="*{precio}">
          <div class=" text-white" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
         
         <label for="categoria">Categoria</label>
         <select id="categoria" name="producto_categoria" th:field="*{categoria}">
-			<option value="" slected>Seleccione una opcion..</option>
+			<option value="" selected>Seleccione una opcion..</option>
 			<option value="Alimentos">Alimentos</option>
 			<option value="Juguetes">Juguetes</option>
 			<option value="Accesorios">Accesorios</option>
