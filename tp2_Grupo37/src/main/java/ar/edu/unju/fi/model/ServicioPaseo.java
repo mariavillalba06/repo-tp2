@@ -13,18 +13,15 @@ import jakarta.validation.constraints.Size;
 public class ServicioPaseo {
 	private int id;
 	@NotEmpty(message="No puede tener el nombre vacio")
-	@Pattern(regexp = "[a-zA-Z\\s]+", message = "Solo se permiten caracteres")
+	@Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$", message = "Solo se permiten caracteres")
 	@Pattern(regexp = "^[A-Z].*", message = "El nombre debe comenzar con una letra mayúscula")
 	@Size(min = 3, message = "El nombre debe tener al menos tres caracteres")
 	private String nombre;
 	@NotBlank(message="Se debe seleccionar un día")
 	private String dia;
-	//@NotEmpty(message="no puede tener el nombre vacio")
 	@DecimalMin(value = "8", inclusive = true, message = "El valor minimo es 8")
 	@DecimalMax(value = "20", inclusive = true, message = "El valor máximo es 20")
 	private byte horarioInicio;
-	//@NotEmpty(message="no puede tener el nombre vacio")
-	@DecimalMin(value = "8", inclusive = true, message = "El valor minimo es 8")
 	@DecimalMax(value = "20", inclusive = true, message = "El valor máximo es 20")
 	private byte horarioFinal;
 	

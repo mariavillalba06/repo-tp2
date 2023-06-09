@@ -11,27 +11,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unju.fi.listas.ListaServicioCorte;
-import ar.edu.unju.fi.listas.ListaServicioPaseo;
 import ar.edu.unju.fi.model.ServicioCorte;
 import ar.edu.unju.fi.model.ServicioPaseo;
+import ar.edu.unju.fi.service.IListaService;
+import ar.edu.unju.fi.service.IServicioService;
 import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/servicios")
 public class ServicioController {
+
+	@Autowired
+	IListaService listaService;
 	
 	@Autowired
-	ListaServicioPaseo listaPaseo;
-	
-	@Autowired
-	ListaServicioCorte listaCorte;
-	
-	@Autowired
-	ServicioPaseo nuevoPaseo;
-	
-	@Autowired
-	ServicioCorte nuevoCorte;
+	IServicioService servicioService;
 	
 	/**
 	 * Método que obtiene una lista de servicios según el tipo de servicio especificado.
@@ -48,11 +42,11 @@ public class ServicioController {
 		if(servicio.equals("paseo")) {
 			paseo=true;
 			corte=false;
-			model.addAttribute("paseos", listaPaseo.getServicioPaseos());
+			model.addAttribute("paseos", servicioService.getServicioPaseos());
 		} else {
 			paseo=false;
 			corte=true;
-			model.addAttribute("cortes", listaCorte.getServicioCortes());
+			model.addAttribute("cortes", servicioService.getServicioCortes());
 		}
 		
 		model.addAttribute("paseo", paseo);
@@ -95,7 +89,10 @@ public class ServicioController {
 		boolean edicion=false;
 		
 		// Agrega un objeto ServicioPaseo vacío al modelo
-		model.addAttribute("servicioPaseo", nuevoPaseo);
+		model.addAttribute("servicioPaseo", servicioService.nuevoPaseo());
+		
+		//Agrega la lista de los dias para el formulario
+		model.addAttribute("dias", listaService.getDias());
 		
 		// Agrega la variable "edicion" al modelo
 		model.addAttribute("edicion", edicion);
@@ -111,8 +108,6 @@ public class ServicioController {
 	 */
 	@PostMapping("/guardar-paseo")
 	public ModelAndView getGuardarPaseoPage(@Valid @ModelAttribute("servicioPaseo") ServicioPaseo servicioPaseo, BindingResult result) {
-		//valor utilizado para controlar el valor del ultima ID, se inicializa en 0 en caso de estar vacia
-		int ultimaId=0;
 		
 		boolean paseo=true, corte=false;
 		
@@ -121,23 +116,16 @@ public class ServicioController {
 		
 		if(result.hasErrors()) {
 			modelView.setViewName("nuevo_paseo");
+			modelView.addObject("dias", listaService.getDias());
 			modelView.addObject("servicioPaseo", servicioPaseo);
 			return modelView;
 		}
 		
-		//Se posiciona en el ultimo elemento y obtine su ID e incrementarlo una unidad
-		for(ServicioPaseo ultimoElemento : listaPaseo.getServicioPaseos()) {
-			ultimaId = ultimoElemento.getId();
-		}
-		ultimaId++;
-		servicioPaseo.setId(ultimaId);
-		
 		// Agrega el servicioPaseo a la lista de paseos de servicio
-		listaPaseo.getServicioPaseos().add(servicioPaseo);
+		servicioService.guardarPaseo(servicioPaseo);
 		
-		// Agrega el listado de paseos y cortes al modelo del ModelAndView
-		modelView.addObject("paseos", listaPaseo.getServicioPaseos());
-		//modelView.addObject("cortes", listaCorte.getServicioCortes());
+		// Agrega el listado de paseos al modelo del ModelAndView
+		modelView.addObject("paseos", servicioService.getServicioPaseos());
 		modelView.addObject("paseo", paseo);
 		modelView.addObject("corte", corte);
 		return modelView;
@@ -152,22 +140,12 @@ public class ServicioController {
 	 */
 	@GetMapping("/modificar-paseo/{id}")
 	public String getModificarPaseo(Model model, @PathVariable(value="id") int id) {
-		// Crea un objeto ServicioPaseo para almacenar el objeto buscado
-		ServicioPaseo paseoEncontrado = new ServicioPaseo();
-		
 		// Variable que indica si se está en modo de edición el metodo
 		boolean edicion = true;
 		
-		// Busca el paseo de servicio correspondiente al ID proporcionado
-		for(ServicioPaseo paseo : listaPaseo.getServicioPaseos()) {
-			if(paseo.getId() == id) {
-				paseoEncontrado = paseo;
-				break;
-			}
-		}
-		
-		// Agrega el objeto encontrado y la bandera al modelo
-		model.addAttribute("servicioPaseo", paseoEncontrado);
+		// Agrega el objeto encontrado, la bandera al modelo y los dias
+		model.addAttribute("servicioPaseo", servicioService.getByIdPaseo(id));
+		model.addAttribute("dias", listaService.getDias());
 		model.addAttribute("edicion", edicion);
 		return "nuevo_paseo";
 	}
@@ -185,20 +163,13 @@ public class ServicioController {
 		if(result.hasErrors()) {
 			modelView.setViewName("nuevo_paseo");
 			modelView.addObject("servicioPaseo", servicioPaseo);
+			modelView.addObject("dias", listaService.getDias());
 			modelView.addObject("edicion", true);
 			return modelView;
 		}
-		// Recorre la lista de paseos de servicio para encontrar el objeto correspondiente al ID
-		for(ServicioPaseo paseo : listaPaseo.getServicioPaseos()) {
-			if(paseo.getId() == servicioPaseo.getId()) {
-				// Actualiza los atributos del paseo con los valores del objeto servicioPaseo
-				paseo.setDia(servicioPaseo.getDia());
-				paseo.setHorarioInicio((byte)servicioPaseo.getHorarioInicio());
-				paseo.setHorarioFinal((byte)servicioPaseo.getHorarioFinal());
-				paseo.setNombre(servicioPaseo.getNombre());
-				break;
-			}
-		}
+		
+		servicioService.modificarPaseo(servicioPaseo);
+		
 		modelView.setViewName("redirect:/servicios/listado/paseo");
 		return modelView;
 	}
@@ -212,14 +183,9 @@ public class ServicioController {
 	 */
 	@GetMapping("/eliminar-paseo/{id}")
 	public String eliminarPaseo(@PathVariable(value="id") int id) {
-		// Recorre la lista de paseos de servicio para encontrar el objeto correspondiente al ID
-		for(ServicioPaseo paseo : listaPaseo.getServicioPaseos()) {
-			if(paseo.getId() == id) {
-				// Elimina el paseo de la lista de paseos de servicio
-				listaPaseo.getServicioPaseos().remove(paseo);
-				break;
-			}
-		}
+		
+		servicioService.eliminarPaseo(id);
+		
 		return "redirect:/servicios/listado/paseo";
 	}
 	
@@ -238,7 +204,7 @@ public class ServicioController {
 		boolean edicion=false;
 		
 		// Agrega un nuevo objeto "ServicioCorte" al modelo
-		model.addAttribute("servicioCorte", nuevoCorte);
+		model.addAttribute("servicioCorte", servicioService.nuevoCorte());
 		
 		// Agregar la variable "edicion" al modelo
 		model.addAttribute("edicion", edicion);
@@ -254,9 +220,7 @@ public class ServicioController {
 	 */
 	@PostMapping("/guardar-corte")
 	public ModelAndView getGuardarCortePage(@Valid @ModelAttribute("servicioCorte") ServicioCorte servicioCorte, BindingResult result) {
-		//valor utilizado para controlar el valor del ultima ID, se inicializa en 0 en caso de estar vacia
-		int ultimaId=0;
-		
+
 		boolean paseo=false, corte=true;
 		
 		// Creación de un objeto ModelAndView para la vista "servicios"
@@ -268,21 +232,10 @@ public class ServicioController {
 			return modelView;
 		}
 		
-		//Se posiciona en el ultimo elemento y obtine su ID e incrementarlo una unidad
-		for(ServicioCorte ultimoElemento : listaCorte.getServicioCortes()) {
-			ultimaId = ultimoElemento.getId();
-		}
-		ultimaId++;
+		servicioService.guardarCorte(servicioCorte);
 		
-		// Establece el ID incrementado al objeto
-		servicioCorte.setId(ultimaId);
-		
-		// Agrega el servicioCorte a la lista de cortes
-		listaCorte.getServicioCortes().add(servicioCorte);
-		
-		// Agrega el listado de paseos y cortes al modelo del ModelAndView
-		//modelView.addObject("paseos", listaPaseo.getServicioPaseos());
-		modelView.addObject("cortes", listaCorte.getServicioCortes());
+		// Agrega el listado de cortes al modelo del ModelAndView y valores booleanos
+		modelView.addObject("cortes", servicioService.getServicioCortes());
 		modelView.addObject("paseo", paseo);
 		modelView.addObject("corte", corte);
 		return modelView;
@@ -297,18 +250,10 @@ public class ServicioController {
 	 */
 	@GetMapping("/modificar-corte/{id}")
 	public String getModificarCorte(Model model, @PathVariable(value="id") int id) {
-		ServicioCorte corteEncontrado = new ServicioCorte();
 		// Variable que indica si se está en modo de edición el metodo
 		boolean edicion = true;
 		
-		for(ServicioCorte corte : listaCorte.getServicioCortes()) {
-			if(corte.getId() == id) {
-				corteEncontrado = corte;
-				break;
-			}
-		}
-		
-		model.addAttribute("servicioCorte", corteEncontrado);
+		model.addAttribute("servicioCorte", servicioService.getByIdCorte(id));
 		model.addAttribute("edicion", edicion);
 		return "nuevo_corte";
 	}
@@ -328,18 +273,9 @@ public class ServicioController {
 			model.addAttribute("edicion", true);
 			return "nuevo_corte";
 		}
-	
 		
-		// Actualiza los datos del corte de servicio en la lista de cortes existentes
-		for(ServicioCorte corte : listaCorte.getServicioCortes()) {
-			if(corte.getId() == servicioCorte.getId()) {
-				corte.setPesoMinimo((byte)servicioCorte.getPesoMinimo());
-				corte.setPesoMaximo((byte)servicioCorte.getPesoMaximo());
-				corte.setInstrumento(servicioCorte.getInstrumento());
-				corte.setPrecio(servicioCorte.getPrecio());
-				break;
-			}
-		}
+		servicioService.modificarCorte(servicioCorte);
+		
 		return "redirect:/servicios/listado/corte";
 	}
 	
@@ -352,13 +288,8 @@ public class ServicioController {
 	 */
 	@GetMapping("/eliminar-corte/{id}")
 	public String eliminarCorte(@PathVariable(value="id") int id) {
-	    // Busca el corte de servicio correspondiente al ID y lo elimina de la lista
-	    for (ServicioCorte corte : listaCorte.getServicioCortes()) {
-	        if (corte.getId() == id) {
-	            listaCorte.getServicioCortes().remove(corte);
-	            break;
-	        }
-	    }
+		
+		servicioService.eliminarCorte(id);
 	    
 	    return "redirect:/servicios/listado/corte";
 	}
