@@ -26,12 +26,7 @@
 					<label for="dia" class="form-label servicio__label">Día</label>
 		      		<select class="form-select" aria-label="Default select example" id="dia" name="dia" th:field="*{dia}">
 				  		<option value="" selected>Selección</option>
-				  		<option value="Lunes">Lunes</option>
-						<option value="Martes">Martes</option>
-						<option value="Miércoles">Miércoles</option>
-						<option value="Jueves">Jueves</option>
-						<option value="Viernes">Viernes</option>
-						<option value="Sábado">Sábado</option>
+				  		<option th:each="dia: ${dias}" th:value="${dia}" th:text="${dia}"></option>
 					</select>
 					<div class="p-1 mt-1 mb-2 bg-danger text-white rounded-1" th:if="${#fields.hasErrors('dia')}" th:errors="*{dia}"></div>
 		      	</div>
