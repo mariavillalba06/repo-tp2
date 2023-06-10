@@ -17,21 +17,25 @@ public class ConsejoServiceImp implements IConsejosService{
 	@Autowired
 	private Consejo consejo;
 	
+	/* Listar Consejos */
 	@Override
 	public List<Consejo> getConsejos() {
 		return listaConsejo.getConsejos();
 	}
 
+	/* Obtener un objeto consejo */
 	@Override
 	public Consejo getConsejo() {
 		return consejo;
 	}
 	
+	/* Obtener un objeto consejo */
 	@Override
 	public Consejo nuevoConsejo() {
 		return consejo;
 	}
 	
+	/* Guardar un objeto consejo */
 	@Override
 	public void guardarConsejo(@Valid Consejo consejo) {
 		int ultimaId=0;
@@ -44,7 +48,8 @@ public class ConsejoServiceImp implements IConsejosService{
 		
 		listaConsejo.getConsejos().add(consejo);
 	}
-
+	
+	/* Buscar objeto consejo a partir de su ID */
 	@Override
 	public Consejo getByIdConsejo(int id) {
 		Consejo consejoEncontrado = null;
@@ -58,6 +63,7 @@ public class ConsejoServiceImp implements IConsejosService{
 		return consejoEncontrado;
 	}
 	
+	/* Modificar un objeto consejo */
 	@Override
 	public void modificarConsejo(Consejo consejo) {
 		for(Consejo c : listaConsejo.getConsejos()) {
@@ -70,7 +76,8 @@ public class ConsejoServiceImp implements IConsejosService{
 		}
 		
 	}
-
+	
+	/* Eliminar un objeto consejo a partir de su ID*/
 	@Override
 	public void eliminarConsejo(int id) {
 		for(Consejo c : listaConsejo.getConsejos()) {
@@ -81,7 +88,5 @@ public class ConsejoServiceImp implements IConsejosService{
 		}
 		
 	}
-
-
 	
 }
