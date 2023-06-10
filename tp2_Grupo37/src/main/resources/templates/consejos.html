@@ -4,16 +4,22 @@
 		<meta charset="UTF-8">
 		<title>Consejos</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Inclusión del archivo CSS de Bootstrap -->
 		<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
 	</head>
 	<body>
+		<!-- Encabezado -->
 		<header th:replace="~{layouts/header :: header}"></header>
 		
+		<!-- Navegación -->
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
+		
+		<!-- Contenedor de lista de consejos -->
 		<div class="container-lg consejos__container">
 			<h2 class="consejos__titulo ">Consejos de salud</h2>
 			<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+			<!-- Iteración sobre la lista de consejos -->
 			  <div class="col" th:each="consejo: ${consejos}">
 			    <div class="card">
 			      <div class="card-body servicios__article">
@@ -22,6 +28,7 @@
 			        <p class="card-text article__texto clave" th:text="${'Consejo clave: ' + consejo.clave}"></p>
 			      
 					<div class="card-footer md-flex justify-content-md-center pt-3">
+					<!-- Botones para editar y eliminar un consejo -->
 			        <a class="btn btn-outline-primary" th:href="@{/consejos/modificar_consejo/} + ${consejo.id}">Editar</a>
                     <a class="btn btn-outline-danger" th:href="@{/consejos/eliminar_consejo/} + ${consejo.id}">Borrar</a>
 			      </div>			      
@@ -30,11 +37,14 @@
 			  </div>
 			</div>
 			<div class="d-grid gap-2">
+				<!-- Boton para crear un nuevo consejo -->
 				<a class="btn btn-success btn-lg" th:href="@{/consejos/nuevo_consejo}">Nuevo consejo</a>
 			</div>
 		</div>
 		
+		<!-- Footer -->
 		<footer th:replace="~{layouts/footer :: footer}"></footer>
+		<!-- Inclusión del archivo JavaScript de Bootstrap -->
 		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 	</body>
 </html>

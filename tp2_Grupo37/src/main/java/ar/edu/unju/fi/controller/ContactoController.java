@@ -20,11 +20,23 @@ public class ContactoController {
 	@Autowired
 	Contacto contacto;
 	
+	/**
+	 * Método que obtiene la vista contacto
+	 * @param model utilizado para pasar datos a la vista
+	 * @return retorma la vista "contacto"
+	 */
 	@GetMapping("/contacto")
 	public String mostrarContacto(Model model) {
 		model.addAttribute("contacto",  contacto);
 	    return "contacto";
 	}
+	
+	/**
+	 * Solicitud POST para guardar un contacto
+	 * @param contacto contiene los datos a guardar
+	 * @param result recupera el resultado de las validaciones 
+	 * @return retorna la vista "nuevo_contacto" con los datos almacenados
+	 */
     @PostMapping("/contacto")
 	public String mostrarContacto(@Valid @ModelAttribute("contacto") Contacto contacto, BindingResult result) {
     	ModelAndView modelView = new ModelAndView("contacto");

@@ -10,6 +10,10 @@ import ar.edu.unju.fi.model.Consejo;
 public class ListaConsejo {
 	private List<Consejo> consejos;
 	
+	/**
+	 * Constructor de la clase ListaConsejo
+	 * Permite inicializar la lista de consejos con algunos objetos precargados
+	 */
 	public ListaConsejo() {
 		consejos = new ArrayList<Consejo>();
 		
@@ -38,11 +42,10 @@ public class ListaConsejo {
 				"Poco después de llegar a tu hogar, la primera salida debe ser al veterinario. Acto seguido se establecerá un calendario de vacunación para tu pequeño cachorro o gatito. Esto, con el objetivo de protegerlos de enfermedades como la rabia o el moquillo en el caso de los perros. Los gatos también se benefician de las vacunas que previenen el virus del herpes felino, la leucemia felina y la rabia.",
 				"si adoptaste una mascota en edad avanzada, asegúrate de que también esté protegido. Las vacunas necesitan renovación y no son solo para mascotas jóvenes."));
 	}
-	
+	/* Getters & Setters */
 	public List<Consejo> getConsejos() {
 		return consejos;
 	}
-	
 	public void setConsejos(List<Consejo> consejos) {
 		this.consejos = consejos;
 	}

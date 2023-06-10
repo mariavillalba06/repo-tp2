@@ -19,10 +19,19 @@ public class Contacto {
 	@NotEmpty(message="El mensaje no puede estar vacío")
 	private String mensaje;
 	
+	/*
+	 * Constructor
+	 */
 	public Contacto() {
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * Constructor parametrizado
+	 * @param nombre
+	 * @param email
+	 * @param ciudad
+	 * @param mensaje
+	 */
 	public Contacto(String nombre, String email, String ciudad, String mensaje) {
 		super();
 		this.nombre = nombre;
@@ -31,6 +40,7 @@ public class Contacto {
 		this.mensaje = mensaje;
 	}
 
+	/* GETTERS & SETTERS*/
 	public String getNombre() {
 		return nombre;
 	}

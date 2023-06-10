@@ -16,10 +16,20 @@ public class Consejo {
 	@Size(max=200, message="La clave no puede tener mas de 200 caracteres")
 	private String clave;
 	
+	/**
+	 * Constructor
+	 */
 	public Consejo() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	/**
+	 * Constructor parametrizado
+	 * @param id
+	 * @param titulo
+	 * @param texto
+	 * @param clave
+	 */
 	public Consejo(int id, String titulo, String texto, String clave) {
 		super();
 		this.id = id;
@@ -27,7 +37,8 @@ public class Consejo {
 		this.texto = texto;
 		this.clave = clave;
 	}
-
+	
+	/* GETTERS & SETTERS*/
 	public int getId() {
 		return id;
 	}

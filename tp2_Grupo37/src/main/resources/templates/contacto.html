@@ -4,14 +4,18 @@
 		<meta charset="UTF-8">
 		<title>Contacto</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Inclusión del archivo CSS de Bootstrap -->
 		<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
 	</head>
 	<body>
+		<!-- Encabezado -->
 		<header th:replace="~{layouts/header :: header}"></header>
 		
+		<!-- Navegación -->
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
 		
+		<!-- Contenedor de formulario de contacto -->
 		<main class="form__container container">
 			<div class="form__section mx-auto text-center">
 				<h2 class="form__titulo">Contáctenos</h2>
@@ -34,6 +38,7 @@
 				<form th:action="@{/contacto}" th:object="${contacto}" method="post">
 					<fieldset class="mx-auto text-center">
 						<legend>Consulta</legend>
+						<!-- Ingreso de nombre -->
 						<div class="mb-3 row">
 							<label for="nombre" class="col-sm-2 col-form-label">Nombre: </label>
 							 <div class="col-sm-10">
@@ -41,6 +46,7 @@
 								<div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
 							</div>
 						</div>
+						<!-- Ingreso de email -->
 						<div class="mb-3 row">
 							<label for="text" class="col-sm-2 col-form-label">Email: </label>
 							<div class="col-sm-10">
@@ -48,6 +54,7 @@
 								<div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 							</div>
 						</div>
+						<!-- Ingreso de ciudad -->
 						<div class="mb-3 row">
 							<label for="ciudad" class="col-sm-2 col-form-label">Ciudad: </label>
 							<div class="col-sm-10">
@@ -55,6 +62,7 @@
 								<div class="text-danger" th:if="${#fields.hasErrors('ciudad')}" th:errors="*{ciudad}"></div>
 							</div>
 						</div>
+						<!-- Ingreso de mensaje -->
 						<div class="mb-3 row">
 							<label class="col-sm-2 col-form-label">Mensaje: </label>
 							<br>
@@ -68,6 +76,9 @@
 				</form>
 			</div>
 		</main>
+		
+		<!-- Footer -->
 		<footer th:replace="~{layouts/footer :: footer}"></footer>
+		<!-- Inclusión del archivo JavaScript de Bootstrap -->
 		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </html>
