@@ -11,23 +11,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unju.fi.listas.ListaConsejo;
 import ar.edu.unju.fi.model.Consejo;
+import ar.edu.unju.fi.service.IConsejosService;
 import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/consejos")
 public class ConsejosController {
-	
 	@Autowired
-	ListaConsejo listaConsejo;
-	
-	@Autowired
-	private Consejo consejo;
+	private IConsejosService consejosService;
 	
 	@GetMapping("/listado")
 	public String mostrarConsejos(Model model) {
-		model.addAttribute("consejos", listaConsejo.getConsejos());
+		model.addAttribute("consejos", consejosService.getConsejos());
 	    return "consejos";
 	}
 	
@@ -35,7 +31,7 @@ public class ConsejosController {
 	public String getNuevoConsejo(Model model) {
 		boolean edicion=false;
 		
-		model.addAttribute("consejo", consejo);
+		model.addAttribute("consejo", consejosService.nuevoConsejo());
 		model.addAttribute("edicion", edicion);
 		
 		return "nuevo_consejo";
@@ -43,7 +39,6 @@ public class ConsejosController {
 	
 	@PostMapping("/guardar_consejo")
 	public ModelAndView getGuardarConsejo(@Valid @ModelAttribute("consejo") Consejo consejo, BindingResult result) {
-		int ultimaId=0;
 		
 		ModelAndView modelView = new ModelAndView("consejos");
 		if(result.hasErrors()) {
@@ -52,32 +47,18 @@ public class ConsejosController {
 			return modelView;
 		}
 		
-		for(Consejo ultimoElemento : listaConsejo.getConsejos()) {
-			ultimaId = ultimoElemento.getId();
-		}
-		ultimaId++;
-		consejo.setId(ultimaId);
+		consejosService.guardarConsejo(consejo);
 		
-		listaConsejo.getConsejos().add(consejo);
-		
-		modelView.addObject("consejos", listaConsejo.getConsejos());
+		modelView.addObject("consejos", consejosService.getConsejos());
 		
 		return modelView;
 	}
 	
 	@GetMapping("/modificar_consejo/{id}")
 	public String getModificarConsejo(Model model, @PathVariable(value="id") int id) {
-		Consejo consejoEncontrado = new Consejo();
 		boolean edicion = true;
 		
-		for(Consejo consejo : listaConsejo.getConsejos()) {
-			if(consejo.getId() == id) {
-				consejoEncontrado = consejo;
-				break;
-			}
-		}
-		
-		model.addAttribute("consejo", consejoEncontrado);
+		model.addAttribute("consejo", consejosService.getByIdConsejo(id));
 		model.addAttribute("edicion", edicion);
 		return "nuevo_consejo";
 	}
@@ -91,26 +72,17 @@ public class ConsejosController {
 			return "nuevo_consejo";
 		}
 		
-		for(Consejo consejo : listaConsejo.getConsejos()) {
-			if(consejo.getId() == consejoModificado.getId()) {
-				consejo.setTitulo(consejoModificado.getTitulo());
-				consejo.setTexto(consejoModificado.getTexto());
-				consejo.setClave(consejoModificado.getClave());
-				break;
-			}
-		}
+		consejosService.modificarConsejo(consejoModificado);
+		
 		return "redirect:/consejos/listado";
 	}
 		
 	
 	@GetMapping("/eliminar_consejo/{id}")
 	public String eliminarConsejo(@PathVariable(value="id") int id) {
-		for(Consejo consejo : listaConsejo.getConsejos()) {
-			if(consejo.getId() == id) {
-				listaConsejo.getConsejos().remove(consejo);
-				break;
-			}
-		}
+		
+		consejosService.eliminarConsejo(id);
+		
 		return "redirect:/consejos/listado";
 	}
 }
