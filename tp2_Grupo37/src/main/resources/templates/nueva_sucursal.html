@@ -21,7 +21,7 @@
        
         <h2 th:text="${edicion}?'Modificar Registro':'Registro de nueva sucursal'"></h2>
         
-        <input type="text" placeholder="Nombre del Local" id="nombre" name="sucursal_nombre" th:field="*{nombre}">
+        <input type="text" th:readonly="${edicion}" placeholder="Nombre del Local" id="nombre" name="sucursal_nombre" th:field="*{nombre}">
         <div class=" text-white" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
         
         <input type="text" placeholder="Direccion" id="direccion" name="sucursal_direccion" th:field="*{direccion}">
@@ -29,11 +29,9 @@
         
         <select id="provincia" name="sucursal_provincia" th:field="*{provincia}">
           <option value="" selected>Seleccione una opcion..</option>
-          <option value="Salta">Salta</option>
-          <option value="Jujuy">Jujuy</option>
-          <option value="Bsas">Buenos aires</option>
+          <option th:each="provincia: ${provincias}" th:value="${provincia}" th:text="${provincia}"></option>
         </select>
-        <div class=" text-white" th:if="${#fields.hasErrors('provincia')}" th:errors="*{provincia}"></div>
+         <div class=" text-white" th:if="${#fields.hasErrors('provincia')}" th:errors="*{provincia}"></div>
         
         <input type="date" placeholder="Fecha Inicio" id="fecha" name="sucursal_fecha" th:field="*{fechaInicio}">
         <div class=" text-white" th:if="${#fields.hasErrors('fechaInicio')}" th:errors="*{fechaInicio}"></div>

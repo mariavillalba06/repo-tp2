@@ -2,6 +2,7 @@ package ar.edu.unju.fi.controller;
 
 
 import ar.edu.unju.fi.model.Sucursal;
+import ar.edu.unju.fi.service.IListaService;
 import ar.edu.unju.fi.service.ISucursalService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/sucursal")
 public class SucursalesController {
+	
+	@Autowired
+	private IListaService listaService;
+	
 	@Autowired
 	private ISucursalService sucursalService;
 	
@@ -42,6 +47,7 @@ public class SucursalesController {
 	public String getNuevaSucursalesPage(Model model) {
 		boolean edicion=false;
 		model.addAttribute("sucursal", sucursalService.getSucursal());
+		model.addAttribute("provincias", listaService.getProvincias());
 		model.addAttribute("edicion", edicion);
 		return "nueva_sucursal";
 	}
@@ -57,6 +63,7 @@ public class SucursalesController {
 		ModelAndView modelandview = new ModelAndView("sucursales");
 		if(result.hasErrors()) {
 			modelandview.setViewName("nueva_sucursal");
+			modelandview.addObject("provincias", listaService.getProvincias());
 			modelandview.addObject("sucursal", sucursal);
 			return modelandview;
 		}
@@ -76,6 +83,7 @@ public class SucursalesController {
 		Sucursal sucursalEncontrada = sucursalService.getBy(nombre);
 		boolean edicion=true;
 		model.addAttribute("sucursal", sucursalEncontrada);
+		model.addAttribute("provincias", listaService.getProvincias());
 		model.addAttribute("edicion", edicion);
 		return "nueva_sucursal";
 	}
@@ -91,10 +99,12 @@ public class SucursalesController {
 	public String modificarSucursal(@Valid @ModelAttribute("sucursal") Sucursal sucursal,BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("sucursal", sucursal);
+			model.addAttribute("provincias", listaService.getProvincias());
 			model.addAttribute("edicion", true);
 			return "nueva_sucursal";
 		}
 		
+		sucursalService.modificar(sucursal);
 		return "redirect:/sucursal/listado";
 	}
 	
