@@ -22,10 +22,10 @@ import jakarta.validation.Valid;
 public class ServicioController {
 
 	@Autowired
-	IListaService listaService;
+	private IListaService listaService;
 	
 	@Autowired
-	IServicioService servicioService;
+	private IServicioService servicioService;
 	
 	/**
 	 * Método que obtiene una lista de servicios según el tipo de servicio especificado.

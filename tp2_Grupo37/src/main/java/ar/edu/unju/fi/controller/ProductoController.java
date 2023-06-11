@@ -13,12 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.model.Producto;
+import ar.edu.unju.fi.service.IListaService;
 import ar.edu.unju.fi.service.IProductoService;
 import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/Producto")
 public class ProductoController {
+	
+	@Autowired
+	private IListaService listaService;
+	
 	@Autowired
 	private IProductoService productoService;
 	
@@ -42,6 +47,7 @@ public class ProductoController {
 	public String getNuevoProductoPage(Model model) {
 		boolean edicion=false;
 		model.addAttribute("productos", productoService.getProducto());
+		model.addAttribute("categorias", listaService.getCategorias());
 		model.addAttribute("edicion", edicion);
 		return "nuevo_producto";
 	}
@@ -58,6 +64,7 @@ public class ProductoController {
 		ModelAndView modelandview = new ModelAndView("productos");
 		if(result.hasErrors()) {
 			modelandview.setViewName("nuevo_producto");
+			modelandview.addObject("categorias", listaService.getCategorias());
 			modelandview.addObject("productos", producto);
 			return modelandview;
 		}
@@ -80,6 +87,7 @@ public class ProductoController {
 		boolean edicion=true;
 		
 		model.addAttribute("productos", productoEncontrado);
+		model.addAttribute("categorias", listaService.getCategorias());
 		model.addAttribute("edicion", edicion);
 		return "nuevo_producto";
 	}
@@ -96,9 +104,12 @@ public class ProductoController {
 	public String modificarProducto(@Valid @ModelAttribute("productos")Producto producto, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("productos", producto);
+			model.addAttribute("categorias", listaService.getCategorias());
 			model.addAttribute("edicion", true);
 			return "nuevo_producto";
 		}
+		
+		productoService.modificarse(producto);
 		
 		return "redirect:/Producto/listas";
 	}

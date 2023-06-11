@@ -32,15 +32,10 @@
         <label for="categoria">Categoria</label>
         <select id="categoria" name="producto_categoria" th:field="*{categoria}">
 			<option value="" selected>Seleccione una opcion..</option>
-			<option value="Alimentos">Alimentos</option>
-			<option value="Juguetes">Juguetes</option>
-			<option value="Accesorios">Accesorios</option>
-			<option value="Productos">Productos</option>
-			<option value="Camas">Cama</option>
-			<option value="Vestimenta">Vestimenta</option>
+			<option th:each="categoria: ${categorias}" th:value="${categoria}" th:text="${categoria}"></option>
 		</select>
 		<div class=" text-white" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></div>
-        
+		        
         <label for="descuento">Descuento</label>
         <input type="number" min="0" max="50" id="descuento" name="producto_descuento" th:field="*{descuento}">
         <input type="hidden" name="precio_total" th:value="*{precioTotal}">
