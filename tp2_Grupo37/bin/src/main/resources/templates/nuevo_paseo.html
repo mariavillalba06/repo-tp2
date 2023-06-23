@@ -47,14 +47,10 @@
 		      	
 		      	<!-- Ingreso para el nombre del paseador -->
 		      	<div class="mb-3">
-		        	<label for="empleadoId" class="form-label servicio__label">Paseador</label>
-		        	<select class="form-select" aria-label="Default select example" id="empleadoId" name="empleado" th:field="*{empleado}">
-		        		<option value="" selected>Selección</option>
-				  		<option th:each="empleado: ${empleados}" th:value="${empleado.id}" th:text="${empleado.nombre} + ' ' + ${empleado.apellido}"></option>
-		        	</select>
-		        	<div class="p-1 mt-1 mb-2 bg-danger text-white rounded-1" th:if="${#fields.hasErrors('empleado')}" th:errors="*{empleado}"></div>
-		        	<!--  <input type="text" class="form-control" id="exampleInputPassword1" name="nombre_paseador" th:field="*{nombre}"> -->
-		      	</div>		      	
+		        	<label for="paseador" class="form-label servicio__label">Paseador</label>
+		        	<input type="text" class="form-control" id="exampleInputPassword1" name="nombre_paseador" th:field="*{nombre}">
+					<div class="p-1 mt-1 mb-2 bg-danger text-white rounded-1" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>	      	
+		      	</div>
 		      	
 		      	<!-- Campo oculto para almacenar el ID del paseo -->
 				<input type="hidden" name="id" th:value="*{id}">

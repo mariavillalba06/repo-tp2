@@ -5,165 +5,178 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.edu.unju.fi.listas.ListaServicioCorte;
-import ar.edu.unju.fi.listas.ListaServicioPaseo;
-import ar.edu.unju.fi.model.ServicioCorte;
-import ar.edu.unju.fi.model.ServicioPaseo;
+import ar.edu.unju.fi.entity.ServicioCorte;
+import ar.edu.unju.fi.entity.ServicioPaseo;
+//import ar.edu.unju.fi.listas.ListaServicioCorte;
+//import ar.edu.unju.fi.listas.ListaServicioPaseo;
+import ar.edu.unju.fi.repository.IServicioCorteRepository;
+import ar.edu.unju.fi.repository.IServicioPaseoRepository;
 import ar.edu.unju.fi.service.IServicioService;
 import jakarta.validation.Valid;
 
 @Service
 public class ServicioServiceImp implements IServicioService{
-	
-	@Autowired
-	ListaServicioPaseo servicioPaseos;
-	
-	@Autowired
-	ListaServicioCorte servicioCortes;
-	
+
 	@Autowired
 	ServicioPaseo paseo;
 	
 	@Autowired
 	ServicioCorte corte;
 	
+	@Autowired
+	IServicioCorteRepository servicioCorteRepository;
+	
+	@Autowired
+	IServicioPaseoRepository servicioPaseoRepository;
+	
 	/* Metodos servicios de paseos */
+	/**
+	 * Obtiene una lista de todos los servicios de paseos activos.
+	 * @return lista de servicios de paseos activos.
+	 */
 	@Override
 	public List<ServicioPaseo> getServicioPaseos() {
-		return servicioPaseos.getServicioPaseos();
+		return servicioPaseoRepository.findByEstado(true);
 	}
-
+	
+	/**
+	 * Guarda un nuevo servicio de paseo.
+	 * @param paseo objeto de tipo ServicioPaseo a guardar.
+	 */
 	@Override
 	public void guardarPaseo(@Valid ServicioPaseo paseo) {
-		//valor utilizado para controlar el valor del ultima ID, se inicializa en 0 en caso de estar vacia
-		int ultimaId=0;
-		
-		//Se posiciona en el ultimo elemento y obtine su ID e incrementarlo una unidad
-		for(ServicioPaseo ultimoElemento : servicioPaseos.getServicioPaseos()) {
-			ultimaId = ultimoElemento.getId();
-		}
-		
-		ultimaId++;
-		paseo.setId(ultimaId);
-		
+		paseo.setEstado(true);
 		// Agrega el servicioPaseo a la lista de paseos de servicio
-		servicioPaseos.getServicioPaseos().add(paseo);		
+		servicioPaseoRepository.save(paseo);
 	}
 
+	/**
+	 * Obtiene un servicio de paseo por su ID.
+	 * @param id del servicio de paseo a buscar.
+	 * @return objeto de tipo ServicioPaseo encontrado.
+	 */
 	@Override
 	public ServicioPaseo getByIdPaseo(int id) {
 		ServicioPaseo paseoEncontrado = null;
 		
-		// Busca el paseo de servicio correspondiente al ID proporcionado
-		for(ServicioPaseo paseo: servicioPaseos.getServicioPaseos()) {
-			if(paseo.getId() == id) {
-				paseoEncontrado = paseo;
-				break;
-			}
-		}
+		paseoEncontrado = servicioPaseoRepository.findById((long) id).get();
 		return paseoEncontrado;
 	}
 
+	/**
+	 * Modifica un servicio de paseo existente.
+	 * @param objeto de tipo ServicioPaseo a modificar.
+	 */
 	@Override
 	public void modificarPaseo(ServicioPaseo paseo) {
-		// Recorre la lista de paseos de servicio para encontrar el objeto correspondiente al ID
-		for(ServicioPaseo paseoModificado: servicioPaseos.getServicioPaseos()) {
-			if(paseoModificado.getId() == paseo.getId()) {
-				// Actualiza los atributos del paseo con los valores del objeto servicioPaseo
-				paseoModificado.setNombre(paseo.getNombre());
-				paseoModificado.setDia(paseo.getDia());
-				paseoModificado.setHorarioInicio(paseo.getHorarioInicio());
-				paseoModificado.setHorarioFinal(paseo.getHorarioFinal());
-				break;
-			}
-		}
+		paseo.setEstado(true);
+		servicioPaseoRepository.save(paseo);
 		
 	}
 
+	/**
+	 * Elimina un servicio de paseo.
+	 * @param objeto de tipo ServicioPaseo a eliminar.
+	 */
 	@Override
-	public void eliminarPaseo(int id) {
-		// Recorre la lista de paseos de servicio para encontrar el objeto correspondiente al ID
-		for(ServicioPaseo paseo : servicioPaseos.getServicioPaseos()) {
-			// Elimina el paseo de la lista de paseos de servicio
-			if(paseo.getId() == id) {
-				// Elimina el paseo de la lista de paseos de servicio
-				servicioPaseos.getServicioPaseos().remove(paseo);
-				break;
-			}
-		}
+	public void eliminarPaseo(ServicioPaseo paseo) {
+		paseo.setEstado(false);
+		servicioPaseoRepository.save(paseo);
 	}
 
+	/**
+	 * Crea un nuevo objeto ServicioPaseo.
+	 * @return objeto de tipo ServicioPaseo inicializado.
+	 */
 	@Override
 	public ServicioPaseo nuevoPaseo() {
 		return paseo;
 	}
+	
+	/**
+	 * Filtra la lista de servicios de paseos por día.
+	 * @param día a filtrar.
+	 * @return lista de servicios de paseos filtrados por día.
+	 */
+	@Override
+	public List<ServicioPaseo> filtroServicioPaseos(String dia) {
+		return servicioPaseoRepository.findByDia(dia);
+	}
 
 	
 	/* Metodos servicios de cortes*/
+	/**
+	 * Obtiene una lista de todos los servicios de cortes activos.
+	 * @return lista de servicios de cortes activos.
+	 */
 	@Override
 	public List<ServicioCorte> getServicioCortes() {
-		return servicioCortes.getServicioCortes();
+		return servicioCorteRepository.findByEstado(true);
 	}
 
-
+	/**
+	 * Guarda un nuevo servicio de corte.
+	 * @param corte objeto de tipo ServicioCorte a guardar.
+	 */
 	@Override
 	public void guardarCorte(@Valid ServicioCorte corte) {
-		//valor utilizado para controlar el valor del ultima ID, se inicializa en 0 en caso de estar vacia
-		int ultimaId=0;
-		
-		//Se posiciona en el ultimo elemento y obtine su ID e incrementarlo una unidad
-		for(ServicioCorte ultimoElemento : servicioCortes.getServicioCortes()){
-			ultimaId = ultimoElemento.getId();
-		}
-		ultimaId++;
-		
-		// Establece el ID incrementado al objeto
-		corte.setId(ultimaId);
-		// Agrega el servicioCorte a la lista de cortes
-		servicioCortes.getServicioCortes().add(corte);
+		corte.setEstado(true);
+		servicioCorteRepository.save(corte);
 	}
 	
+	/**
+	 * Obtiene un servicio de corte por su ID.
+	 * @param id del servicio de corte a buscar.
+	 * @return objeto de tipo ServicioCorte encontrado.
+	 */
 	@Override
 	public ServicioCorte getByIdCorte(int id) {
 		ServicioCorte corteEncontrado = null;
-		// Recorre la lista de cortes de servicio para encontrar el objeto correspondiente al ID
-		for(ServicioCorte corte: servicioCortes.getServicioCortes()) {
-			if(corte.getId() == id) {
-				corteEncontrado = corte;
-				break;
-			}
-		}
+		corteEncontrado = servicioCorteRepository.findById((long) id).get();
 		return corteEncontrado;
 	}
 
+	/**
+	 * Modifica un servicio de corte existente.
+	 * @param objeto de tipo ServicioCorte a modificar.
+	 */
 	@Override
 	public void modificarCorte(ServicioCorte corte) {
+		
+		corte.setEstado(true);
 		// Actualiza los datos del corte de servicio en la lista de cortes existentes
-		for(ServicioCorte corteModificado: servicioCortes.getServicioCortes()) {
-			if(corteModificado.getId() == corte.getId()) {
-				corteModificado.setInstrumento(corte.getInstrumento());
-				corteModificado.setPesoMaximo(corte.getPesoMaximo());
-				corteModificado.setPesoMinimo(corte.getPesoMinimo());
-				corteModificado.setPrecio(corte.getPrecio());
-				break;
-			}
-		}
+		servicioCorteRepository.save(corte);
 	}
 
+	/**
+	 * Elimina un servicio de corte.
+	 * @param objeto de tipo ServicioCorte a eliminar.
+	 */
 	@Override
-	public void eliminarCorte(int id) {
-		// Busca el corte de servicio correspondiente al ID y lo elimina de la lista
-		for(ServicioCorte corte : servicioCortes.getServicioCortes()) {
-			if(corte.getId() == id) {
-				servicioCortes.getServicioCortes().remove(corte);
-				break;
-			}
-		}
+	public void eliminarCorte(ServicioCorte corte) {
+		//valor booleano para eliminar logicamente el objeto
+		corte.setEstado(false);
+		servicioCorteRepository.save(corte);
+		
 	}
 
+	/**
+	 * Crea un nuevo objeto ServicioCorte.
+	 * @return objeto de tipo ServicioCorte inicializado.
+	 */
 	@Override
 	public ServicioCorte nuevoCorte() {
 		return corte;
+	}
+
+	/**
+	 * Filtra la lista de servicios de cortes por día.
+	 * @param dia día a filtrar.
+	 * @return lista de servicios de cortes filtrados por día.
+	 */
+	@Override
+	public List<ServicioCorte> filtroServicioCortes(String dia){
+		return servicioCorteRepository.findByDia(dia);
 	}
 
 }

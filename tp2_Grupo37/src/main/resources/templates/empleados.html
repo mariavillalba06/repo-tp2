@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Servicios</title>
+		<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
+	</head>
+	<body>
+		<!-- Encabezado -->
+		<header th:replace="~{layouts/header :: header}"></header>
+		
+		<!-- Navegación -->
+		<nav th:replace="~{layouts/nav :: nav}"></nav>
+
+        
+        <!-- Contenedor de empleados -->
+        <!-- Se mostrar la lista de acuerdo al valor de la variable paseo (true para mostrar) -->
+		<div class="servicios__container">
+            <section class="table-responsive">
+                <h1 class="servicios__titulo">Empleados</h1>
+                <table class="table table-striped text-center tabla__container">
+                    <thead class="tabla__head">
+                        <tr>
+                            <th class="text-white tabla__encabezado"><strong>Nombre</strong></th>
+                            <th class="text-white tabla__encabezado"><strong>Apellido</strong></th>
+                            <th class="text-white tabla__encabezado"><strong>Acciones</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tabla__body">
+                    	<!-- Iteración sobre la lista de empleados -->
+                        <tr th:each="empleado: ${empleados}">
+                            <td class="tabla__dato" th:text="${empleado.nombre}"></td>
+                            <td class="tabla__dato" th:text="${empleado.apellido}"></td>
+                            <td class="tabla__dato">
+                            	<!-- Enlaces para editar y eliminar un empleado -->
+                            	<a id="tabla__enlace" th:href="@{/empleados/modificar/} + ${empleado.id}">Editar</a>
+                            	<a id="tabla__enlace" th:href="@{/empleados/eliminar/} + ${empleado.id}">Borrar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        
+        <!-- footer -->
+        <footer th:replace="~{layouts/footer :: footer}"></footer>
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	</body>
+</html>

@@ -21,16 +21,6 @@
 			<!-- Formulario para crear o modificar un corte -->
 			<form th:action="${edicion}? @{/servicios/modificar-corte} : @{/servicios/guardar-corte}" th:object="${servicioCorte}" method="post">
 				
-				<!-- Selección del día del paseo -->
-				<div class="mb-3">
-					<label for="dia" class="form-label servicio__label">Día</label>
-		      		<select class="form-select" aria-label="Default select example" id="dia" name="dia" th:field="*{dia}">
-				  		<option value="" selected>Selección</option>
-				  		<option th:each="dia: ${dias}" th:value="${dia}" th:text="${dia}"></option>
-					</select>
-					<div class="p-1 mt-1 mb-2 bg-danger text-white rounded-1" th:if="${#fields.hasErrors('dia')}" th:errors="*{dia}"></div>
-		      	</div>
-				
 				<!-- Selección del peso minimo -->
 				<div class="mb-3">
 					<label for="peso_minimo" class="form-label servicio__label">Peso mínimo</label>
@@ -63,17 +53,6 @@
 					<div class="p-1 mt-1 mb-2 bg-danger text-white rounded-1" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
 				</div>
 				
-				<!-- Ingreso para el nombre del empleado -->
-		      	<div class="mb-3">
-		        	<label for="paseador" class="form-label servicio__label">Cortador</label>
-		        	<select class="form-select" aria-label="Default select example" id="empleado" name="empleado" th:field="*{empleado}">
-		        		<option value="" selected>Selección</option>
-				  		<option th:each="empleado: ${empleados}" th:value="${empleado.id}" th:text="${empleado.nombre} + ' ' + ${empleado.apellido}"></option>
-		        	</select>
-		        	<div class="p-1 mt-1 mb-2 bg-danger text-white rounded-1" th:if="${#fields.hasErrors('empleado')}" th:errors="*{empleado}"></div>
-		        	<!--  <input type="text" class="form-control" id="exampleInputPassword1" name="nombre_paseador" th:field="*{nombre}"> -->      	
-		      	</div>
-		      	
 				<!-- Campo oculto para almacenar el ID del corte -->
 				<input type="hidden" name="id" th:value="*{id}">
 				

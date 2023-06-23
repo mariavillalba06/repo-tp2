@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Servicio</title>
+		<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
+	</head>
+	<body>
+		<!-- Encabezado -->
+		<header th:replace="~{layouts/header :: header}"></header>
+		
+		<!-- Navegación -->
+		<nav th:replace="~{layouts/nav :: nav}"></nav>
+		
+		<section class="formulario__container">
+			<!-- Título dinámico según el valor de la variable "edicion"--> 
+			<h3 class="formulario__subtitulo" th:text="${edicion}? 'Modificar empleado' : 'Nuevo empleado'"></h3>
+						
+			<!-- Formulario para crear o modificar un empleado -->
+			<form th:action="${edicion}? @{/empleados/modificar_empleado} : @{/empleados/guardar_empleado}" th:object="${empleado}" method="post">
+				
+				<!-- Selección del nombre -->
+				<div class="mb-3">
+					<label for="nombre" class="form-label servicio__label">Nombre</label>
+					<input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}">
+					<div class="p-1 mt-1 mb-2 bg-danger text-white rounded-1" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+				</div>
+				
+				<!-- Selección del apellido -->
+				<div class="mb-3">
+					<label for="apellido" class="form-label servicio__label">Apellido</label>
+					<input type="text" class="form-control" id="apellido" name="apellido" th:field="*{apellido}">
+					<div class="p-1 mt-1 mb-2 bg-danger text-white rounded-1" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
+				</div>			
+				
+				<!-- Campo oculto para almacenar el ID del empleado -->
+				<input type="hidden" name="id" th:value="*{id}">
+				
+				<!-- Envío del formulario, muestrará de manera dinamica el título según la variable "edición"  -->
+				<input type="submit" class="btn btn-primary" th:value="${edicion}? 'Modificar' : 'Guardar'">
+			</form>
+		</section>
+		
+		
+		<!-- footer -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	</body>
+</html>

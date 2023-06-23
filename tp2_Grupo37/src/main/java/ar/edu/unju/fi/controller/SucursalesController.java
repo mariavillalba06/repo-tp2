@@ -1,7 +1,7 @@
 package ar.edu.unju.fi.controller;
 
 
-import ar.edu.unju.fi.model.Sucursal;
+import ar.edu.unju.fi.entity.Sucursal;
 import ar.edu.unju.fi.service.IListaService;
 import ar.edu.unju.fi.service.ISucursalService;
 import jakarta.validation.Valid;

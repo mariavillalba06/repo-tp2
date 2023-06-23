@@ -24,20 +24,36 @@
 		  <!-- Botón de enlace "Corte" -->
 		  <a th:href="@{/servicios/servicios-corte}" class="btn btn-primary">Corte</a>
 		</div>
-
-        
+		
+		
+		
         <!-- Contenedor de servicios de paseos -->
         <!-- Se mostrar la lista de acuerdo al valor de la variable paseo (true para mostrar) -->
 		<div th:if="${paseo}" class="servicios__container">
             <section class="table-responsive">
                 <h1 class="servicios__titulo">Paseos</h1>
+              	
+              	<!-- Filtro por dia -->
+				<div class="dropdown mb-1">
+					<a class="btn dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Días</a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item small" th:href="@{/servicios/servicios-paseo}" >Todos</a></li>
+						<li><a class="dropdown-item small" th:href="@{/servicios/filtro-paseo/{dia}(dia=${'Lunes'})}">Lunes</a></li>
+						<li><a class="dropdown-item small" th:href="@{/servicios/filtro-paseo/{dia}(dia=${'Martes'})}">Martes</a></li>
+						<li><a class="dropdown-item small" th:href="@{/servicios/filtro-paseo/{dia}(dia=${'Miercoles'})}">Miercoles</a></li>
+						<li><a class="dropdown-item small" th:href="@{/servicios/filtro-paseo/{dia}(dia=${'Jueves'})}">Jueves</a></li>
+						<li><a class="dropdown-item small" th:href="@{/servicios/filtro-paseo/{dia}(dia=${'Viernes'})}">Viernes</a></li>
+						<li><a class="dropdown-item small" th:href="@{/servicios/filtro-paseo/{dia}(dia=${'Sabado'})}">Sabado</a></li>			
+					</ul>
+				</div>
+
                 <table class="table table-striped text-center tabla__container">
                     <thead class="tabla__head">
                         <tr>
                             <th class="text-white tabla__encabezado"><strong>Día</strong></th>
                             <th class="text-white tabla__encabezado"><strong>Horario</strong></th>
                             <th class="text-white tabla__encabezado"><strong>Paseador</strong></th>
-                            <th class="text-white tabla__encabezado"><strong>Acciones</strong></th>
+                            <th th:if="${corte}" class="text-white tabla__encabezado"><strong>Acciones</strong></th>
                         </tr>
                     </thead>
                     <tbody class="tabla__body">
@@ -45,8 +61,8 @@
                         <tr th:each="paseo: ${paseos}">
                             <td class="tabla__dato" th:text="${paseo.dia}"></td>
                             <td class="tabla__dato" th:text="${paseo.horarioInicio + ' - ' + paseo.horarioFinal + ' hs'}"></td>
-                            <td class="tabla__dato" th:text="${paseo.nombre}"></td>
-                            <td class="tabla__dato">
+                            <td class="tabla__dato" th:text="${paseo.empleado.nombre} + ' ' + ${paseo.empleado.apellido}"></td>
+                            <td th:if="${acciones}" class="tabla__dato">
                             	<!-- Enlaces para editar y eliminar un paseo -->
                             	<a id="tabla__enlace" th:href="@{/servicios/modificar-paseo/} + ${paseo.id}">Editar</a>
                             	<a id="tabla__enlace" th:href="@{/servicios/eliminar-paseo/} + ${paseo.id}">Borrar</a>
@@ -55,31 +71,49 @@
                     </tbody>
                 </table>
                 <!-- Enlace para crear un nuevo servicio de paseo -->
-           		<a class="servicio__enlace" th:href="@{/servicios/nuevo-paseo}">Nuevo servicio de paseo</a>
+           		<a class="servicio__enlace" th:href="@{/servicios/nuevo-paseo}">Nuevo servicio de paseo</a>           		
             </section>
         </div>
         
         <!-- Contenedor de servicios de cortes -->
         <!-- Se mostrar la lista de acuerdo al valor de la variable corte (true para mostrar) -->
         <div th:if="${corte}" class="servicios__container">
-            <section>
+            <section class="table-responsive">
                 <h1 class="servicios__titulo">Cortes</h1>
+                <!-- Filtro por dia -->
+                <div class="dropdown mb-1">
+					<a class="btn dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Días</a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item small" th:href="@{/servicios/servicios-corte}" >Todos</a></li>
+						<li><a class="dropdown-item small" th:href="@{/servicios/filtro-corte/{dia}(dia=${'Lunes'})}">Lunes</a></li>
+						<li><a class="dropdown-item small" th:href="@{/servicios/filtro-corte/{dia}(dia=${'Martes'})}">Martes</a></li>
+						<li><a class="dropdown-item small" th:href="@{/servicios/filtro-corte/{dia}(dia=${'Miercoles'})}">Miercoles</a></li>
+						<li><a class="dropdown-item small" th:href="@{/servicios/filtro-corte/{dia}(dia=${'Jueves'})}">Jueves</a></li>
+						<li><a class="dropdown-item small" th:href="@{/servicios/filtro-corte/{dia}(dia=${'Viernes'})}">Viernes</a></li>
+						<li><a class="dropdown-item small" th:href="@{/servicios/filtro-corte/{dia}(dia=${'Sabado'})}">Sabado</a></li>			
+					</ul>
+				</div>
+                
                 <table class="table table-striped text-center tabla__container">
                     <thead class="tabla__head">
                         <tr>
+  	  	                    <th class="text-white tabla__encabezado"><strong>Día</strong></th>
                             <th class="text-white tabla__encabezado"><strong>Peso</strong></th>
                             <th class="text-white tabla__encabezado"><strong>Instrumento</strong></th>
                             <th class="text-white tabla__encabezado"><strong>Precio</strong></th>
-                            <th class="text-white tabla__encabezado"><strong>Acciones</strong></th>
-                        </tr>
+                            <th class="text-white tabla__encabezado"><strong>Cortador</strong></th>
+                            <th th:if="${acciones}" class="text-white tabla__encabezado"><strong>Acciones</strong></th>
+                        </tr>        
                     </thead>
                     <tbody class="tabla__body">
                         <tr th:each="corte: ${cortes}">
                         	<!-- Iteración sobre la lista de cortes -->
+                        	<td class="tabla__dato" th:text="${corte.dia}"></td>
                             <td class="tabla__dato" th:text="${corte.pesoMinimo + ' - ' + corte.pesoMaximo + ' Kg'}"></td>
                             <td class="tabla__dato" th:text="${corte.instrumento}"></td>
                             <td class="tabla__dato" th:text="${corte.precio + ' $'}"></td>
-                            <td class="tabla__dato">
+                            <td class="tabla__dato" th:text="${corte.empleado.nombre} + ' ' + ${corte.empleado.apellido}"></td>
+                            <td th:if="${acciones}" class="tabla__dato">
                             	<!-- Enlaces para editar y eliminar un corte -->
                             	<a id="tabla__enlace" th:href="@{/servicios/modificar-corte/} + ${corte.id}">Editar</a>
                             	<a id="tabla__enlace" th:href="@{/servicios/eliminar-corte/} + ${corte.id}">Borrar</a>
@@ -90,10 +124,10 @@
                 <!-- Enlace para crear un nuevo servicio de corte -->
                 <a class="servicio__enlace" th:href="@{/servicios/nuevo-corte}">Nuevo servicio de corte</a>
             </section>
-        </div>
+        </div>    
         
-        
-        
+        <a class="servicio__enlace" th:href="@{/empleados/nuevo_empleado}">Nuevo empleado</a>
+        <a class="servicio__enlace" th:href="@{/empleados/listado}">Lista empleados</a>
         <!-- footer -->
         <footer th:replace="~{layouts/footer :: footer}"></footer>
         <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>

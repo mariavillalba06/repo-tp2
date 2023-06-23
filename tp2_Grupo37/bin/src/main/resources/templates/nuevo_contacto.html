@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head lang="es">
+		<meta charset="UTF-8">
+		<title>Contacto</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Inclusión del archivo CSS de Bootstrap -->
+		<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
+	</head>
+	<body>
+		<!-- Encabezado -->
+		<header th:replace="~{layouts/header :: header}"></header>
+		
+		<!-- Navegación -->
+		<nav th:replace="~{layouts/nav :: nav}"></nav>
+		
+		<!-- Contenedor de formulario de contacto nuevo -->
+		<main class="form__container container">
+			<div class="form__section mx-auto text-center">
+				<h2 class="form__titulo">CONSULTA ENVIADA</h2>
+				<div class="form__datos">
+					<p>Nombre: <span th:text="${nombre}"></span></p>
+					<p>Email: <span th:text="${email}"></span></p>
+					<p>Ciudad: <span th:text="${ciudad}"></span></p>
+					<p>Consulta: <span th:text="${mensaje}"></span></p>
+				</div>
+			</div>
+		</main>
+		
+		<!-- Footer -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+		<!-- Inclusión del archivo JavaScript de Bootstrap -->
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<!-- Inclusión del archivo CSS de Bootstrap -->
+		<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	</head>
+	<body>
+		
+		
+		<footer class="footer text-center text-white" th:fragment="footer">
+			<div class="container p-4 pb-0">
+		    
+		    	<section class="mb-1">
+				    <!-- Facebook -->
+				    <a class="btn m-1" href="#" role="button"><img class="footer__icon" alt="facebook" th:src="@{/images/facebook.png}"></a>
+				
+				    <!-- Instagram -->
+				    <a class="btn m-1" href="#" role="button"><img class="footer__icon" alt="instagram" th:src="@{/images/instagram.png}"></a>
+				
+				    <!-- Twitter -->
+				    <a class="btn m-1" href="#" role="button"><img class="footer__icon" alt="twitter" th:src="@{/images/twitter.png}"></a>
+				
+				    <!-- Email -->
+				    <a class="btn m-1" href="#" role="button"><img class="footer__icon" alt="email" th:src="@{/images/correo-electronico.png}"></a>
+		    	</section>
+		    
+		  	</div>
+			<!-- Copyright -->
+		 	<p class="text-center p-3">&copy; 2023  Copyright: Patas Arriba S.A – Jujuy – República Argentina</p>
+		  
+		</footer>
+		<!-- Inclusión del archivo JavaScript de Bootstrap -->
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	</body>
+</html>

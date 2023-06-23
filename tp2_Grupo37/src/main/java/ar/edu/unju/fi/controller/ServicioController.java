@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unju.fi.model.ServicioCorte;
-import ar.edu.unju.fi.model.ServicioPaseo;
+import ar.edu.unju.fi.entity.Empleado;
+import ar.edu.unju.fi.entity.ServicioCorte;
+import ar.edu.unju.fi.entity.ServicioPaseo;
+import ar.edu.unju.fi.service.IEmpleadoService;
 import ar.edu.unju.fi.service.IListaService;
 import ar.edu.unju.fi.service.IServicioService;
 import jakarta.validation.Valid;
@@ -26,6 +28,12 @@ public class ServicioController {
 	
 	@Autowired
 	private IServicioService servicioService;
+	
+	@Autowired
+	private IEmpleadoService empleadoService;
+	
+	@Autowired
+	private Empleado empleado;
 	
 	/**
 	 * Método que obtiene una lista de servicios según el tipo de servicio especificado.
@@ -48,7 +56,7 @@ public class ServicioController {
 			corte=true;
 			model.addAttribute("cortes", servicioService.getServicioCortes());
 		}
-		
+		model.addAttribute("acciones", false);
 		model.addAttribute("paseo", paseo);
 		model.addAttribute("corte", corte);
 
@@ -94,6 +102,9 @@ public class ServicioController {
 		//Agrega la lista de los dias para el formulario
 		model.addAttribute("dias", listaService.getDias());
 		
+		//Agrega la lista de los empleados para el formulario
+		model.addAttribute("empleados", empleadoService.getListaEmpleados());
+		
 		// Agrega la variable "edicion" al modelo
 		model.addAttribute("edicion", edicion);
 		return "nuevo_paseo";
@@ -117,6 +128,7 @@ public class ServicioController {
 		if(result.hasErrors()) {
 			modelView.setViewName("nuevo_paseo");
 			modelView.addObject("dias", listaService.getDias());
+			modelView.addObject("empleados", empleadoService.getListaEmpleados());
 			modelView.addObject("servicioPaseo", servicioPaseo);
 			return modelView;
 		}
@@ -124,8 +136,13 @@ public class ServicioController {
 		// Agrega el servicioPaseo a la lista de paseos de servicio
 		servicioService.guardarPaseo(servicioPaseo);
 		
+		empleado = empleadoService.findEmpleadoById(servicioPaseo.getEmpleado().getId());
+		
+		servicioPaseo.setEmpleado(empleado);
+		
 		// Agrega el listado de paseos al modelo del ModelAndView
 		modelView.addObject("paseos", servicioService.getServicioPaseos());
+		modelView.addObject("acciones", false);
 		modelView.addObject("paseo", paseo);
 		modelView.addObject("corte", corte);
 		return modelView;
@@ -143,9 +160,10 @@ public class ServicioController {
 		// Variable que indica si se está en modo de edición el metodo
 		boolean edicion = true;
 		
-		// Agrega el objeto encontrado, la bandera al modelo y los dias
+		// Agrega el objeto encontrado, la bandera al modelo, la lista de empleados y los dias
 		model.addAttribute("servicioPaseo", servicioService.getByIdPaseo(id));
 		model.addAttribute("dias", listaService.getDias());
+		model.addAttribute("empleados", empleadoService.getListaEmpleados());
 		model.addAttribute("edicion", edicion);
 		return "nuevo_paseo";
 	}
@@ -164,6 +182,7 @@ public class ServicioController {
 			modelView.setViewName("nuevo_paseo");
 			modelView.addObject("servicioPaseo", servicioPaseo);
 			modelView.addObject("dias", listaService.getDias());
+			modelView.addObject("empleados", empleadoService.getListaEmpleados());
 			modelView.addObject("edicion", true);
 			return modelView;
 		}
@@ -183,14 +202,29 @@ public class ServicioController {
 	 */
 	@GetMapping("/eliminar-paseo/{id}")
 	public String eliminarPaseo(@PathVariable(value="id") int id) {
-		
-		servicioService.eliminarPaseo(id);
+		// Eliminamos el paseo utilizando su id en la lista
+		servicioService.eliminarPaseo(servicioService.getByIdPaseo(id));
 		
 		return "redirect:/servicios/listado/paseo";
 	}
 	
+	@GetMapping("/filtro-paseo/{dia}")
+	public String getfiltoServicioPaseo(Model model, @PathVariable(value="dia")String dia) {
+		boolean paseo, corte;
+		
+		//obtiene los servicios de acuerdo al dia correspondiente
+		model.addAttribute("paseos", servicioService.filtroServicioPaseos(dia));
+		paseo=true;
+		corte=false;
+		model.addAttribute("acciones", false);
+		model.addAttribute("paseo", paseo);
+		model.addAttribute("corte", corte);
+
+		return "servicios";
+	}
 	
-	//Servicio de cortes
+	
+	//----Servicio de cortes----//
 	/**
 	 * Maneja la solicitud GET para la página "nuevo_corte".
 	 * 
@@ -205,6 +239,11 @@ public class ServicioController {
 		
 		// Agrega un nuevo objeto "ServicioCorte" al modelo
 		model.addAttribute("servicioCorte", servicioService.nuevoCorte());
+		// Agrega la lista de empleados al modelo
+		model.addAttribute("empleados", empleadoService.getListaEmpleados());
+		
+		//Agrega la lista de los dias para el formulario
+		model.addAttribute("dias", listaService.getDias());
 		
 		// Agregar la variable "edicion" al modelo
 		model.addAttribute("edicion", edicion);
@@ -228,14 +267,21 @@ public class ServicioController {
 		
 		if(result.hasErrors()) {
 			modelView.setViewName("nuevo_corte");
+			modelView.addObject("dias", listaService.getDias());
 			modelView.addObject("servicioCorte", servicioCorte);
+			modelView.addObject("empleados", empleadoService.getListaEmpleados());
 			return modelView;
 		}
+		
+		empleado = empleadoService.findEmpleadoById(servicioCorte.getEmpleado().getId());
+		
+		servicioCorte.setEmpleado(empleado);
 		
 		servicioService.guardarCorte(servicioCorte);
 		
 		// Agrega el listado de cortes al modelo del ModelAndView y valores booleanos
 		modelView.addObject("cortes", servicioService.getServicioCortes());
+		modelView.addObject("acciones", false);
 		modelView.addObject("paseo", paseo);
 		modelView.addObject("corte", corte);
 		return modelView;
@@ -254,6 +300,8 @@ public class ServicioController {
 		boolean edicion = true;
 		
 		model.addAttribute("servicioCorte", servicioService.getByIdCorte(id));
+		model.addAttribute("dias", listaService.getDias());
+		model.addAttribute("empleados", empleadoService.getListaEmpleados());
 		model.addAttribute("edicion", edicion);
 		return "nuevo_corte";
 	}
@@ -270,6 +318,8 @@ public class ServicioController {
 		
 		if(result.hasErrors()) {
 			model.addAttribute("servicioCorte", servicioCorte);
+			model.addAttribute("dias", listaService.getDias());
+			model.addAttribute("empleados", empleadoService.getListaEmpleados());
 			model.addAttribute("edicion", true);
 			return "nuevo_corte";
 		}
@@ -289,8 +339,24 @@ public class ServicioController {
 	@GetMapping("/eliminar-corte/{id}")
 	public String eliminarCorte(@PathVariable(value="id") int id) {
 		
-		servicioService.eliminarCorte(id);
+		// Eliminamos el corte utilizando su id en la lista
+		servicioService.eliminarCorte(servicioService.getByIdCorte(id));
 	    
 	    return "redirect:/servicios/listado/corte";
+	}
+	
+	@GetMapping("/filtro-corte/{dia}")
+	public String getfiltoServicioCorte(Model model, @PathVariable(value="dia")String dia) {
+		boolean paseo, corte;
+		
+		//obtiene los servicios de acuerdo al dia correspondiente
+		model.addAttribute("cortes", servicioService.filtroServicioCortes(dia));
+		paseo=false;
+		corte=true;
+		model.addAttribute("acciones", false);
+		model.addAttribute("paseo", paseo);
+		model.addAttribute("corte", corte);
+
+		return "servicios";
 	}
 }

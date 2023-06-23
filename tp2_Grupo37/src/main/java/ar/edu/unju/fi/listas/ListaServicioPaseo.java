@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import ar.edu.unju.fi.entity.ServicioPaseo;
 
-import ar.edu.unju.fi.model.ServicioPaseo;
+import java.util.ArrayList;
 
 @Component
 public class ListaServicioPaseo {
@@ -20,12 +20,12 @@ public class ListaServicioPaseo {
 	public ListaServicioPaseo() {
 		servicioPaseos = new ArrayList<ServicioPaseo>();
 		
-		servicioPaseos.add(new ServicioPaseo(1, "Juan Perez", "Lunes", (byte)9, (byte)12));
+		/*servicioPaseos.add(new ServicioPaseo(1, "Juan Perez", "Lunes", (byte)9, (byte)12));
 		servicioPaseos.add(new ServicioPaseo(2, "Lucas Diaz", "Martes", (byte)16, (byte)18));
 		servicioPaseos.add(new ServicioPaseo(3, "Juan Perez", "Miercoles", (byte)9, (byte)12));
 		servicioPaseos.add(new ServicioPaseo(4, "María Gomez", "Jueves", (byte)16, (byte)18));
 		servicioPaseos.add(new ServicioPaseo(5, "Lucas Diaz", "Viernes", (byte)9, (byte)12));
-		servicioPaseos.add(new ServicioPaseo(6, "Roberto Vazquez", "Sábado", (byte)16, (byte)18));
+		servicioPaseos.add(new ServicioPaseo(6, "Roberto Vazquez", "Sábado", (byte)16, (byte)18));*/
 	}
 	
 	/**

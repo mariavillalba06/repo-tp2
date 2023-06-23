@@ -1,73 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 	<head lang="es">
 		<meta charset="UTF-8">
 		<title>Contacto</title>
-		<link rel="stylesheet" href="../static/estilos/estilos.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Inclusión del archivo CSS de Bootstrap -->
+		<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
 	</head>
 	<body>
-		<header class="header">
-		<img class="logo" alt="logo-veterinaria" src="../static/images/logo.png" title="Veterinaria S.A">
-			<h1 class="titulo">Patas Arriba S.A</h1>
-		</header>
-		<nav class="nav__container">
-			<ul>
-				<li class="item"><a class="nav__enlace" href="index.html">Inicio</a></li>
-				<li class="item"><a class="nav__enlace" href="productos.html">Productos</a></li>
-				<li class="item"><a class="nav__enlace" href="consejos.html">Consejos de salud</a></li>
-				<li class="item"><a class="nav__enlace" href="servicios.html">Servicios de paseo</a></li>
-				<li class="item"><a class="nav__enlace" href="sucursales.html">Sucursales</a></li>
-				<li class="item"><a class="nav__enlace" href="contacto.html">Contáctanos</a></li>
-			</ul>
-		</nav>
-		<main class="form__container">
-			<div class="form__section">
+		<!-- Encabezado -->
+		<header th:replace="~{layouts/header :: header}"></header>
+		
+		<!-- Navegación -->
+		<nav th:replace="~{layouts/nav :: nav}"></nav>
+		
+		<!-- Contenedor de formulario de contacto -->
+		<main class="form__container container">
+			<div class="form__section mx-auto text-center">
 				<h2 class="form__titulo">Contáctenos</h2>
 				<div class="form__datos">
 					<p>Direccion: 3915 Av. General Belgrano</p>
 					<p>Telefono: 388-49999</p>
 					<p>Horario:</p>
-					<ul>
-						<li>Lunes a viernes: 9:00 am a 8:00pm</li>
-						<li>Sabado a domingo: 9:00 am a 12:30 pm</li>
-					</ul>
+					<div class="row">
+						<section class="col-md-6">
+							<p>Lunes a viernes: 9:00 am a 8:00pm</p>
+						</section>
+						
+						<section class="col-md-6">
+							<p>Sábados y domingos: 9:00 am a 12:30 pm</p>
+						</section>
+					</div>
+					
 					<p>Correo electrónico: <a href="mailto:contactos@mail.com.ar">contactos@mail.com.ar</a></p>
 				</div>
-				<form class="form__consulta">
-					<fieldset>
+				<form th:action="@{/contacto}" th:object="${contacto}" method="post">
+					<fieldset class="mx-auto text-center">
 						<legend>Consulta</legend>
-						<div>
-							<label>Nombre: </label>
-							<input type="text" name="nombre" placeholder="Ingrese su nombre" required>
+						<!-- Ingreso de nombre -->
+						<div class="mb-3 row">
+							<label for="nombre" class="col-sm-2 col-form-label">Nombre: </label>
+							 <div class="col-sm-10">
+								<input type="text" class="form-control" id="nombre"name="nombre" placeholder="Ingrese su nombre" th:field="*{nombre}">
+								<div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+							</div>
 						</div>
-						<div>
-							<label>Email: </label>
-							<input type="email" name="email" placeholder="Ingrese un email válido" required>
+						<!-- Ingreso de email -->
+						<div class="mb-3 row">
+							<label for="text" class="col-sm-2 col-form-label">Email: </label>
+							<div class="col-sm-10">
+								<input type="email" class="form-control" id="email" name="email" placeholder="Ingrese un email válido" th:field="*{email}">
+								<div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+							</div>
 						</div>
-						<div>
-							<label>Ciudad: </label>
-							<input type="text" name="ciudad" placeholder="Ingrese su ciudad" required>
+						<!-- Ingreso de ciudad -->
+						<div class="mb-3 row">
+							<label for="ciudad" class="col-sm-2 col-form-label">Ciudad: </label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ingrese su ciudad" th:field="*{ciudad}">
+								<div class="text-danger" th:if="${#fields.hasErrors('ciudad')}" th:errors="*{ciudad}"></div>
+							</div>
 						</div>
-						<div>
-							<label>Mensaje: </label>
+						<!-- Ingreso de mensaje -->
+						<div class="mb-3 row">
+							<label class="col-sm-2 col-form-label">Mensaje: </label>
 							<br>
-							<textarea rows="8"></textarea>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="8" th:field="*{mensaje}"></textarea>
+								<div class="text-danger" th:if="${#fields.hasErrors('mensaje')}" th:errors="*{mensaje}"></div>
+							</div>
 						</div>
 						<button type="submit" id="button__submit">Enviar</button>
 					</fieldset>
 				</form>
 			</div>
 		</main>
-		<footer class="footer">
-			<div class="footer__copyright">
-				<p class="copyright">Copyright &copy; 2023 - Patas Arriba S.A – Jujuy – República Argentina</p>
-			</div>
-			<hr>
-			<div class="footer__icon__container">
-				<a href="#"><img class="footer__icon" alt="facebook" src="../static/images/facebook.png"></a>
-				<a href="#"><img class="footer__icon" alt="instagram" src="../static/images/instagram.png"></a>
-				<a href="#"><img class="footer__icon" alt="twitter" src="../static/images/twitter.png"></a>
-				<a href="#"><img class="footer__icon" alt="email" src="../static/images/correo-electronico.png"></a>
-			</div>
-		</footer>
+		
+		<!-- Footer -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+		<!-- Inclusión del archivo JavaScript de Bootstrap -->
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </html>

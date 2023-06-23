@@ -1,76 +1,80 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 	<head>
 	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <title>Inicio</title>
-		<link rel="stylesheet" href="../static/estilos/estilos.css">
+	    <!-- Inclusión del archivo CSS de Bootstrap -->
+	    <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
 	</head>
 	<body>
-		<header class="header">
-			<img class="logo" alt="logo-veterinaria" src="../static/images/logo.png" title="Veterinaria S.A">
-			<h1 class="titulo">Patas Arriba S.A</h1>
-		</header>
+		<!-- Encabezado -->
+		<header th:replace="~{layouts/header :: header}"></header>
 		
-		<nav class="nav__container">
-			<ul>
-				<li class="item"><a class="nav__enlace" href="index.html">Inicio</a></li>
-				<li class="item"><a class="nav__enlace" href="productos.html">Productos</a></li>
-				<li class="item"><a class="nav__enlace" href="consejos.html">Consejos de salud</a></li>
-				<li class="item"><a class="nav__enlace" href="servicios.html">Servicios de paseo</a></li>
-				<li class="item"><a class="nav__enlace" href="sucursales.html">Sucursales</a></li>
-				<li class="item"><a class="nav__enlace" href="contacto.html">Contáctanos</a></li>
-			</ul>
-		</nav>
-		<main class="main__container">
-			<section class="main__section">
-				<h2 class="main__titulo">Buscamos</h2>
+		<!-- Navegación -->
+		<nav th:replace="~{layouts/nav :: nav}"></nav>
+		
+		<!-- Contenido principal -->
+		<main class="container main__container rounded-4">
+			<div class="row">
 				
-				<article class="main__article">
-					<h3 class="article__subtitulo">Promover el cuidado y bienestar de las mascotas</h3>
-					<p class="article__texto">Concientizando y garantizar que las mascotas reciban una atención adecuada y se mantengan en las mejores condiciones posibles en un ambiente saludable,
-					al igual que fomentar la adopción y la tenencia responsable</p>
-				</article>
-				
-				<article class="main__article">
-					<h3 class="article__subtitulo">Satisfacer sus necesidades</h3>
-					<p class="article__texto">Ofrecemos productos y servicios que incluyen alimentos, juguetes, ropa, productos para el cuidado de la salud de la mascota, 
-					servicios de aseo, entre otros para lograr satisfacer las necesidades de los clientes y de los diferentes tipos de mascotas, así como de diferentes razas y edades.</p>
-				</article>
-				
-				<article class="main__article">
-					<h3 class="article__subtitulo">Proporcionar una adecuada atención</h3>
-					<p class="article__texto">Damos un servicio al cliente exelente, ayudandolos a encontrar los productos adecuados, 
-					proporcionando información sobre el cuidado de las mascotas y respondiendo a las preguntas de manera útil.</p>
-				</article>
-			</section>
-			
-			<aside class="main__aside">
-				<div class="aside__container">
-					<h3 class="aside__titulo">Artículos de interés</h3>
-					<ul class="aside__lista">
-						<li class="lista__item"><a class="lista__enlace" href="#">Adiestramiento</a></li>
-						<li class="lista__item"><a class="lista__enlace" href="#">Alimentación</a></li>
-						<li class="lista__item"><a class="lista__enlace" href="#">Cuidados</a></li>
-						<li class="lista__item"><a class="lista__enlace" href="#">Curiosidades</a></li>
-						<li class="lista__item"><a class="lista__enlace" href="#">Perros</a></li>
-						<li class="lista__item"><a class="lista__enlace" href="#">Gatos</a></li>
-						<li class="lista__item"><a class="lista__enlace" href="#">Otras razas</a></li>
-					</ul>
-				</div>
-			</aside>
+				<!-- Sección principal -->
+				<section class="col-lg-10 col-md-12 main__section">
+					<!-- Título de la sección -->
+			    	<h2 class="main__titulo">Buscamos</h2>
+					
+					<!-- Primer artículo -->
+					<article class="mt-4 mb-4">
+						<!-- Subtítulo del artículo -->
+						<h3 class="article__subtitulo">Promover el cuidado y bienestar de las mascotas</h3>
+						<!-- Texto del artículo -->
+						<p class="article__texto">Concientizando y garantizar que las mascotas reciban una atención adecuada y se mantengan en las mejores condiciones posibles en un ambiente saludable,
+						al igual que fomentar la adopción y la tenencia responsable</p>
+					</article>
+					
+					<!-- Segundo artículo -->
+					<article class="main__article mt-4 mb-4">
+						<!-- Subtítulo del artículo -->
+						<h3 class="article__subtitulo">Satisfacer sus necesidades</h3>
+						<!-- Texto del artículo -->
+						<p class="article__texto">Ofrecemos productos y servicios que incluyen alimentos, juguetes, ropa, productos para el cuidado de la salud de la mascota, 
+						servicios de aseo, entre otros para lograr satisfacer las necesidades de los clientes y de los diferentes tipos de mascotas, así como de diferentes razas y edades.</p>
+					</article>
+					
+					<!-- Tercer artículo -->
+					<article class="main__article mt-4 mb-4">
+						<!-- Subtítulo del artículo -->
+						<h3 class="article__subtitulo">Proporcionar una adecuada atención</h3>
+						<!-- Texto del artículo -->
+						<p class="article__texto">Damos un servicio al cliente exelente, ayudandolos a encontrar los productos adecuados, 
+						proporcionando información sobre el cuidado de las mascotas y respondiendo a las preguntas de manera útil.</p>
+					</article>
+			    </section>
+			    
+			    <!-- Aside lateral -->
+			    <aside class="col-lg-2 col-md-12">
+			    	<!-- Contenido del aside -->
+			    	<div class="mx-auto text-center mt-3">
+			    		<!-- Título del aside -->
+			    		<h4 class="aside__titulo">Artículos de interés</h4>
+			    		<!-- Enlaces del aside -->
+			    		<a class="lista__enlace mt-3 mb-3" href="#">Adiestramiento</a>
+			    		<a class="lista__enlace mt-3 mb-3" href="#">Alimentación</a>
+			    		<a class="lista__enlace mt-3 mb-3" href="#">Cuidados</a>
+			    		<a class="lista__enlace mt-3 mb-3" href="#">Curiosidades</a>
+			    		<a class="lista__enlace mt-3 mb-3" href="#">Perros</a>
+			    		<a class="lista__enlace mt-3 mb-3" href="#">Gatos</a>
+			    		<a class="lista__enlace mt-3 mb-3" href="#">Otras razas</a>
+			    	</div>
+			    </aside>
+			</div>
 		</main>
 		
-		<footer class="footer">
-			<div class="footer__copyright">
-				<p class="copyright">Copyright &copy; 2023 - Patas Arriba S.A – Jujuy – República Argentina</p>
-			</div>
-			<hr>
-			<div class="footer__icon__container">
-				<a href="#"><img class="footer__icon" alt="facebook" src="../static/images/facebook.png"></a>
-				<a href="#"><img class="footer__icon" alt="instagram" src="../static/images/instagram.png"></a>
-				<a href="#"><img class="footer__icon" alt="twitter" src="../static/images/twitter.png"></a>
-				<a href="#"><img class="footer__icon" alt="email" src="../static/images/correo-electronico.png"></a>
-			</div>
-		</footer>
+		 <!-- footer -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+		
+		<!-- Inclusión del archivo JavaScript de Bootstrap -->
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 	</body>
 </html>

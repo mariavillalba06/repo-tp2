@@ -2,8 +2,8 @@ package ar.edu.unju.fi.service;
 
 import java.util.List;
 
-import ar.edu.unju.fi.model.ServicioCorte;
-import ar.edu.unju.fi.model.ServicioPaseo;
+import ar.edu.unju.fi.entity.ServicioCorte;
+import ar.edu.unju.fi.entity.ServicioPaseo;
 import jakarta.validation.Valid;
 
 public interface IServicioService {
@@ -17,9 +17,11 @@ public interface IServicioService {
 	
 	void modificarPaseo(ServicioPaseo paseo);
 	
-	void eliminarPaseo(int id);
+	void eliminarPaseo(ServicioPaseo paseo);
 	
 	ServicioPaseo nuevoPaseo();
+	
+	List<ServicioPaseo> filtroServicioPaseos(String dia);
 	
 	/* Metodos servicios de cortes*/
 	List<ServicioCorte> getServicioCortes();
@@ -30,7 +32,9 @@ public interface IServicioService {
 	
 	void modificarCorte(ServicioCorte corte);
 	
-	void eliminarCorte(int id);
+	void eliminarCorte(ServicioCorte corte);
 	
 	ServicioCorte nuevoCorte();
+	
+	List<ServicioCorte> filtroServicioCortes(String dia);
 }
