@@ -21,7 +21,7 @@
 	        <div class="card-body text-center">
 	          <h5 class="fw-bold card-title" th:text="${produ.nombre}"></h5>
 	          <p class="fw-bold text-primary" th:text="${'Precio: ' + produ.precio + ' $'}"></p>
-	          <p class="fw-bold text-primary" th:text="${'Categoria: ' + produ.categoria}"></p>
+	          <p class="fw-bold text-primary" th:text="${'Categoria: ' + produ.categoria.nombre}"></p>
 	          <p class="fw-bold text-primary" th:text="${'Descuento: ' + produ.descuento + '%'}"></p>
 	          <p class="fw-bold text-primary" th:text="${'Precio total: ' + produ.precioTotal + ' $'}"></p>
 	          <a class="btn btn-outline-primary mt-2" th:href="@{/Producto/modificarse/}+${produ.codigo}">Editar</a><br>

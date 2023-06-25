@@ -82,8 +82,8 @@ public class ProductoController {
 	 * @return retorna la vista "nuevo_producto" con la modificacion del producto
 	 */
 	@GetMapping("/modificarse/{codigo}")
-	public String getModificarProductoPage(Model model, @PathVariable(value="codigo")int codigo) {
-		Producto productoEncontrado = productoService.getBy(codigo);
+	public String getModificarProductoPage(Model model, @PathVariable(value="id")Long id) {
+		Producto productoEncontrado = productoService.getBy(id);
 		boolean edicion=true;
 		
 		model.addAttribute("productos", productoEncontrado);
@@ -121,9 +121,9 @@ public class ProductoController {
 	 * @return redirige a la página de listado de productos actualizada
 	 */
 	@GetMapping("/eliminarse/{codigo}")
-	public String eliminarProducto(@PathVariable(value="codigo")int codigo) {
-		Producto productoEncontrado = productoService.getBy(codigo);
-		productoService.eliminarse(productoEncontrado);
+	public String eliminarProducto(@PathVariable(value="id") Long id) {
+		//Producto productoEncontrado = productoService.getBy(codigo);
+		productoService.eliminarse(productoService.getBy(id));
 		return "redirect:/Producto/listas";
 }
 	

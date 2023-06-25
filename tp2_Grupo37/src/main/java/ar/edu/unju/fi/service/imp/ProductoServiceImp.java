@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.entity.Producto;
@@ -13,6 +14,7 @@ import jakarta.validation.Valid;
 
 
 @Service
+@Primary
 public class ProductoServiceImp implements IProductoService{
 
 	@Autowired
@@ -46,10 +48,10 @@ public class ProductoServiceImp implements IProductoService{
 	
 	//Buscar objeto producto a partir de su codigo
 	@Override
-	public Producto getBy(int codigo) {
+	public Producto getBy(Long id) {
 		Producto productoEncontrado=null;
 		for(Producto produ : listaProducto.getProductos()) {
-			if(produ.getCodigo() == codigo) {
+			if(produ.getId() == id) {
 				productoEncontrado=produ;
 				break;
 			}
@@ -74,16 +76,25 @@ public class ProductoServiceImp implements IProductoService{
 	}
 	
 	//Eliminar un objeto producto
-	@Override
-	public void eliminarse(Producto productoEncontrado) {
-		listaProducto.getProductos().remove(producto);
-		
-	}
+	/*@Override
+	public void eliminarse(Long id) {
+	for(Producto produ : listaProducto.getProductos()) {
+		if(produ.getId() == id) {
+			listaProducto.getProductos().remove(produ);
+			break;
+		}
+	}}*/
 
 	// Obtener un objeto producto 
 	@Override
 	public Producto getProducto() {
 		return producto;
+	}
+
+	@Override
+	public void eliminarse(Producto producto) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

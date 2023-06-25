@@ -30,10 +30,14 @@
          <div class=" text-white" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
         
         <label for="categoria">Categoria</label>
-        <select id="categoria" name="producto_categoria" th:field="*{categoria}">
+        <!--<select id="categoria" name="producto_categoria" th:field="*{categoria}">
 			<option value="" selected>Seleccione una opcion..</option>
 			<option th:each="categoria: ${categorias}" th:value="${categoria}" th:text="${categoria}"></option>
-		</select>
+		</select>-->
+		<select id="categoria" name="producto_categoria" th:field="*{categoria}">
+    <option value="" selected>Seleccione una opcion..</option>
+    <option th:each="categoria: ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
+</select>
 		<div class=" text-white" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></div>
 		        
         <label for="descuento">Descuento</label>
