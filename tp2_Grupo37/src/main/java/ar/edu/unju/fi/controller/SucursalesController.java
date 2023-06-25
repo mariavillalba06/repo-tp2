@@ -1,10 +1,15 @@
 package ar.edu.unju.fi.controller;
 
 
+import ar.edu.unju.fi.entity.Provincia;
 import ar.edu.unju.fi.entity.Sucursal;
-import ar.edu.unju.fi.service.IListaService;
+import ar.edu.unju.fi.service.IProvinciaService;
 import ar.edu.unju.fi.service.ISucursalService;
 import jakarta.validation.Valid;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -21,10 +27,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class SucursalesController {
 	
 	@Autowired
-	private IListaService listaService;
+	private ISucursalService sucursalService;
 	
 	@Autowired
-	private ISucursalService sucursalService;
+	private IProvinciaService provinciaService;
+	
+	@Autowired
+	private Provincia provincia;
 	
 	
 	/**
@@ -47,7 +56,7 @@ public class SucursalesController {
 	public String getNuevaSucursalesPage(Model model) {
 		boolean edicion=false;
 		model.addAttribute("sucursal", sucursalService.getSucursal());
-		model.addAttribute("provincias", listaService.getProvincias());
+		model.addAttribute("provincias", provinciaService.getListaProvincias());
 		model.addAttribute("edicion", edicion);
 		return "nueva_sucursal";
 	}
@@ -63,11 +72,16 @@ public class SucursalesController {
 		ModelAndView modelandview = new ModelAndView("sucursales");
 		if(result.hasErrors()) {
 			modelandview.setViewName("nueva_sucursal");
-			modelandview.addObject("provincias", listaService.getProvincias());
+			modelandview.addObject("provincias", provinciaService.getListaProvincias());
 			modelandview.addObject("sucursal", sucursal);
 			return modelandview;
 		}
 		sucursalService.guardar(sucursal);
+		
+		provincia = provinciaService.findProvinciaById(sucursal.getProvincia().getId());
+		
+		sucursal.setProvincia(provincia);
+		
 		modelandview.addObject("sucursales", sucursalService.getLista());
 		return modelandview;
 	}
@@ -78,12 +92,12 @@ public class SucursalesController {
 	 * @param nombre identificador de la sucursal a modificar
 	 * @return retorna la vista "nueva_sucursal" con la modificacion de la sucursal
 	 */
-	@GetMapping("/modificar/{nombre}")
-	public String getModificarSucursalPage(Model model, @PathVariable(value="nombre")String nombre) {
-		Sucursal sucursalEncontrada = sucursalService.getBy(nombre);
+	@GetMapping("/modificar/{id}")
+	public String getModificarSucursalPage(Model model, @PathVariable(value="id") Long id) {
+
 		boolean edicion=true;
-		model.addAttribute("sucursal", sucursalEncontrada);
-		model.addAttribute("provincias", listaService.getProvincias());
+		model.addAttribute("sucursal", sucursalService.getById(id));
+		model.addAttribute("provincias", provinciaService.getListaProvincias());
 		model.addAttribute("edicion", edicion);
 		return "nueva_sucursal";
 	}
@@ -99,7 +113,7 @@ public class SucursalesController {
 	public String modificarSucursal(@Valid @ModelAttribute("sucursal") Sucursal sucursal,BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("sucursal", sucursal);
-			model.addAttribute("provincias", listaService.getProvincias());
+			model.addAttribute("provincias", provinciaService.getListaProvincias());
 			model.addAttribute("edicion", true);
 			return "nueva_sucursal";
 		}
@@ -110,15 +124,39 @@ public class SucursalesController {
 	
 	/**
 	 * Solicitud GET para eliminar una sucursal
-	 * @param nombre identificador de la sucursal a eliminar
-	 * @param sucursalEncontrada es la variable donde se gurda el nombre de la sucursal
+	 * @param id identificador de la sucursal a eliminar
 	 * @return redirige a la página de listado de sucursales actualizada
 	 */
-	@GetMapping("/eliminar/{nombre}")
-	public String eliminarSucursal(@PathVariable(value="nombre")String nombre) {
-		Sucursal sucursalEncontrada = sucursalService.getBy(nombre);
-		sucursalService.eliminar(sucursalEncontrada);
+	@GetMapping("/eliminar/{id}")
+	public String eliminarSucursal(@PathVariable(value="id")Long id) {
+		sucursalService.eliminar(sucursalService.getById(id));
 		return "redirect:/sucursal/listado";
-}
-}
+	}
 	
+	/*
+	@PostMapping("/filtro_sucursal/{fechaInicio}/{fechaFin}")
+	public String getfiltroSucursal(Model model, @PathVariable(value="fechaInicio")LocalDate fechaInicio, @PathVariable(value="fechaFin")LocalDate fechaFin) {
+		
+		model.addAttribute("sucursales", sucursalService.filtroSucursal(fechaInicio,fechaFin));
+
+		return "sucursales";
+	} */
+	
+	@PostMapping("/filtro_sucursal")
+    public String recibirFecha(Model model, @RequestParam("fechaInicio") LocalDate fechaInicio, @RequestParam("fechaFin") LocalDate fechaFin) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaInicioFormateada = fechaInicio.format(formatter);
+        String fechaFinFormateada = fechaFin.format(formatter);
+
+        model.addAttribute("fechaInicio", fechaInicioFormateada);
+        model.addAttribute("fechaFin", fechaFinFormateada);
+        model.addAttribute("mensaje", true);
+        
+        model.addAttribute("sucursales", sucursalService.filtroSucursal(fechaInicio, fechaFin));
+        
+        
+
+        return "sucursales";
+    }
+	
+}	

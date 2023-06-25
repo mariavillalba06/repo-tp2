@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Servicios</title>
+		<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<link rel="stylesheet" th:href="@{/estilos/estilos.css}">
+	</head>
+	<body>
+		<!-- Encabezado -->
+		<header th:replace="~{layouts/header :: header}"></header>
+		
+		<!-- Navegación -->
+		<nav th:replace="~{layouts/nav :: nav}"></nav>
+
+        
+        <!-- Contenedor de provincias -->
+		<div class="servicios__container">
+            <section class="table-responsive">
+                <h1 class="servicios__titulo">Provincias</h1>
+                <table class="table table-striped text-center tabla__container">
+                    <thead class="tabla__head">
+                        <tr>
+                            <th class="text-white tabla__encabezado"><strong>Nombre</strong></th>
+                            <th class="text-white tabla__encabezado"><strong>Acciones</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tabla__body">
+                    	<!-- Iteración sobre la lista de provincias -->
+                        <tr th:each="provincia: ${provincias}">
+                            <td class="tabla__dato" th:text="${provincia.nombre}"></td>
+                            <td class="tabla__dato">
+                            	<!-- Enlaces para editar y eliminar una provincia -->
+                            	<a id="tabla__enlace" th:href="@{/provincias/modificar/} + ${provincia.id}">Editar</a>
+                            	<a id="tabla__enlace" th:href="@{/provincias/eliminar/} + ${provincia.id}">Borrar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            <a class="servicio__enlace" th:href="@{/provincias/nueva_provincia}">Nueva provincia</a>
+            </section>
+        </div>
+        <a class="nav-link servicio__enlace" th:href="@{/sucursal/listado}">Volver a Sucursales</a>
+        <!-- footer -->
+        <footer th:replace="~{layouts/footer :: footer}"></footer>
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	</body>
+</html>

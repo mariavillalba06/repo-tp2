@@ -15,10 +15,26 @@
   
      
 		 <div class="container-sm table-responsive">
+		 
 			<div class="row ">
-				<a class="newlink" th:href="@{/sucursal/nuevo}">Nueva sucursal</a>
+			<h1 class="text-xl-center text-white">Sucursales</h1>
 			</div>
+			
+			<!-- Filtro por rango de fecha -->
+			
+			<h2 class="text-left text-white">Filtrado por un rango de fechas</h2>
+			<form class="form-container" method="post" th:action="@{/sucursal/filtro_sucursal}">
+				<p>Fecha de inicio</p>
+				<input type="date" placeholder="Fecha Inicio" id="fechaInicio" name="fechaInicio" required>
+				<p>Fecha de finalizacion</p>
+				<input type="date" placeholder="Fecha Fin" id="fechaFin" name="fechaFin" required>
+				
+				<p><input class="buttom" type="submit" value="Filtrar"></p>
+				<h3 th:if="${mensaje}" th:text="'Sucursales desde la fecha '+${fechaInicio}+' hasta '+ ${fechaFin}"></h3>
+      		</form>
+			
 			<div class="d-flex justify-content-center align-items-center">
+              	
 	        <table class="table table-bordered table-hover newtable ">
 				<thead class="table-dark">
 		          <tr>
@@ -26,6 +42,7 @@
 		            <th scope="col">Dirección</th>
 		            <th scope="col">Provincia</th>
 		            <th scope="col">Fecha Inicio</th>
+		            <th scope="col">Fecha Final</th>
 		            <th scope="col">Email</th>
 		            <th scope="col">Teléfono</th>    
 		            <th scope="col">Ediciones</th>      
@@ -34,18 +51,32 @@
 	          <tr th:each="sucu: ${sucursales}">
 				<td   th:text="${sucu.nombre}"></td>
 				<td th:text="${sucu.direccion}"></td>
-				<td th:text="${sucu.provincia}"></td>
+				<td th:text="${sucu.provincia.nombre}"></td>
 				<td th:text="${#temporals.format(sucu.fechaInicio,'dd/MM/yyyy')}"></td>
+				<td th:text="${#temporals.format(sucu.fechaFin,'dd/MM/yyyy')}"></td>
 				<td th:text="${sucu.email}"></td>
 				<td th:text="${sucu.telefono}"></td>
 				<td>
-					<a class="newlink" th:href="@{/sucursal/modificar/}+${sucu.nombre}">Editar</a><br>
-					<a class="newlink" th:href="@{/sucursal/eliminar/}+${sucu.nombre}">Eliminar</a>
+					<a class="newlink" th:href="@{/sucursal/modificar/}+${sucu.id}">Editar</a><br>
+					<a class="newlink" th:href="@{/sucursal/eliminar/}+${sucu.id}">Eliminar</a>
 				</td>
 			  </tr>
 	        </table>
 	        </div>
 	     </div>
+      <a class="newlink servicio__enlace" th:href="@{/sucursal/nuevo}">Nueva sucursal</a>
+      <div class="container">
+      	<div class="row">
+      	<div class="col">
+      		<a class="newlink servicio__enlace" th:href="@{/provincias/nueva_provincia}">Nueva provincia</a>
+      	</div>
+      	<div class="col">
+      		<a class="newlink servicio__enlace" th:href="@{/provincias/listado}">Listar provincia</a>
+      	</div>
+      </div>
+      </div>
+      
+      
       
       <footer th:replace="~{layouts/footer :: footer}"></footer>
       <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
