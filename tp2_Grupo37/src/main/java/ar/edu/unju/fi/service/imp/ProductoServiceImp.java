@@ -22,16 +22,9 @@ public class ProductoServiceImp implements IProductoService{
 	@Autowired
 	private Producto producto;
 	
-	/*
-	 * Mantendra el numero de imagen en caso de modificar un producto
-	 * Si el producto de crea el numero sera aleatorio
-	 */
-	//private int numeroImagen;
-	
 	//Listar Productos
 	@Override
 	public List<Producto> getLista() {
-		//return listaProducto.getProductos();
 		return productoRespository.findByEstado(true);
 	}
 
@@ -39,18 +32,6 @@ public class ProductoServiceImp implements IProductoService{
 	@Override
 	public void guardarse(@Valid Producto producto) {
 		int numeroImagen;
-		/*int ultimaId=0, numeroImagen;
-		for(Producto ultimoElemento : listaProducto.getProductos()) {
-			ultimaId = ultimoElemento.getCodigo();
-		}
-		ultimaId++;
-		producto.setPrecioTotal(producto.calcularDescuento());
-		producto.setCodigo(ultimaId);
-		Random random = new Random();
-		numeroImagen = random.nextInt(3) + 1;
-		producto.setNumeroImg(numeroImagen);
-		
-		listaProducto.getProductos().add(producto);*/
 		Random random = new Random();
 		numeroImagen = random.nextInt(3) + 1;
 		producto.setNumeroImg(numeroImagen);
@@ -63,14 +44,6 @@ public class ProductoServiceImp implements IProductoService{
 	//Buscar objeto producto a partir de su codigo
 	@Override
 	public Producto getBy(Long id) {
-		/*Producto productoEncontrado=null;
-		for(Producto produ : listaProducto.getProductos()) {
-			if(produ.getCodigo() == id) {
-				productoEncontrado=produ;
-				break;
-			}
-		}
-		return productoEncontrado;*/
 		producto = productoRespository.findById(id).get();
 		return producto;
 	}
@@ -79,16 +52,6 @@ public class ProductoServiceImp implements IProductoService{
 	@Override
 	public void modificarse(Producto producto) {
 		int numeroImagen;
-		/*for(Producto produ: listaProducto.getProductos()) {
-			if(produ.getCodigo() == producto.getCodigo()) {
-				produ.setNombre(producto.getNombre());
-				//produ.setCategoria(producto.getCategoria());
-				produ.setDescuento(producto.getDescuento());
-				produ.setPrecio(producto.getPrecio());
-				produ.setPrecioTotal(producto.calcularDescuento());
-				break;
-				}
-		}*/
 		Random random = new Random();
 		numeroImagen = random.nextInt(3) + 1;
 		producto.setNumeroImg(numeroImagen);
@@ -101,7 +64,6 @@ public class ProductoServiceImp implements IProductoService{
 	//Eliminar un objeto producto
 	@Override
 	public void eliminarse(Producto productoEncontrado) {
-		//listaProducto.getProductos().remove(producto);
 		productoEncontrado.setEstado(false);
 		productoRespository.save(productoEncontrado);
 	}
