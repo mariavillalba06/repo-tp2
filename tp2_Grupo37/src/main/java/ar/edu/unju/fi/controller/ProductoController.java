@@ -74,7 +74,6 @@ public class ProductoController {
 		ModelAndView modelandview = new ModelAndView("productos");
 		if(result.hasErrors()) {
 			modelandview.setViewName("nuevo_producto");
-			//modelandview.addObject("categorias", listaService.getCategorias());
 			modelandview.addObject("categorias", categoriaService.getListaCategorias());
 			modelandview.addObject("productos", producto);
 			return modelandview;
@@ -98,7 +97,6 @@ public class ProductoController {
 	 */
 	@GetMapping("/modificarse/{codigo}")
 	public String getModificarProductoPage(Model model, @PathVariable(value="codigo")Long codigo) {
-		//Producto productoEncontrado = productoService.getBy(codigo);
 		boolean edicion=true;
 		
 		model.addAttribute("productos", productoService.getBy(codigo));
@@ -137,7 +135,6 @@ public class ProductoController {
 	 */
 	@GetMapping("/eliminarse/{codigo}")
 	public String eliminarProducto(@PathVariable(value="codigo")Long codigo) {
-		//Producto productoEncontrado = productoService.getBy(codigo);
 		productoService.eliminarse(productoService.getBy(codigo));
 		return "redirect:/Producto/listas";
 	}
