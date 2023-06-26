@@ -4,10 +4,13 @@ import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -15,49 +18,51 @@ import jakarta.validation.constraints.Positive;
 
 @Component
 @Entity
+@Table(name="producto")
 public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="prod_id")
-	private Long id;	
-	@Column(name="prod_numImg")
-	private int numeroImg;	
+	@Column(name = "prod_id")
+	private Long id;
+	
+	private int numeroImg;
 	@NotEmpty(message="¡Este campo no puede quedar vacio!")
-	@Column(name="prod_nombre")
-	private String nombre;	
-	@Column(name="prod_codigo")
-	private int codigo;	
+	private String nombre;
+	
 	@NotNull(message="¡Este campo no puede quedar vacio!")
 	@Positive(message="El precio debe tener valor un valor positivo")
 	@Min(value=100,message="El precio no puede ser menor que 100")
-	@Column(name="prod_precio")
-	private float precio;	
-	@ManyToOne
-	private Categoria categoria;	
-	@Column(name="prod_descuento")
-	private int descuento;	
-	@Column(name="prod_dprecioTotal")
-	private float precioTotal;	
+	private float precio;
+	
+	/*@NotEmpty(message="¡Debe seleccionar una categoria!")
+	private String categoria;*/
+	
+	/*@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="categ_id")
+	@NotNull(message="Debe seleccionar una categoria")
+	private Categoria categoria;*/
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@NotNull(message="Debe seleccionar una categoria")
+	@JoinColumn(name = "categ_id")
+	private Categoria categoria;
+	
+	@Column(name = "estado")
 	private boolean estado;
+	
+	private int descuento;
+	private float precioTotal;
+	 	 
 	public Producto() {
 	}	
-	public Producto(Long id,int numeroImg, String nombre, int codigo, float precio, Categoria categoria, int descuento,boolean estado) {
+	public Producto(int numeroImg, String nombre, float precio, int descuento) {
 		super();
-		this.id=id;
 		this.numeroImg = numeroImg;
 		this.nombre = nombre;
-		this.codigo = codigo;
 		this.precio = precio;
-		this.categoria = categoria;
 		this.descuento = descuento;
-		this.estado = estado;
 	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id=id;
-	}
+
 	public int getNumeroImg() {
 		return numeroImg;
 	}
@@ -72,14 +77,6 @@ public class Producto {
 		this.nombre = nombre;
 	}
 
-	public int getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
-
 	public float getPrecio() {
 		return precio;
 	}
@@ -87,13 +84,6 @@ public class Producto {
 	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
-
-	public Categoria getCategoria() {
-		return categoria;
-		}
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-		}
 
 	public int getDescuento() {
 		return descuento;
@@ -117,11 +107,24 @@ public class Producto {
 	public void setPrecioTotal(float precioTotal) {
 		this.precioTotal = precioTotal;
 	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 	public boolean isEstado() {
 		return estado;
 	}
-    public void setEstado(boolean estado) {
-    	this.estado = estado;
-    }
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+	
 
 }
