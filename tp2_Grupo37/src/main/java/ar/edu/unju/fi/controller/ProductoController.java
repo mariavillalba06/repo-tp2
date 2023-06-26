@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.controller;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.entity.Categoria;
 import ar.edu.unju.fi.entity.Producto;
-import ar.edu.unju.fi.service.IListaService;
+import ar.edu.unju.fi.service.ICategoriaService;
 import ar.edu.unju.fi.service.IProductoService;
 import jakarta.validation.Valid;
 
@@ -21,11 +23,17 @@ import jakarta.validation.Valid;
 @RequestMapping("/Producto")
 public class ProductoController {
 	
-	@Autowired
-	private IListaService listaService;
+	/*@Autowired
+	private IListaService listaService;*/
 	
 	@Autowired
 	private IProductoService productoService;
+	
+	@Autowired
+	private ICategoriaService categoriaService;
+	
+	@Autowired
+	private Categoria categoria;
 	
 	/**
 	 * Método que obtiene la lista de producto
@@ -35,6 +43,7 @@ public class ProductoController {
 	@GetMapping("/listas")
 	public String getProductoPage(Model model) {
 		model.addAttribute("productos", productoService.getLista());
+		model.addAttribute("categorias", categoriaService.getListaCategorias());
 		return "productos";
 	}
 	
@@ -47,7 +56,8 @@ public class ProductoController {
 	public String getNuevoProductoPage(Model model) {
 		boolean edicion=false;
 		model.addAttribute("productos", productoService.getProducto());
-		model.addAttribute("categorias", listaService.getCategorias());
+		//model.addAttribute("Categorias", listaService.getCategorias());
+		model.addAttribute("categorias", categoriaService.getListaCategorias());
 		model.addAttribute("edicion", edicion);
 		return "nuevo_producto";
 	}
@@ -64,12 +74,17 @@ public class ProductoController {
 		ModelAndView modelandview = new ModelAndView("productos");
 		if(result.hasErrors()) {
 			modelandview.setViewName("nuevo_producto");
-			modelandview.addObject("categorias", listaService.getCategorias());
+			//modelandview.addObject("categorias", listaService.getCategorias());
+			modelandview.addObject("categorias", categoriaService.getListaCategorias());
 			modelandview.addObject("productos", producto);
 			return modelandview;
 		}
 		
 		productoService.guardarse(producto);
+		
+		categoria = categoriaService.findCategoriaById(producto.getCategoria().getId());
+		
+		producto.setCategoria(categoria);
 		modelandview.addObject("productos", productoService.getLista());
 		return modelandview;
 	}
@@ -82,12 +97,12 @@ public class ProductoController {
 	 * @return retorna la vista "nuevo_producto" con la modificacion del producto
 	 */
 	@GetMapping("/modificarse/{codigo}")
-	public String getModificarProductoPage(Model model, @PathVariable(value="id")Long id) {
-		Producto productoEncontrado = productoService.getBy(id);
+	public String getModificarProductoPage(Model model, @PathVariable(value="codigo")Long codigo) {
+		//Producto productoEncontrado = productoService.getBy(codigo);
 		boolean edicion=true;
 		
-		model.addAttribute("productos", productoEncontrado);
-		model.addAttribute("categorias", listaService.getCategorias());
+		model.addAttribute("productos", productoService.getBy(codigo));
+		model.addAttribute("categorias", categoriaService.getListaCategorias());
 		model.addAttribute("edicion", edicion);
 		return "nuevo_producto";
 	}
@@ -104,7 +119,7 @@ public class ProductoController {
 	public String modificarProducto(@Valid @ModelAttribute("productos")Producto producto, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("productos", producto);
-			model.addAttribute("categorias", listaService.getCategorias());
+			model.addAttribute("categorias", categoriaService.getListaCategorias());
 			model.addAttribute("edicion", true);
 			return "nuevo_producto";
 		}
@@ -121,10 +136,17 @@ public class ProductoController {
 	 * @return redirige a la página de listado de productos actualizada
 	 */
 	@GetMapping("/eliminarse/{codigo}")
-	public String eliminarProducto(@PathVariable(value="id") Long id) {
+	public String eliminarProducto(@PathVariable(value="codigo")Long codigo) {
 		//Producto productoEncontrado = productoService.getBy(codigo);
-		productoService.eliminarse(productoService.getBy(id));
+		productoService.eliminarse(productoService.getBy(codigo));
 		return "redirect:/Producto/listas";
-}
+	}
+	
+	@GetMapping("/gestion")
+	public String getGestionProductos(Model model) {
+		model.addAttribute("productos", productoService.getLista());
+		model.addAttribute("acciones", true);
+		return "productos";
+	}
 	
 }

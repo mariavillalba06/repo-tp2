@@ -13,15 +13,14 @@ public interface IProductoService {
 	void guardarse(@Valid Producto producto);
 	
 	//Buscar un producto por su codigo
-	Producto getBy(Long id);
+	Producto getBy(Long codigo);
 	
 	//Modificar un objeto producto
 	void modificarse(Producto producto);
 	
 	//Eliminar un objeto producto
-	void eliminarse(Producto producto);
+	void eliminarse(Producto productoEncontrado);
 	
 	//Obtener un onjeto producto
 	Producto getProducto();
-
 }
