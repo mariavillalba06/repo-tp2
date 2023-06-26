@@ -118,4 +118,11 @@ public class ConsejosController {
 		
 		return "redirect:/consejos/listado";
 	}
+	
+	@GetMapping("/gestion")
+	public String getGestionConsejos(Model model) {
+		model.addAttribute("consejos", consejosService.getConsejos());
+		model.addAttribute("acciones", true);
+		return "consejos";
+	}
 }

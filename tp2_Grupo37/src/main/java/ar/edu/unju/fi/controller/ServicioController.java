@@ -223,6 +223,17 @@ public class ServicioController {
 		return "servicios";
 	}
 	
+	@GetMapping("/gestion-paseo")
+	public String getGestionServicioPaseo(Model model) {
+		
+		model.addAttribute("paseos", servicioService.getServicioPaseos());
+
+		model.addAttribute("acciones", true);
+		model.addAttribute("paseo", true);
+		model.addAttribute("corte", false);
+
+		return "servicios";
+	}
 	
 	//----Servicio de cortes----//
 	/**
@@ -356,6 +367,18 @@ public class ServicioController {
 		model.addAttribute("acciones", false);
 		model.addAttribute("paseo", paseo);
 		model.addAttribute("corte", corte);
+
+		return "servicios";
+	}
+	
+	@GetMapping("/gestion-corte")
+	public String getGestionServicioCorte(Model model) {
+		
+		model.addAttribute("cortes", servicioService.getServicioCortes());
+
+		model.addAttribute("acciones", true);
+		model.addAttribute("paseo", false);
+		model.addAttribute("corte", true);
 
 		return "servicios";
 	}

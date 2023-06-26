@@ -27,7 +27,7 @@
 			        <p class="card-text article__texto" th:text="${consejo.texto}"></p>
 			        <p class="card-text article__texto clave" th:text="${'Consejo clave: ' + consejo.clave}"></p>
 			      
-					<div class="card-footer md-flex justify-content-md-center pt-3">
+					<div th:if="${acciones}" class="card-footer md-flex justify-content-md-center pt-3">
 					<!-- Botones para editar y eliminar un consejo -->
 			        <a class="btn btn-outline-primary" th:href="@{/consejos/modificar_consejo/} + ${consejo.id}">Editar</a>
                     <a class="btn btn-outline-danger" th:href="@{/consejos/eliminar_consejo/} + ${consejo.id}">Borrar</a>
@@ -36,7 +36,7 @@
 			    </div>
 			  </div>
 			</div>
-			<div class="d-grid gap-2">
+			<div th:if="${acciones}" class="d-grid gap-2">
 				<!-- Boton para crear un nuevo consejo -->
 				<a class="btn btn-success btn-lg" th:href="@{/consejos/nuevo_consejo}">Nuevo consejo</a>
 			</div>

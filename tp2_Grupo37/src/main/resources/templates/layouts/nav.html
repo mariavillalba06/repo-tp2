@@ -30,6 +30,19 @@
 		        <a class="nav-link nav__enlace" th:href="@{/servicios/listado/paseo}">Servicios de paseo</a>
 		        <a class="nav-link nav__enlace" th:href="@{/sucursal/listado}">Sucursales</a>
 		        <a class="nav-link nav__enlace" th:href="@{/contacto}">Contáctanos</a>
+		        <div class="dropdown">
+					<a class="nav-link btn dropdown-toggle text-dark" data-bs-toggle="dropdown" role="button" aria-expanded="false">Gestión de datos</a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item small" th:href="@{/empleados/listado}">Empleados</a></li>
+						<li><a class="dropdown-item small" th:href="@{/servicios/gestion-paseo}">Paseos</a></li>
+						<li><a class="dropdown-item small" th:href="@{/servicios/gestion-corte}">Cortes</a></li>
+						<li><a class="dropdown-item small" th:href="@{/Producto/gestion}">Productos</a></li>
+						<li><a class="dropdown-item small" th:href="@{/categorias/listado}">Categoría</a></li>
+						<li><a class="dropdown-item small" th:href="@{/sucursal/gestion}">Sucursales</a></li>
+						<li><a class="dropdown-item small" th:href="@{/provincias/listado}">Provincias</a></li>
+						<li><a class="dropdown-item small" th:href="@{/consejos/gestion}">Consejos</a></li>
+					</ul>
+				</div>
 		      </div>
 		    </div>
 		  </div>

@@ -133,14 +133,6 @@ public class SucursalesController {
 		return "redirect:/sucursal/listado";
 	}
 	
-	/*
-	@PostMapping("/filtro_sucursal/{fechaInicio}/{fechaFin}")
-	public String getfiltroSucursal(Model model, @PathVariable(value="fechaInicio")LocalDate fechaInicio, @PathVariable(value="fechaFin")LocalDate fechaFin) {
-		
-		model.addAttribute("sucursales", sucursalService.filtroSucursal(fechaInicio,fechaFin));
-
-		return "sucursales";
-	} */
 	
 	@PostMapping("/filtro_sucursal")
     public String recibirFecha(Model model, @RequestParam("fechaInicio") LocalDate fechaInicio, @RequestParam("fechaFin") LocalDate fechaFin) {
@@ -159,4 +151,10 @@ public class SucursalesController {
         return "sucursales";
     }
 	
+	@GetMapping("/gestion")
+	public String getGestionSucursales(Model model) {
+		model.addAttribute("sucursales", sucursalService.getLista());
+		model.addAttribute("acciones", true);
+		return "sucursales";
+	}
 }	
