@@ -33,8 +33,7 @@ public class Producto {
 	@Positive(message="El precio debe tener valor un valor positivo")
 	@Min(value=100,message="El precio no puede ser menor que 100")
 	private float precio;
-	
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@NotNull(message="Debe seleccionar una categoria")
 	@JoinColumn(name = "categ_id")
