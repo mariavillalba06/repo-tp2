@@ -64,8 +64,6 @@ public class EmpleadoController {
 			return modelView;
 		}
 		empleadoService.guardarEmpleado(empleado);
-		System.out.println("se guarda: " + empleado.getNombre() + " " + empleado.getApellido());
-		modelView.addObject("empleados", empleadoService.getListaEmpleados());
 		
 		return modelView;
 	}

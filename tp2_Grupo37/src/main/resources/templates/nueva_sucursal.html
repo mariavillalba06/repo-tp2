@@ -21,7 +21,7 @@
       	 
         <h2 th:text="${edicion}?'Modificar Registro':'Registro de nueva sucursal'"></h2>
         
-        <input type="text" th:readonly="${edicion}" placeholder="Nombre del Local" id="nombre" name="sucursal_nombre" th:field="*{nombre}">
+        <input type="text" placeholder="Nombre del Local" id="nombre" name="sucursal_nombre" th:field="*{nombre}">
         <div class=" text-white" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
         
         <input type="text" placeholder="Direccion" id="direccion" name="sucursal_direccion" th:field="*{direccion}">

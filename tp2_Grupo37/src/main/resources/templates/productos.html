@@ -21,21 +21,18 @@
 	        <div class="card-body text-center">
 	          <h5 class="fw-bold card-title" th:text="${produ.nombre}"></h5>
 	          <p class="fw-bold text-primary" th:text="${'Precio: ' + produ.precio + ' $'}"></p>
-	          <p class="fw-bold text-primary" th:text="${'Categoria: ' + produ.categorias.nombre}"></p>
+	          <p class="fw-bold text-primary" th:text="${'Categoria: ' + produ.categoria.nombre}"></p>
 	          <p class="fw-bold text-primary" th:text="${'Descuento: ' + produ.descuento + '%'}"></p>
 	          <p class="fw-bold text-primary" th:text="${'Precio total: ' + produ.precioTotal + ' $'}"></p>
-	          <a class="btn btn-outline-primary mt-2" th:href="@{/Producto/modificarse/}+${produ.id}">Editar</a><br>
-	          <a class="btn btn-outline-primary mt-2" th:href="@{/Producto/eliminarse/}+${produ.id}">Eliminar</a>
+	          <a th:if="${acciones}" class="btn btn-outline-primary mt-2" th:href="@{/Producto/modificarse/}+${produ.id}">Editar</a><br>
+	          <a th:if="${acciones}" class="btn btn-outline-primary mt-2" th:href="@{/Producto/eliminarse/}+${produ.id}">Eliminar</a>
 	        </div>
 	      </div>
 	    </div>
 	  </div>
-	  <a class="btn btn-primary mt-3" th:href="@{/Producto/nuevo}">Nuevo Producto</a>
+	  <a th:if="${acciones}" class="btn btn-primary mt-3" th:href="@{/Producto/nuevo}">Nuevo Producto</a>
 	</section>
-	
-	<a id="tabla__enlace" th:href="@{/categorias/nueva_categoria}">Nueva categoria</a>
-    <a id="tabla__enlace" th:href="@{/categorias/listado}">Listar categorias</a>
-      
+
     <footer th:replace="~{/layouts/footer :: footer}"></footer>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
   </body>

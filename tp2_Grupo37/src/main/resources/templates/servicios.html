@@ -71,7 +71,7 @@
                     </tbody>
                 </table>
                 <!-- Enlace para crear un nuevo servicio de paseo -->
-           		<a class="servicio__enlace" th:href="@{/servicios/nuevo-paseo}">Nuevo servicio de paseo</a>           		
+           		<a th:if="${acciones}" class="servicio__enlace" th:href="@{/servicios/nuevo-paseo}">Nuevo servicio de paseo</a>           		
             </section>
         </div>
         
@@ -122,12 +122,10 @@
                     </tbody>
                 </table>
                 <!-- Enlace para crear un nuevo servicio de corte -->
-                <a class="servicio__enlace" th:href="@{/servicios/nuevo-corte}">Nuevo servicio de corte</a>
+                <a th:if="${acciones}" class="servicio__enlace" th:href="@{/servicios/nuevo-corte}">Nuevo servicio de corte</a>
             </section>
         </div>    
-        
-        <a class="servicio__enlace" th:href="@{/empleados/nuevo_empleado}">Nuevo empleado</a>
-        <a class="servicio__enlace" th:href="@{/empleados/listado}">Lista empleados</a>
+     
         <!-- footer -->
         <footer th:replace="~{layouts/footer :: footer}"></footer>
         <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>

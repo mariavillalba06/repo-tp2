@@ -34,13 +34,6 @@ public class Producto {
 	@Min(value=100,message="El precio no puede ser menor que 100")
 	private float precio;
 	
-	/*@NotEmpty(message="¡Debe seleccionar una categoria!")
-	private String categoria;*/
-	
-	/*@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="categ_id")
-	@NotNull(message="Debe seleccionar una categoria")
-	private Categoria categoria;*/
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@NotNull(message="Debe seleccionar una categoria")
